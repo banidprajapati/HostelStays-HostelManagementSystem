@@ -1,6 +1,7 @@
-import {useState} from "react";
+// import {useState} from "react";
 import "./App.css";
-import {home} from "./components/home"
+import {Home} from "./components/Home";
+
 function App() {
   return (
     <>
@@ -8,7 +9,7 @@ function App() {
       <p>This is a paragraph</p>
       <p>This is a paragraph</p>
       <p>This is a paragraph</p>
-      <home />
+      <Home />
     </>
   );
 }

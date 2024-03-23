@@ -1,13 +1,13 @@
-import {useState} from "react";
+import React from "react";
 
-function home() {
+const Home = () => {
   return (
     <header>
       <div className="company">Hostel Stays</div>
-        <button>Login</button>
-        <button>Signup</button>
+      <button>Login</button>
+      <button>Signup</button>
     </header>
   );
-}
+};
 
-export default home;
+export default Home;
