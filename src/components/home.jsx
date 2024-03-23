@@ -1,5 +1,6 @@
-import React from 'react'; 
-export default const home = () => {
+import {useState} from "react";
+
+function home() {
   return (
     <header>
       <div className="company">Hostel Stays</div>
@@ -9,3 +10,4 @@ export default const home = () => {
   );
 }
 
+export default home;
