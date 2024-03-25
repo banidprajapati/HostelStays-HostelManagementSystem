@@ -2,16 +2,18 @@ import React from "react";
 
 export const Home = () => {
   return (
-    <header className="flex justify-between items-center px-4 py-2">
-      <div className="text-4xl text-red-600">Hostel Stays</div>
-      <div>
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
-          Login
-        </button>
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          Signup
-        </button>
+    <nav >
+      <h1 className="text-xl font-bold">
+        <a href="/" className="text-black float-left">Hostel Stays</a>
+      </h1>
+      <div className="flex space-x-4 float-right">
+        <h3>
+          <a href="/login" className="text-black hover:text-blue-600">Login</a>
+        </h3>
+        <h3>
+          <a href="/signup" className="text-black hover:text-blue-600">Signup</a>
+        </h3>
       </div>
-    </header>
+    </nav>
   );
 };
