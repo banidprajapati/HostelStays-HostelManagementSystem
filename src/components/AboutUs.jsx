@@ -50,7 +50,7 @@ export const AboutUs = () => {
                   sustainability, and empower local communities. By offering
                   budget-friendly accommodations and promoting responsible tourism
                   practices, we aim to create a positive impact on both travelers
-                  and the destinations they visit.
+                  and the destinations they visitt.
                 </p>
               </div>
             </div>
