@@ -2,11 +2,13 @@
 import "./App.css";
 import {Home} from "./components/Home";
 import {Footer} from "./components/Footer";
+import {LoginEmail} from "./components/LoginEmail";
 function App() {
   return (
     <>
-      <Home />
-      <Footer />
+      {/* <Home /> */}
+      <LoginEmail />
+      {/* <Footer /> */}
     </>
   );
 }
