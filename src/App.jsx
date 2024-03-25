@@ -1,13 +1,16 @@
-// import {useState} from "react";
+import React from "react";
 import "./App.css";
-// import {Home} from "./components/Home";
-// import {Footer} from "./components/Footer";
-import {AboutUs} from "./components/AboutUs";
+import { Home } from "./components/Home";
+import { Footer } from "./components/Footer";
+import { LoginEmail } from "./components/LoginEmail";
+import { AboutUs } from "./components/AboutUs";
+
 function App() {
   return (
     <>
-      {/* <Home />
-      <Footer /> */}
+      <Home />
+      <Footer />
+      <LoginEmail />
       <AboutUs />
     </>
   );
