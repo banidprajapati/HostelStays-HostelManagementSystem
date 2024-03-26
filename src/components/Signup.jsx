@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 
-export const SignUp = ({ email, handleLogin }) => {
+export const SignUp = ({email, handleLogin}) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -27,7 +27,8 @@ export const SignUp = ({ email, handleLogin }) => {
       <div className="w-1/2 flex items-center justify-center p-8">
         <div className="text-left m-0 p-0">
           <h1 className="text-3xl font-bold mb-4">Create an Account</h1>
-          <p className="mb-2">Email Address: {email}</p>
+          <p className="mb-2">Create a new password for </p>
+          <p className="font-bold">{email}</p>
           <div className="mb-4 max-w-85 flex flex-col">
             <input
               type="password"
@@ -45,8 +46,7 @@ export const SignUp = ({ email, handleLogin }) => {
             />
             <button
               className="bg-blue-500 text-white px-4 py-2 rounded-md"
-              onClick={handleSignUp}
-            >
+              onClick={handleSignUp}>
               Sign Up
             </button>
           </div>
