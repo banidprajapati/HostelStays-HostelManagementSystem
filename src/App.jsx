@@ -8,9 +8,9 @@ import { AboutUs } from "./components/AboutUs";
 function App() {
   return (
     <>
-      <Home />
+      {/* <Home />
       <Footer />
-      <LoginEmail />
+      <LoginEmail /> */}
       <AboutUs />
     </>
   );
