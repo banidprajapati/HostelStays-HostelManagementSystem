@@ -1,23 +1,28 @@
-import React, {useState} from "react";
-import {Login} from "./Login";
+
+import React, { useState } from "react";
+import { Login } from "./Login";
+import { SignUp } from "./Signup";
 
 export const LoginEmail = () => {
   const [email, setEmail] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
+  const [showSignUp, setShowSignUp] = useState(false);
 
   const handleLogin = () => {
     // Here you can check if the email is correct
     if (email === "correct@example.com") {
       setLoggedIn(true);
     } else {
-      alert("Invalid email. Please try again.");
+      setShowSignUp(true);
     }
   };
 
   if (loggedIn) {
-    return (
-      <Login email={email} setEmail={setEmail} handleLogin={handleLogin} />
-    );
+    return <Login email={email} handleLogin={handleLogin} />;
+  }
+
+  if (showSignUp) {
+    return <SignUp email={email} handleLogin={handleLogin} />;
   }
 
   return (
@@ -32,9 +37,7 @@ export const LoginEmail = () => {
 
       <div className="w-1/2 flex items-center justify-center p-8">
         <div className="text-left m-0 p-0">
-          <h1 className="text-3xl font-bold mb-4">
-            Log in or Create an Account
-          </h1>
+          <h1 className="text-3xl font-bold mb-4">Log in or Create an Account</h1>
           <p className="mb-2">Email Address:</p>
           <div className="mb-4 max-w-85 flex flex-col">
             <input
@@ -46,7 +49,8 @@ export const LoginEmail = () => {
             />
             <button
               className="bg-blue-500 text-white px-4 py-2 rounded-md"
-              onClick={handleLogin}>
+              onClick={handleLogin}
+            >
               Continue
             </button>
           </div>
