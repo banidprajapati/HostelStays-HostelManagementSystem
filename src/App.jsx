@@ -1,20 +1,15 @@
 import React from "react";
-import { Home } from "./components/Home";
-import { Footer } from "./components/Footer";
-import { LoginEmail } from "./components/LoginEmail";
-import { AboutUs } from "./components/AboutUs";
-import { DiscoverNepal } from "./components/DiscoverNepal";
-import { SearchBar } from "./components/SearchBar";
+import "./App.css";
+// import {Button, ButtonGroup} from "@chakra-ui/react";
+import {LoginEmail} from "./components/LoginEmail";
+// import {AdminPage} from "./components/AdminPage";
+// import {LandingPage} from "./components/LandingPage";
+// import {AuthenticationPage} from "./components/AuthenticationPage";
 
 function App() {
   return (
     <>
-      <Home />
-      {/* <Footer /> */}
-      {/* <LoginEmail /> */}
-      {/* <AboutUs /> */}
-      {/* <DiscoverNepal /> */}
-      {/* <SearchBar /> */}
+      <LoginEmail />
     </>
   );
 }

@@ -11,7 +11,6 @@
 
 // export default AuthenticationPage;
 
-
 // AuthenticationPage.jsx working wala code
 
 // import React, { useState } from "react";
@@ -46,16 +45,14 @@
 
 // export default AuthenticationPage;
 
-
-
 // Admin wala
 
 // AuthenticationPage.jsx
-import React, { useState } from "react";
-import { LoginEmail } from "./LoginEmail";
+import React, {useState} from "react";
+import {LoginEmail} from "./LoginEmail";
 import AdminPage from "./AdminPage";
 
-const AuthenticationPage = () => {
+export const AuthenticationPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
@@ -75,13 +72,13 @@ const AuthenticationPage = () => {
         <AdminPage />
       ) : (
         <div>
-          <LoginEmail setEmail={setEmail} setPassword={setPassword} handleLogin={handleLogin} />
+          <LoginEmail
+            setEmail={setEmail}
+            setPassword={setPassword}
+            handleLogin={handleLogin}
+          />
         </div>
       )}
     </div>
   );
 };
-
-export default AuthenticationPage;
-
-

@@ -1,7 +1,7 @@
 // AdminPage.jsx
 import React from "react";
 
-const AdminPage = () => {
+export const AdminPage = () => {
   return (
     <div>
       <h1>Welcome Admin</h1>
@@ -20,5 +20,3 @@ const AdminPage = () => {
     </div>
   );
 };
-
-export default AdminPage;
