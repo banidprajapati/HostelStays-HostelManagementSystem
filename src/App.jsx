@@ -34,19 +34,22 @@
 
 
 
-// Admin wala
+// App.jsx  Admin login working
 
-// App.jsx
 import React from "react";
-import "./App.css";
-import AuthenticationPage from "./components/AuthenticationPage";
+import AdminLogin from "./components/AdminLogin";
 
 function App() {
   return (
     <>
-      <AuthenticationPage />
+      <AdminLogin />
     </>
   );
 }
 
 export default App;
+
+
+
+
+
