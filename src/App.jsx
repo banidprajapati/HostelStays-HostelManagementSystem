@@ -10,6 +10,7 @@ import { Room } from "./components/Room";
 function App() {
   return (
     <>
+      {/* Uncomment the components you want to render */}
       {/* <Home /> */}
       {/* <Footer /> */}
       {/* <LoginEmail /> */}

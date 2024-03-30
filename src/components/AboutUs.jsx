@@ -4,8 +4,8 @@ export const AboutUs = () => {
   return (
     <div>
       <h1 className="text-3xl font-bold mt-10 mb-7 text-left">Our Story.</h1>
-      <div className="flex flex-wrap items-left justify-left font-poppins">
-        <div className="w-full w-1/2">
+      <div className="flex items-left justify-center font-poppins">
+        <div className="w-full">
           <div className="mb-4 flex text-left gap-9">
             <div className="flex-1">
               <h1 className="font-bold pb-2 text-xl">Who are we?</h1>
