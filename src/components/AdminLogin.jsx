@@ -200,7 +200,7 @@ const AdminLogin = () => {
           </div>
           {showError && (
             email && password ? (
-              <div className="text-red-500 mb-2">Only Admin can login.</div>
+              <div className="text-red-500 mb-2">Invalid username or password.</div>
             ) : (
               <div className="text-red-500 mb-2">Please fill in all fields.</div>
             )

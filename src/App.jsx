@@ -51,5 +51,21 @@ export default App;
 
 
 
+// localhost 
+// import React from 'react';
+// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+// import AdminLogin from './components/AdminLogin'; // Import your AdminLogin component
 
+// const App = () => {
+//   return (
+//     <Router>
+//       <Switch>
+//         <Route path="/Admin" component={AdminLogin} />
+//         {/* Other routes go here */}
+//       </Switch>
+//     </Router>
+//   );
+// };
+
+// export default App;
 
