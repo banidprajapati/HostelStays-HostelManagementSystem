@@ -27,15 +27,20 @@ export const DiscoverNepal = () => {
       image:
         "https://images.pexels.com/photos/1054218/pexels-photo-1054218.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2",
     },
+    {
+      name: "Nepalgunj",
+      image:
+        "https://images.pexels.com/photos/1054218/pexels-photo-1054218.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2",
+    },
   ];
 
   return (
     <>
-      <h1 className="mb-4 text-2xl font-bold text-left">Discover Nepal.</h1>
-      <div className="flex flex-col items-left mt-8 font-poppins">
-        <div className="flex justify-left items-left gap-16">
+      <h1 className=" text-2xl font-bold text-left">Discover Nepal.</h1>
+      <div className="flex flex-col items-left  font-poppins">
+        <div className="flex justify-left items-left gap-14">
           {places.map((place) => (
-            <div key={place.name} className="mr-7 mb-4">
+            <div key={place.name} className=" mb-4">
               <img
                 src={place.image}
                 alt="About Us Image"
