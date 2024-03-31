@@ -1,28 +1,71 @@
+// // import {useState} from "react";
+// import "./App.css";
+// import {Home} from "./components/Home";
+// import {Footer} from "./components/Footer";
+// import {LoginEmail} from "./components/LoginEmail";
+
+// function App() {
+//   return (
+//     <>
+//       {/* <Home /> */}
+//       <LoginEmail />
+//       {/* <Footer /> */}
+//     </>
+//   );
+// }
+
+// export default App;
+
+
+
 import React from "react";
-import "./App.css"
-// import { Header } from "./components/Header";
-// import { Footer } from "./components/Footer";
-// import { LoginEmail } from "./components/LoginEmail";
-// import { AboutUs } from "./components/AboutUs";
-// import { DiscoverNepal } from "./components/DiscoverNepal";
-// import { SearchBar } from "./components/SearchBar";
-import { Room } from "./components/Room";
-import { LandingPage } from "./components/LandingPage";
+import "./App.css";
+import { LoginEmail } from "./components/LoginEmail";
 
 function App() {
   return (
     <>
-      {/* Uncomment the components you want to render */}
-      {/* <Home /> */}
-      {/* <Footer /> */}
-      {/* <LoginEmail /> */}
-      {/* <AboutUs /> */}
-      {/* <DiscoverNepal /> */}
-      {/* <SearchBar />        */}
-      {/* <Room /> */}
-      <LandingPage />
+      <LoginEmail />
     </>
   );
 }
 
 export default App;
+
+
+
+// App.jsx  Admin login working
+
+// import React from "react";
+// import AdminLogin from "./components/AdminLogin";
+
+// function App() {
+//   return (
+//     <>
+//       <AdminLogin />
+//     </>
+//   );
+// }
+
+// export default App;
+
+
+
+// localhost 
+// import React from 'react';
+// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+// import AdminLogin from './components/AdminLogin'; // Import your AdminLogin component
+
+// const App = () => {
+//   return (
+//     <Router>
+//       <Switch>
+//         <Route path="/Admin" component={AdminLogin} />
+//         {/* Other routes go here */}
+//       </Switch>
+//     </Router>
+//   );
+// };
+
+// export default App;
+
