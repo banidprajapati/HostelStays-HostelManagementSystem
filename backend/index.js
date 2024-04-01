@@ -1,20 +1,25 @@
-// index.js
-
-// Remove this line, as mongoose is already imported indirectly through './db'
-// const mongoose = require("./db");
-
+// Import required modules
 const express = require("express");
+const mongoose = require("./db"); // Import Mongoose instance from db.js
+const customerDetailsRoutes = require("./routes/customerDetails");
+
+// Create an Express application
 const app = express();
 
-// Import your routes or other middleware here
-const bookingRoutes = require("./routes/bookingRoutes");
+// Middleware setup
+app.use(express.json());
 
-// Mount routes
-app.use("/api/bookings", bookingRoutes);
+// Mount customer details routes
+app.use("/api/customerDetails", customerDetailsRoutes);
 
-// Start the server
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something went wrong!");
+});
+
+// Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log("Database Connected");
   console.log(`Server is running on port ${PORT}`);
 });
