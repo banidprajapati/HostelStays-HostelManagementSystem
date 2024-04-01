@@ -8,7 +8,6 @@ export const LoginEmail = () => {
   const [showSignUp, setShowSignUp] = useState(false);
 
   const handleLogin = () => {
-    // Here you can check if the email is correct
     if (email === "correct@example.com") {
       setLoggedIn(true);
     } else {

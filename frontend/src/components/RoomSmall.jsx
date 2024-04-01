@@ -1,7 +1,7 @@
 import React from "react";
 import {useToast, Button} from "@chakra-ui/react";
 
-export const Room = () => {
+export const RoomSmall = () => {
   return (
     <div className="max-w-96 bg-gray-200 rounded-lg text-left">
       <img
