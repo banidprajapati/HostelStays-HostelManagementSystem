@@ -16,56 +16,53 @@ const AdminLogin = () => {
       setShowSuccess(true);
     } else {
       setShowError(true);
+      setTimeout(() => setShowError(false), 5000);
     }
   };
 
   return (
-    <div className="p-0 flex h-screen">
-      <div className="w-1/2 h-full">
+    <div className="flex h-screen">
+      <div className="w-1/2">
         <img
           src="https://cdn.britannica.com/68/178668-050-DA998E6C/Durbar-Square-heart-district-Kathmandu-earthquake-Nepal-April-25-2015.jpg"
           alt="Nepal"
-          className="w-full h-full object-cover p-0"
+          className="w-full h-full object-cover"
         />
       </div>
-
-      <div className="w-1/2 flex items-center justify-center p-8">
-        <div className="text-left m-0 p-0">
+      <div className="w-1/2 flex items-center justify-center">
+        <div className="max-w-md p-8">
           {showSuccess && (
             <div className="text-green-500 mb-2">Login Successful!</div>
           )}
           <h1 className="text-3xl font-bold mb-4">Admin Login</h1>
-          <div className="mb-4 max-w-85 flex flex-col">
+          <div className="mb-4">
             <input
               type="text"
               placeholder="Enter your email"
-              className="border-b border-gray-400 focus:outline-none mb-2 p-2"
+              className="w-full border-b border-gray-400 focus:outline-none mb-2 p-2"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <input
               type="password"
               placeholder="Enter your password"
-              className="border-b border-gray-400 focus:outline-none mb-2 p-2"
+              className="w-full border-b border-gray-400 focus:outline-none mb-2 p-2"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
             <button
-              className="bg-blue-500 text-white px-4 py-2 rounded-md"
+              className="w-full bg-blue-500 text-white px-4 py-2 rounded-md"
               onClick={handleLogin}>
               Continue
             </button>
           </div>
-          {showError &&
-            (email && password ? (
-              <div className="text-red-500 mb-2">
-                Invalid username or password.
-              </div>
-            ) : (
-              <div className="text-red-500 mb-2">
-                Please fill in all fields.
-              </div>
-            ))}
+          {showError && (
+            <div className="text-red-500 mb-2">
+              {email && password
+                ? "Invalid username or password."
+                : "Please fill in all fields."}
+            </div>
+          )}
         </div>
       </div>
     </div>

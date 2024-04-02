@@ -7,6 +7,11 @@ import {AboutUs} from "./components/AboutUs";
 import {DiscoverNepal} from "./components/DiscoverNepal";
 import {SearchBar} from "./components/SearchBar";
 import {RoomSmall} from "./components/RoomSmall";
+import {AdminDashboard} from "./components/AdminDashboard";
+import AdminSideBar from "./components/AdminSideBar";
+import {AdminBookings} from "./components/AdminBookings";
+import {AdminUserDetails} from "./components/AdminUserDetails";
+import {AdminSettings} from "./components/AdminSettings";
 
 function App() {
   return (
@@ -14,7 +19,8 @@ function App() {
       {/* Uncomment the components you want to render */}
       {/* <Home /> */}
       {/* <Footer /> */}
-      <LoginEmail />
+      {/* <AdminLogin /> */}
+      <AdminSettings />
       {/* <AboutUs /> */}
       {/* <DiscoverNepal /> */}
       {/* <SearchBar /> */}
