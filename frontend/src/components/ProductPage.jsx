@@ -1,33 +1,27 @@
 import React from "react";
-import Nav from "./components/Nav";
-import Gallery from "./components/Gallery";
-import Description from "./components/Description";
-import Amenities from "./components/Amenities";
-import Feedback_Reviews from "./components/Feedback_Reviews";
-import HostelPolicies from "./components/HostelPolicies";
-import BookStay from "./components/BookStay";
-import Footer from "./components/Footer";
+import { Gallery } from "./Gallery";
+import { Description } from "./Description";
+import { Amenities } from "./Amenities";
+import { Feedback_Reviews } from "./Feedback_Reviews";
+import { HostelPolicies } from "./HostelPolicies";
+import { BookStay } from "./BookStay";
+import { Footer } from "./Footer";
+import { Header } from "./Header";
 
-const ProductPage = () => {
+export const ProductPage = () => {
   return (
     <div className="flex flex-col gap-8 font-poppins">
-      <Nav />
-      <h1 className="mt-14 text-left text-5xl font-bold">Discover Nepal - <br/>One sleep at a time</h1>
-      <h2 className="mt-7 font-bold text-xl text-left">Search for residence all over Nepal</h2>
-      <SearchBar /> {/* Assuming SearchBar is a part of Nav or a separate component */}
-      <Description />
-      <h1 className="font-bold text-2xl text-left">Handpicked by us.</h1>
-      <div className="grid grid-cols-3 grid-rows-2 gap-4">
-        <Amenities />
-        <Feedback_Reviews />
-        <HostelPolicies />
-        <Gallery />
-        <BookStay />
+      <p>HEllo world</p>
+      {/* <Header />
+      <div className="grid grid-cols-2 grid-rows-3 gap-8">
+        <Gallery className="col-span-2 row-span-2" />
+        <Description className="col-span-1" />
+        <Amenities className="col-span-1" />
+        <BookStay className="col-span-1" />
+        <HostelPolicies className="col-span-1" />
+        <Feedback_Reviews className="col-span-2" />
       </div>
-      <div className="border-t-2 border-gray-400 my-4"></div>
-      <Footer />
+      <Footer /> */}
     </div>
   );
 };
-
-export default ProductPage;

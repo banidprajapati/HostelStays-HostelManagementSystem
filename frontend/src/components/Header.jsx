@@ -13,12 +13,14 @@ export const Header = () => {
       <div className="flex space-x-4">
         <a
           href="/login"
-          className="text-black hover:text-blue-600 hover:underline">
+          className="text-black hover:text-blue-600 hover:underline"
+        >
           Login
         </a>
         <a
           href="/signup"
-          className="text-black hover:text-blue-600 hover:underline">
+          className="text-black hover:text-blue-600 hover:underline"
+        >
           Signup
         </a>
       </div>
