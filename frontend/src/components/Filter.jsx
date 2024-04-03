@@ -1,5 +1,5 @@
 import React from "react";
-import { Checkbox, Radio } from "@material-tailwind/react";
+import {Checkbox, Radio} from "@material-tailwind/react";
 
 export const Filter = () => {
   return (
@@ -29,7 +29,7 @@ export const Filter = () => {
           </label>
           <label className="block">
             <Checkbox name="type" />
-            <span className="ml-2">Kitchen</span>
+            <span className="ml-2">Kitchen</span>love
           </label>
           {/* Add similar labels for other options */}
         </div>

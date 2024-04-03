@@ -1,6 +1,6 @@
 import React from "react";
 
-const AdminSideBar = () => {
+export const AdminSideBar = () => {
   return (
     <div className="flex h-screen">
       <div className="bg-gray-400 text-black w-64 h-full p-4">
@@ -41,5 +41,3 @@ const AdminSideBar = () => {
     </div>
   );
 };
-
-export default AdminSideBar;
