@@ -1,12 +1,12 @@
 import React from "react";
 import "./App.css";
-import { Filter } from "./components/Filter";
+import { SearchPage } from "./components/SearchPage";
 
 
 function App() {
   return (
     <>
-     <Filter /> 
+     <SearchPage /> 
     </>
   );
 }
