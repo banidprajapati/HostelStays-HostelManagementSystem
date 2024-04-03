@@ -4,14 +4,13 @@ export const HostelPolicies = () => {
   return (
     <div>
       <h2>
-        <strong style={{ color: "black" }}>
+        <strong style={{color: "black"}}>
           <span
             style={{
               borderBottom: "2px solid blue",
               fontWeight: "bold",
               letterSpacing: "1px",
-            }}
-          >
+            }}>
             Hos
           </span>
           tel Policies
@@ -28,21 +27,19 @@ export const HostelPolicies = () => {
           borderRadius: "10px",
           width: "80%",
           margin: "auto",
-        }}
-      >
-        <div style={{ width: "50%", textAlign: "center" }}>
+        }}>
+        <div style={{width: "50%", textAlign: "center"}}>
           <h3>Check-in</h3>
-          <p style={{ fontWeight: "bold" }}>10:00 am</p>
+          <p style={{fontWeight: "bold"}}>10:00 am</p>
         </div>
         <div
           style={{
             width: "50%",
             textAlign: "center",
             borderLeft: "1px solid white",
-          }}
-        >
+          }}>
           <h3>Check-out</h3>
-          <p style={{ fontWeight: "bold" }}>10:00 am</p>
+          <p style={{fontWeight: "bold"}}>10:00 am</p>
         </div>
       </div>
       <ul
@@ -51,8 +48,7 @@ export const HostelPolicies = () => {
           paddingLeft: "12%",
           listStyleType: "circle",
           listStyleColor: "#333333",
-        }}
-      >
+        }}>
         <li>
           Free cancellation up to 24 hours before arrival after which a fee
           applies.

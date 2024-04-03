@@ -4,14 +4,13 @@ export const BookStay = () => {
   return (
     <div>
       <h2>
-        <strong style={{ color: "black" }}>
+        <strong style={{color: "black"}}>
           <span
             style={{
               borderBottom: "2px solid blue",
               fontWeight: "bold",
               letterSpacing: "1px",
-            }}
-          >
+            }}>
             Book
           </span>{" "}
           you stay
@@ -28,8 +27,7 @@ export const BookStay = () => {
           margin: "auto",
           height: "300px",
           position: "relative",
-        }}
-      >
+        }}>
         {/* Big rectangle box */}
         <input
           type="text"
@@ -74,8 +72,7 @@ export const BookStay = () => {
             fontWeight: "bold",
             fontSize: "20px",
             color: "black",
-          }}
-        >
+          }}>
           Total Price (including all taxes)
         </h3>
         {/* Removed the second horizontal line */}
@@ -86,8 +83,7 @@ export const BookStay = () => {
             bottom: "60px",
             left: "40px",
             color: "black",
-          }}
-        >
+          }}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </h4>
         <br />
@@ -100,8 +96,7 @@ export const BookStay = () => {
             color: "white",
             padding: "10px 20px",
             borderRadius: "5px",
-          }}
-        >
+          }}>
           Confirm Booking
         </button>
         <br />
@@ -113,8 +108,7 @@ export const BookStay = () => {
             fontWeight: "bold",
             fontSize: "20px",
             color: "black",
-          }}
-        >
+          }}>
           NPR 2500
         </h3>
       </div>

@@ -17,7 +17,7 @@ export const SearchBar = () => {
           placeholder="City Name"
           className="px-4 py-3 border-r-2 border-gray-400 bg-gray-200 focus:bg-gray-200 focus:outline-none h-12 rounded-l-lg placeholder-gray-700 w-2/5" // Updated width to w-full
         />
-        <inpu2
+        <input
           type="date"
           placeholder="Check in"
           className="px-4 py-3 border-r-2 border-gray-400 bg-gray-200 focus:bg-gray-200 focus:outline-none h-12 placeholder-gray-700 w-1/5"
