@@ -9,7 +9,7 @@ export const RoomDetails = () => {
         alt="About Us Image"
         className="w-72 rounded-lg"
       />
-      <div className="text-left ml-5 w-96 ">
+      <div className="text-left ml-5 w-full ">
         <h1 className="text-2xl mt-3">Bhatbhatini Super Hostel Store</h1>
         <p className="text-xl mb-1">Bhatbhatini, Naxal</p>
         <div className="flex flex-row items-center gap-2">
