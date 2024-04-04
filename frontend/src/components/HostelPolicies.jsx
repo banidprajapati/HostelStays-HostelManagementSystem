@@ -9,18 +9,18 @@ export const HostelPolicies = () => {
           tel Policies
         </strong>
       </h2>
-      <br /> {/* Two lines of space */}
-      <div className="flex justify-center bg-gray-300 p-5 border  rounded-lg w-80">
-        <div className="w-1/2 text-center">
-          <h3>Check-in</h3>
-          <p className="font-bold">10:00 am</p>
+      <br />
+      <div className="flex justify-center bg-gray-300 border  w-full rounded-lg">
+        <div className="w-96 text-center m-3">
+          <h3 className="text-xl">Check-in</h3>
+          <p className="font-bold text-2xl my-2">10:00 am</p>
         </div>
-        <div className="w-1/2 text-center border-l border-white">
-          <h3>Check-out</h3>
-          <p className="font-bold">10:00 am</p>
+        <div className="w-96 text-center border-l border-white m-3">
+          <h3 className="text-xl">Check-out</h3>
+          <p className="font-bold text-2xl my-2">10:00 am</p>
         </div>
       </div>
-      <ul className="mt-5 list-none text-gray-800">
+      <ul className="mt-5 list-disc text-gray-800">
         <li>
           Free cancellation up to 24 hours before arrival after which a fee
           applies.

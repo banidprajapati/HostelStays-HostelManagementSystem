@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
-import { ProductPage } from "./components/ProductPage"; // Import ProductPage component
+import { AdminDashboard } from "./components/Admin/AdminDashboard"; // Import ProductPage component
 
 function App() {
   return (
     <>
-      <ProductPage />
+      <AdminDashboard />
     </>
   );
 }

@@ -8,9 +8,7 @@ import {
 } from '@chakra-ui/react'
 
 export const Filter = () => {
-  const [range, setRange] = useState({ min: 1000, max: 50000 }); // State to store the range values
-
-  // Function to handle changes in the range values
+  const [range, setRange] = useState({ min: 1000, max: 50000 }); 
   const handleRangeChange = (event, type) => {
     const newValue = parseInt(event.target.value);
     if (!isNaN(newValue)) {

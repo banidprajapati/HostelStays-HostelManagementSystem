@@ -10,16 +10,16 @@ export const BookStay = () => {
         <div className="absolute top-16 left-16 w-3/4 h-10 flex border rounded px-2">
           <input
             type="text"
-            className="w-1/3 h-10 bg-white px-2"
+            className="w-1/3 h-10 bg-gray-200 px-2"
             placeholder="Date"
           />
-          <div className="w-px bg-gray-500 mx-2"></div>
+          <div className="w-px bg-gray-500"></div>
           <input
             type="text"
             className="w-1/3 h-10 bg-white px-2"
             placeholder="Guests"
           />
-          <div className="w-px bg-gray-500 mx-2"></div>
+          <div className="w-px bg-gray-500 "></div>
           <input
             type="text"
             className="w-1/3 h-10 bg-white px-2"

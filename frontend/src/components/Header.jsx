@@ -15,13 +15,7 @@ export const Header = () => {
           href="/login"
           className="text-black hover:text-blue-600 hover:underline"
         >
-          Login
-        </a>
-        <a
-          href="/signup"
-          className="text-black hover:text-blue-600 hover:underline"
-        >
-          Signup
+          Login/SignUp
         </a>
       </div>
     </div>

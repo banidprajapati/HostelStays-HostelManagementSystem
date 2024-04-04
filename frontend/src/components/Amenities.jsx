@@ -21,7 +21,7 @@ export const Amenities = () => {
       <ul>
         {amenities.map((amenity, index) => (
           <li key={index} className="flex items-center">
-            <span className="text-green-500 mr-2">
+            <span className="text-white bg-green-500 my-1 rounded-md mr-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
