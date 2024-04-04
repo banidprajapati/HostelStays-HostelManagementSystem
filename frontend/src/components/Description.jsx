@@ -1,19 +1,11 @@
-// Description.jsx
 import React from "react";
 
 export const Description = () => {
   return (
-    <div>
-      <h2>
-        <strong style={{color: "black"}}>
-          <span
-            style={{
-              borderBottom: "2px solid blue",
-              fontWeight: "bold",
-              letterSpacing: "1px",
-            }}>
-            Des
-          </span>
+    <div className="text-left">
+      <h2 style={{ fontSize: "1.5rem" }}>
+        <strong className="text-black">
+          <span>Des</span>
           cription
         </strong>
       </h2>
@@ -21,32 +13,23 @@ export const Description = () => {
       <h3>
         <strong>Last Garden Apartment and Guest House</strong>
       </h3>
-      <div style={{display: "flex", alignItems: "center"}}>
-        <div
-          style={{
-            background: "green",
-            color: "white",
-            padding: "5px",
-            marginRight: "10px",
-            borderRadius: "5px",
-            height: "30px",
-            width: "40px",
-          }}>
+      <div className="flex items-center">
+        <div className="bg-green-500 text-white px-2 py-1 mr-4 rounded">
           ★ 4
         </div>
-        <div style={{fontSize: "small"}}>100 Reviews</div>
+        <div className="text-sm">100 Reviews</div>
       </div>
       <br /> {/* One line space */}
       <h3>
         <strong>Location</strong>
       </h3>
-      <div style={{fontSize: "small"}}>Address Line 1</div>
-      <div style={{fontSize: "small"}}>Address Line 2</div>
+      <div className="text-sm">Address Line 1</div>
+      <div className="text-sm">Address Line 2</div>
       <br /> {/* One line space */}
       <h3>
         <strong>Description</strong>
       </h3>
-      <p style={{fontSize: "small"}}>
+      <p className="text-sm">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel urna
         a ipsum tincidunt laoreet. Cras nec dolor justo. Donec vel libero eu
         enim pretium vulputate. Integer nec arcu felis.
