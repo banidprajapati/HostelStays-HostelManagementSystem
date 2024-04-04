@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Login = ({email, setEmail, handleLogin}) => {
+export const Login = ({ email, setEmail, handleLogin }) => {
   return (
     <div className="p-0 flex h-screen">
       <div className="w-1/2 h-full">
@@ -24,7 +24,8 @@ export const Login = ({email, setEmail, handleLogin}) => {
             />
             <button
               className="bg-blue-500 text-white px-4 py-2 rounded-md"
-              onClick={handleLogin}>
+              onClick={handleLogin}
+            >
               Continue
             </button>
           </div>

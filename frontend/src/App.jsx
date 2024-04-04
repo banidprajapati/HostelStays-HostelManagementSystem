@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import { ProductPage } from "./components/ProductPage";
+// import { ProductPage } from "./components/ProductPage";
 // import { LandingPage } from "./components/LandingPage";
 // import {Amenities} from "./components/Amenities";
 // import {Description} from "./components/Description";
