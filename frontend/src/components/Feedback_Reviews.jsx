@@ -1,147 +1,51 @@
-// Feedback_Reviews.jsx
 import React from "react";
 
 export const Feedback_Reviews = () => {
   return (
-    <div>
-      <h2>
-        <strong style={{color: "black"}}>
-          <span
-            style={{
-              borderBottom: "2px solid blue",
-              fontWeight: "bold",
-              letterSpacing: "1px",
-            }}>
-            Feedback and Reviews
-          </span>
+    <div className="text-left ml-2 mr-0">
+      <h2 style={{ fontSize: "1.5rem" }}>
+        <strong className="text-black">
+          <span>Feedback and Reviews</span>
         </strong>
       </h2>
       <br /> {/* One line of space */}
-      <div style={{marginBottom: "20px"}}>
-        <div style={{display: "flex", alignItems: "center"}}>
-          <div
-            style={{
-              width: "10px",
-              height: "10px",
-              borderRadius: "50%",
-              background: "black",
-              marginRight: "10px",
-            }}></div>{" "}
-          {/* Dot symbol */}
-          <strong>Sonam Yunjan, 13 Apr 2023</strong>
-          <span
-            style={{
-              marginLeft: "100px",
-              display: "flex",
-              alignItems: "center",
-            }}>
-            {" "}
-            {/* Space before the rating symbol */}
-            <div
-              style={{
-                background: "green",
-                color: "white",
-                padding: "5px",
-                borderRadius: "5px",
-                height: "30px",
-                width: "40px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}>
+      <div className="mb-4">
+        <div className="flex items-start justify-between">
+          <strong className="mr-6">Sonam Yunjan, 13 Apr 2023</strong>
+          <div className="flex items-center">
+            <div className="bg-green-500 text-white px-2 py-1 rounded mr-4">
               ★ 3
             </div>
-          </span>
+          </div>
         </div>
-        <div style={{marginLeft: "20px"}}>
-          {" "}
-          {/* Gap before the review paragraph */}
-          Short review goes here...
-        </div>
+        <div className="ml-0 text-left">Short review goes here...</div>{" "}
+        {/* Gap before the review paragraph */}
       </div>
-      <div style={{marginBottom: "20px"}}>
-        <div style={{display: "flex", alignItems: "center"}}>
-          <div
-            style={{
-              width: "10px",
-              height: "10px",
-              borderRadius: "50%",
-              background: "black",
-              marginRight: "10px",
-            }}></div>{" "}
-          {/* Dot symbol */}
-          <strong>John Doe, 15 Apr 2023</strong>
-          <span
-            style={{
-              marginLeft: "100px",
-              display: "flex",
-              alignItems: "center",
-            }}>
-            {" "}
-            {/* Space before the rating symbol */}
-            <div
-              style={{
-                background: "green",
-                color: "white",
-                padding: "5px",
-                borderRadius: "5px",
-                height: "30px",
-                width: "40px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}>
+      <div className="mb-4">
+        <div className="flex items-start justify-between">
+          <strong className="mr-6">John Doe, 15 Apr 2023</strong>
+          <div className="flex items-center">
+            <div className="bg-green-500 text-white px-2 py-1 rounded mr-4">
               ★ 4
             </div>
-          </span>
+          </div>
         </div>
-        <div style={{marginLeft: "20px"}}>
-          {" "}
-          {/* Gap before the review paragraph */}
-          Another short review goes here...
-        </div>
+        <div className="ml-0 text-left">Another short review goes here...</div>{" "}
+        {/* Gap before the review paragraph */}
       </div>
-      <div>
-        <div style={{display: "flex", alignItems: "center"}}>
-          <div
-            style={{
-              width: "10px",
-              height: "10px",
-              borderRadius: "50%",
-              background: "black",
-              marginRight: "10px",
-            }}></div>{" "}
-          {/* Dot symbol */}
-          <strong>Jane Smith, 17 Apr 2023</strong>
-          <span
-            style={{
-              marginLeft: "100px",
-              display: "flex",
-              alignItems: "center",
-            }}>
-            {" "}
-            {/* Space before the rating symbol */}
-            <div
-              style={{
-                background: "green",
-                color: "white",
-                padding: "5px",
-                borderRadius: "5px",
-                height: "30px",
-                width: "40px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}>
+      <div className="mb-4">
+        <div className="flex items-start justify-between">
+          <strong className="mr-6">Jane Smith, 17 Apr 2023</strong>
+          <div className="flex items-center">
+            <div className="bg-green-500 text-white px-2 py-1 rounded mr-4">
               ★ 5
             </div>
-          </span>
+          </div>
         </div>
-        <div style={{marginLeft: "20px"}}>
-          {" "}
-          {/* Gap before the review paragraph */}
+        <div className="ml-0 text-left">
           Yet another short review goes here...
-        </div>
+        </div>{" "}
+        {/* Gap before the review paragraph */}
       </div>
     </div>
   );

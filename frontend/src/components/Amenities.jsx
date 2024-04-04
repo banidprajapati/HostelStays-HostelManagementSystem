@@ -1,49 +1,45 @@
-// Amenities.jsx
 import React from "react";
 
 export const Amenities = () => {
+  const amenities = [
+    "Free Wi-Fi",
+    "Parking",
+    "Community Area",
+    "Access to Kitchen",
+    "Shared / Personal Bathroom",
+    "Free Cancellation",
+    "Swimming pool",
+    "lorem ipsum",
+  ];
+
   return (
-    <div>
-      <h2>
-        <strong style={{color: "black"}}>
-          <span
-            style={{
-              borderBottom: "2px solid blue",
-              fontWeight: "bold",
-              letterSpacing: "1px",
-            }}>
-            Ame
-          </span>
-          nities
-        </strong>
+    <div className="text-left">
+      <h2 className="text-3xl font-bold text-black">
+        <span>Ame</span>nities
       </h2>
       <br /> {/* Two lines of space */}
       <ul>
-        <li>
-          <span style={{color: "green"}}>☑</span> Free Wi-Fi
-        </li>
-        <li>
-          <span style={{color: "green"}}>☑</span> Parking
-        </li>
-        <li>
-          <span style={{color: "green"}}>☑</span> Community Area
-        </li>
-        <li>
-          <span style={{color: "green"}}>☑</span> Access to Kitchen
-        </li>
-        <li>
-          <span style={{color: "green"}}>☑</span> Shared / Personal Bathroom
-        </li>
-        <li>
-          <span style={{color: "green"}}>☑</span> Free Cancelation
-        </li>
-        <li>
-          <span style={{color: "green"}}>☑</span> Swimming pool
-        </li>
-        <li>
-          <span style={{color: "green"}}>☑</span> lorem ipsum
-        </li>
-        {/* Add more amenities as needed */}
+        {amenities.map((amenity, index) => (
+          <li key={index} className="flex items-center">
+            <span className="text-green-500 mr-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                className="h-6 w-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+            </span>
+            {amenity}
+          </li>
+        ))}
       </ul>
     </div>
   );

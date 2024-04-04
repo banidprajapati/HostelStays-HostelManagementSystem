@@ -2,71 +2,17 @@ import React from "react";
 
 export const Gallery = () => {
   return (
-    <div>
-      <h2>
-        <strong style={{color: "black"}}>
-          <span
-            style={{
-              borderBottom: "2px solid blue",
-              fontWeight: "bold",
-              letterSpacing: "1px",
-            }}>
-            Gal
-          </span>
-          lery
-        </strong>
+    <div className="text-left">
+      <h2 className="text-3xl font-bold ">
+        <span>Gal</span>lery
       </h2>
-      <br /> {/* Two lines of space */}
-      <div
-        style={{
-          background: "#808080",
-          padding: "20px",
-          border: "1px solid black",
-          borderRadius: "10px",
-          width: "80%",
-          margin: "auto",
-          height: "400px",
-        }}>
-        {/* Big gray box */}
-      </div>
-      <div
-        style={{display: "flex", justifyContent: "center", marginTop: "20px"}}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            width: "80%",
-          }}>
-          <div
-            style={{
-              background: "#808080",
-              padding: "70px",
-              border: "1px solid black",
-              borderRadius: "10px",
-              width: "30%",
-            }}>
-            {/* Small gray box 1 */}
-          </div>
-          <div
-            style={{
-              background: "#808080",
-              padding: "70px",
-              border: "1px solid black",
-              borderRadius: "10px",
-              width: "30%",
-            }}>
-            {/* Small gray box 2 */}
-          </div>
-          <div
-            style={{
-              background: "#808080",
-              padding: "70px",
-              border: "1px solid black",
-              borderRadius: "10px",
-              width: "30%",
-            }}>
-            {/* Small gray box 3 */}
-          </div>
+      <br />
+      <div className="bg-gray-300 p-2 border rounded-lg w-3/5 mx-auto h-60 py-8"></div>
+      <div className="flex justify-center mt-5">
+        <div className="flex justify-between w-3/5">
+          <div className="bg-gray-300 p-12 border "></div>
+          <div className="bg-gray-300 p-12 border "></div>
+          <div className="bg-gray-300 p-12 border "></div>
         </div>
       </div>
     </div>

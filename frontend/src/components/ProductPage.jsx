@@ -11,8 +11,7 @@ import { Header } from "./Header";
 export const ProductPage = () => {
   return (
     <div className="flex flex-col gap-8 font-poppins">
-      <p>HEllo world</p>
-      {/* <Header />
+      <Header />
       <div className="grid grid-cols-2 grid-rows-3 gap-8">
         <Gallery className="col-span-2 row-span-2" />
         <Description className="col-span-1" />
@@ -21,7 +20,7 @@ export const ProductPage = () => {
         <HostelPolicies className="col-span-1" />
         <Feedback_Reviews className="col-span-2" />
       </div>
-      <Footer /> */}
+      <Footer />
     </div>
   );
 };
