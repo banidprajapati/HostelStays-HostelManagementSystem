@@ -3,14 +3,11 @@ import React from "react";
 export const HostelPolicies = () => {
   return (
     <div className="text-left">
-      <h2 style={{ fontSize: "1.5rem" }}>
-        <strong className="text-black">
-          <span>Hos</span>
-          tel Policies
-        </strong>
+      <h2 className="text-3xl font-bold">
+        <span className="text-black">Hostel</span> Policies
       </h2>
       <br />
-      <div className="flex justify-center bg-gray-300 border  w-full rounded-lg">
+      <div className="flex justify-center bg-gray-300 border w-full rounded-lg">
         <div className="w-96 text-center m-3">
           <h3 className="text-xl">Check-in</h3>
           <p className="font-bold text-2xl my-2">10:00 am</p>

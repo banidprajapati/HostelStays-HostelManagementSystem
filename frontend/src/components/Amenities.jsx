@@ -14,8 +14,8 @@ export const Amenities = () => {
 
   return (
     <div className="text-left">
-      <h2 className="text-3xl font-bold text-black">
-        <span>Ame</span>nities
+      <h2 className="text-3xl font-bold">
+        <span className="text-black">Ame</span>nities
       </h2>
       <br /> {/* Two lines of space */}
       <ul>

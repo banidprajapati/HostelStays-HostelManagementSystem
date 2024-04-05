@@ -5,7 +5,7 @@ export const Description = () => {
     <div className="text-left">
       <h2 style={{ fontSize: "1.5rem" }}>
         <strong className="text-black">
-          <span>Des</span>
+          <span className="font-bold">Des</span>
           cription
         </strong>
       </h2>

@@ -2,27 +2,33 @@ import React from "react";
 
 export const BookStay = () => {
   return (
-    <div className="flex flex-col items-center mt-8">
+    <div
+      className="flex flex-col items-start mt-8"
+      style={{ width: "80%", height: "400px" }}
+    >
       <h2 className="text-3xl font-bold">
-        <span>Book</span> your stay
+        <span className="text-black">Book</span> your stay
       </h2>
-      <div className="relative bg-gray-300 p-8 border rounded-lg w-3/4 mx-auto h-96">
+      <div
+        className="relative bg-gray-300 p-8 border rounded-lg w-full mx-auto"
+        style={{ height: "calc(100% - 40px)" }}
+      >
         <div className="absolute top-16 left-16 w-3/4 h-10 flex border rounded px-2">
           <input
             type="text"
-            className="w-1/3 h-10 bg-gray-200 px-2"
+            className="w-1/3 h-10 bg-gray-200 px-2 focus:outline-none"
             placeholder="Date"
           />
           <div className="w-px bg-gray-500"></div>
           <input
             type="text"
-            className="w-1/3 h-10 bg-white px-2"
+            className="w-1/3 h-10 bg-gray-200 px-2 focus:outline-none"
             placeholder="Guests"
           />
           <div className="w-px bg-gray-500 "></div>
           <input
             type="text"
-            className="w-1/3 h-10 bg-white px-2"
+            className="w-1/3 h-10 bg-gray-200 px-2 focus:outline-none"
             placeholder="Rooms"
           />
         </div>

@@ -3,10 +3,8 @@ import React from "react";
 export const Feedback_Reviews = () => {
   return (
     <div className="text-left ml-2 mr-0">
-      <h2 style={{ fontSize: "1.5rem" }}>
-        <strong className="text-black">
-          <span>Feedback and Reviews</span>
-        </strong>
+      <h2 className="text-3xl font-bold">
+        <span className="text-black">Feedback and Reviews</span>
       </h2>
       <br /> {/* One line of space */}
       <div className="mb-4">
