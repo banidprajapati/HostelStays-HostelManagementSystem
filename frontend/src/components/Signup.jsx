@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
-export const SignUp = ({email, handleLogin}) => {
+export const SignUp = ({ email, handleLogin }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -46,7 +46,8 @@ export const SignUp = ({email, handleLogin}) => {
             />
             <button
               className="bg-blue-500 text-white px-4 py-2 rounded-md"
-              onClick={handleSignUp}>
+              onClick={handleSignUp}
+            >
               Sign Up
             </button>
           </div>
