@@ -18,7 +18,7 @@ export const Amenities = () => {
     "Library",
     "Games Room",
     "Outdoor Terrace",
-    "Fitness Classes",
+    "Fitness Classes ",
     "Organized Tours",
     "Breakfast Included",
     "Housekeeping Services",
@@ -45,7 +45,7 @@ export const Amenities = () => {
       </h2>
       <br />
       <div className="flex">
-        <ul className="flex flex-col w-1/2">
+        <ul className="flex flex-col w-2/3 pr-4">
           {firstHalf.map((amenity, index) => (
             <li key={index} className="flex items-center">
               <span className="text-white bg-green-500 my-1 rounded-md mr-2 flex items-center justify-center w-6 h-6">
@@ -68,7 +68,7 @@ export const Amenities = () => {
             </li>
           ))}
         </ul>
-        <ul className="flex flex-col w-1/2 ml-auto pl-4">
+        <ul className="flex flex-col w-1/3">
           {secondHalf.map((amenity, index) => (
             <li key={index} className="flex items-center">
               <span className="text-white bg-green-500 my-1 rounded-md mr-2 flex items-center justify-center w-6 h-6">
