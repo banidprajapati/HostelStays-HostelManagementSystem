@@ -23,48 +23,54 @@ export const Gallery = () => {
     );
   };
 
-  const displayImages = images.slice(0, 3);
+  const displayImages = images.slice(0, 4);
+  const imageSize = 80 / displayImages.length + "%";
+  const remainingImages = images.length - displayImages.length;
 
   return (
-    <div className="text-left" style={{ marginRight: "auto" }}>
-      {" "}
-      {/* Move the Gallery component to the left */}
+    <div className="text-left ml-auto">
       <h2 className="text-3xl font-bold">
-        <span>Gallery</span>
+        <span className="text-black">Gallery</span>
       </h2>
       <br />
       <div
-        className="p-1 border rounded-lg w-full mx-auto h-80 py-6 relative"
-        style={{ marginBottom: "-0.25rem" }}
+        className="p-0 rounded-lg w-full mx-auto h-80 py-3 relative"
+        style={{ marginBottom: "-0.25rem", marginTop: "-0.125rem" }}
       >
         <img
           src={images[currentImageIndex]}
           alt={`Image ${currentImageIndex + 1}`}
           className="object-cover w-full h-full rounded-lg"
         />
+      </div>
+      <div className="flex justify-center items-center">
         <button
-          className="absolute top-0 bottom-0 left-0 ml-2 my-auto text-white px-3 py-1 rounded-full focus:outline-none"
+          className="mx-1 text-black font-bold text-xl px-2 py-3 rounded-full focus:outline-none"
           onClick={prevImage}
         >
           &lt;
         </button>
-        <button
-          className="absolute top-0 bottom-0 right-0 mr-2 my-auto text-white px-3 py-1 rounded-full focus:outline-none"
-          onClick={nextImage}
-        >
-          &gt;
-        </button>
-      </div>
-      <div className="flex justify-center mt-4" style={{ margin: "-0.25rem" }}>
         {displayImages.map((image, index) => (
           <img
             key={index}
             src={image}
             alt={`Image ${index + 1}`}
-            className="p-1 border cursor-pointer object-cover w-32 h-32 rounded-lg mx-4 my-2" // Adjusted margin to create space between images
+            className="p-0.5 border cursor-pointer object-cover rounded-lg mx-0.5"
+            style={{ width: imageSize }}
             onClick={() => setCurrentImageIndex(index)}
           />
         ))}
+        {remainingImages > 0 && (
+          <span className="p-0.5 border cursor-pointer object-cover rounded-lg mx-0.5 text-black font-bold text-xl">
+            +{remainingImages}
+          </span>
+        )}
+        <button
+          className="mx-1 text-black font-bold text-xl px-2 py-3 rounded-full focus:outline-none"
+          onClick={nextImage}
+        >
+          &gt;
+        </button>
       </div>
     </div>
   );

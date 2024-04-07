@@ -2,7 +2,8 @@ import React from "react";
 
 export const HostelPolicies = () => {
   return (
-    <div className="text-left">
+    <div className="text-left mt-0">
+      {/* Adjusted margin top */}
       <h2 className="text-3xl font-bold">
         <span className="text-black">Hostel</span> Policies
       </h2>
@@ -17,7 +18,9 @@ export const HostelPolicies = () => {
           <p className="font-bold text-2xl my-2">10:00 am</p>
         </div>
       </div>
-      <ul className="mt-5 list-disc text-gray-800">
+      <ul className="mt-5 list-none text-gray-800">
+        {" "}
+        {/* Removed list-disc and added list-none */}
         <li>
           Free cancellation up to 24 hours before arrival after which a fee
           applies.

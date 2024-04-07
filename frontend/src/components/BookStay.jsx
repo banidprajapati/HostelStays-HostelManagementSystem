@@ -1,36 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export const BookStay = () => {
+  const [guests, setGuests] = useState("");
+  const [startDate, setStartDate] = useState(null);
+
+  const handleGuestsChange = (event) => {
+    const { value } = event.target;
+    setGuests(value);
+  };
+
+  let roomsRecommended = "";
+  if (guests !== "") {
+    const roomsNeeded = Math.ceil(guests / 6);
+    roomsRecommended =
+      roomsNeeded > 1
+        ? `${roomsNeeded} rooms recommended`
+        : "1 room recommended";
+  }
+
   return (
     <div
-      className="flex flex-col items-start mt-2" // Adjusted margin of flex container
-      style={{ width: "90%", height: "300px", marginTop: "100px" }} // Decreased height to 300px and added marginTop
+      className="flex flex-col items-start"
+      style={{ width: "98%", height: "300px", marginTop: "0" }} // Increased width to 98%
     >
+      {/* Adjusted margin of flex container */}
       <h2 className="text-3xl font-bold mb-2">
         {/* Adjusted margin of heading */}
         <span className="text-black">Book</span> your stay
       </h2>
       <div
-        className="relative bg-gray-300 p-8 border rounded-lg w-full mx-auto flex flex-col justify-between" // Adjusted width to full width, added flex properties
+        className="relative bg-gray-300 p-8 border rounded-lg w-full mx-auto flex flex-col justify-between"
         style={{ height: "calc(100% - 40px)" }}
       >
+        {/* Adjusted width to full width, added flex properties */}
         <div className="flex justify-between mb-4">
-          <input
-            type="text"
-            className="w-1/3 h-10 bg-gray-200 px-2 focus:outline-none rounded"
-            placeholder="Date"
+          <DatePicker
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+            className="w-full h-10 bg-gray-200 px-2 mr-2 focus:outline-none rounded" // Set width to full width
+            placeholderText="Date"
           />
           <input
             type="text"
-            className="w-1/3 h-10 bg-gray-200 px-2 focus:outline-none rounded"
+            className="w-1/2 h-10 bg-gray-200 px-2 focus:outline-none rounded"
             placeholder="Guests"
-          />
-          <input
-            type="text"
-            className="w-1/3 h-10 bg-gray-200 px-2 focus:outline-none rounded"
-            placeholder="Rooms"
+            value={guests}
+            onChange={handleGuestsChange}
           />
         </div>
+        {roomsRecommended && <p className="text-black">{roomsRecommended}</p>}
         <hr className="border border-white" />
         <div className="flex flex-col">
           {/* Adjusted margin-top */}
@@ -50,8 +70,13 @@ export const BookStay = () => {
           </h4>
           <h3
             className="font-bold text-lg text-black"
-            style={{ paddingLeft: "260px" }} // Add padding to the left
+            style={{
+              textAlign: "left",
+              fontSize: "24px",
+              marginLeft: "370px", // Change marginLeft to a positive value
+            }}
           >
+            {/* Remove paddingLeft */}
             NPR 2500
           </h3>
         </div>
