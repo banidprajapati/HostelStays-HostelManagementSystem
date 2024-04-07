@@ -33,6 +33,14 @@ export const HostelPolicies = () => {
         <li>Quiet hours enforced from 10:00 PM to 7:00 AM.</li>
         <li>Guests responsible for reporting damages; charges may apply.</li>
         <li>Guests must adhere to noise and behavior standards.</li>
+        <li>
+          Quiet hours enforced from 10:00 PM to 7:00 AM, promoting a peaceful
+          environment for all guests to rest and relax.
+        </li>
+        <li>
+          Smoking is prohibited in all indoor areas to maintain a healthy
+          environment for everyone.
+        </li>
       </ul>
     </div>
   );

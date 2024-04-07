@@ -28,13 +28,16 @@ export const Gallery = () => {
   const remainingImages = images.length - displayImages.length;
 
   return (
-    <div className="text-left ml-auto">
+    <div
+      className="text-left ml-auto"
+      style={{ width: "100%", marginTop: "1rem", marginBottom: "1rem" }}
+    >
       <h2 className="text-3xl font-bold">
         <span className="text-black">Gallery</span>
       </h2>
       <br />
       <div
-        className="p-0 rounded-lg w-full mx-auto h-80 py-3 relative"
+        className="p-0 rounded-lg w-full mx-auto h-120 py-3 relative" // Increased height to 120px
         style={{ marginBottom: "-0.25rem", marginTop: "-0.125rem" }}
       >
         <img
@@ -43,9 +46,14 @@ export const Gallery = () => {
           className="object-cover w-full h-full rounded-lg"
         />
       </div>
-      <div className="flex justify-center items-center">
+      <div
+        className="flex justify-center items-center"
+        style={{ width: "100%", padding: "0 1rem" }}
+      >
+        {" "}
+        {/* Increased width and added padding */}
         <button
-          className="mx-1 text-black font-bold text-xl px-2 py-3 rounded-full focus:outline-none"
+          className="mx-1 text-black font-bold text-2xl px-4 py-3 rounded-full focus:outline-none" // Increased font size and padding
           onClick={prevImage}
         >
           &lt;
@@ -56,7 +64,7 @@ export const Gallery = () => {
             src={image}
             alt={`Image ${index + 1}`}
             className="p-0.5 border cursor-pointer object-cover rounded-lg mx-0.5"
-            style={{ width: imageSize }}
+            style={{ width: imageSize, height: "80px" }} // Fixed height for small images
             onClick={() => setCurrentImageIndex(index)}
           />
         ))}
@@ -66,7 +74,7 @@ export const Gallery = () => {
           </span>
         )}
         <button
-          className="mx-1 text-black font-bold text-xl px-2 py-3 rounded-full focus:outline-none"
+          className="mx-1 text-black font-bold text-2xl px-4 py-3 rounded-full focus:outline-none" // Increased font size and padding
           onClick={nextImage}
         >
           &gt;
