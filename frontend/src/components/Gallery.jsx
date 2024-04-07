@@ -26,14 +26,16 @@ export const Gallery = () => {
   const displayImages = images.slice(0, 3);
 
   return (
-    <div className="text-left">
+    <div className="text-left" style={{ marginRight: "auto" }}>
+      {" "}
+      {/* Move the Gallery component to the left */}
       <h2 className="text-3xl font-bold">
         <span>Gallery</span>
       </h2>
       <br />
       <div
-        className="p-1 border rounded-lg w-3/5 mx-auto h-80 py-6 relative"
-        style={{ marginBottom: "-0.25rem", width: "80%" }}
+        className="p-1 border rounded-lg w-full mx-auto h-80 py-6 relative"
+        style={{ marginBottom: "-0.25rem" }}
       >
         <img
           src={images[currentImageIndex]}
@@ -67,3 +69,5 @@ export const Gallery = () => {
     </div>
   );
 };
+
+export default Gallery;

@@ -3,10 +3,9 @@ import React from "react";
 export const Description = () => {
   return (
     <div className="text-left">
-      <h2 style={{ fontSize: "1.5rem" }}>
+      <h2 className="text-3xl font-bold">
         <strong className="text-black">
-          <span className="font-bold">Des</span>
-          cription
+          <div className="font-bold">Description</div>
         </strong>
       </h2>
       <br /> {/* Two lines of space */}

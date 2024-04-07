@@ -13,7 +13,9 @@ export const Amenities = () => {
   ];
 
   return (
-    <div className="text-left">
+    <div className="text-left" style={{ marginTop: "100px" }}>
+      {" "}
+      {/* Added style to move the whole div down by 100px */}
       <h2 className="text-3xl font-bold">
         <span className="text-black">Ame</span>nities
       </h2>

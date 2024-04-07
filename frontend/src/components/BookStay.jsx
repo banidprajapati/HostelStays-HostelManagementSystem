@@ -4,7 +4,7 @@ export const BookStay = () => {
   return (
     <div
       className="flex flex-col items-start mt-2" // Adjusted margin of flex container
-      style={{ width: "90%", height: "300px" }} // Decreased height to 300px
+      style={{ width: "90%", height: "300px", marginTop: "100px" }} // Decreased height to 300px and added marginTop
     >
       <h2 className="text-3xl font-bold mb-2">
         {/* Adjusted margin of heading */}
