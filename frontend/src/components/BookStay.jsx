@@ -98,7 +98,6 @@ export const BookStay = () => {
             style={{
               textAlign: "left",
               fontSize: "24px",
-              marginLeft: "370px",
             }}
           >
             NPR 2500

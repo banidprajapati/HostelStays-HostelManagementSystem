@@ -30,7 +30,7 @@ export const Gallery = () => {
   return (
     <div
       className="text-left ml-auto"
-      style={{ width: "100%", marginTop: "1rem", marginBottom: "1rem" }}
+      style={{ width: "100%", marginBottom: "1rem" }}
     >
       <h2 className="text-3xl font-bold">
         <span className="text-black">Gallery</span>
