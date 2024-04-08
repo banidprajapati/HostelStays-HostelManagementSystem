@@ -47,7 +47,7 @@ export const BookStay = () => {
       className="flex flex-col items-start"
       style={{ width: "98%", height: "300px", marginTop: "0" }}
     >
-      <h2 className="text-3xl font-bold mb-2">
+      <h2 className="text-3xl font-bold mb-4" style={{ marginBottom: "28px" }}>
         <span className="text-black">Book</span> your stay
       </h2>
       <div
