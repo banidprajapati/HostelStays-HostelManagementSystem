@@ -4,12 +4,11 @@ export const Description = () => {
   return (
     <div className="text-left">
       <h2 className="text-3xl font-bold">
-        <strong className="text-black">
-          <div className="font-bold">Description</div>
-        </strong>
+        <strong className="text-black font-bold">Description</strong>
       </h2>
-      <br /> {/* Two lines of space */}
-      <h3>
+      <br className="my-8" /> {/* Two lines of space */}
+      <h3 className="text-2xl">
+        {/* Increased font size class applied */}
         <strong>Last Garden Apartment and Guest House</strong>
       </h3>
       <div className="flex items-center">
@@ -18,13 +17,13 @@ export const Description = () => {
         </div>
         <div className="text-sm">100 Reviews</div>
       </div>
-      <br /> {/* One line space */}
+      <br className="my-4" /> {/* One line space */}
       <h3>
         <strong>Location</strong>
       </h3>
       <div className="text-sm">Address Line 1</div>
       <div className="text-sm">Address Line 2</div>
-      <br /> {/* One line space */}
+      <br className="my-4" /> {/* One line space */}
       <h3>
         <strong>Description</strong>
       </h3>
