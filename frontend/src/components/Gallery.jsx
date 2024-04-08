@@ -44,6 +44,7 @@ export const Gallery = () => {
           src={images[currentImageIndex]}
           alt={`Image ${currentImageIndex + 1}`}
           className="object-cover w-full h-full rounded-lg"
+          style={{ width: "600px", height: "400px" }} // Fixed width and height
         />
       </div>
       <div
