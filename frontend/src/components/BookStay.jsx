@@ -1,3 +1,5 @@
+// Css used
+
 import React, { useState, useRef, useEffect } from "react";
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main style file

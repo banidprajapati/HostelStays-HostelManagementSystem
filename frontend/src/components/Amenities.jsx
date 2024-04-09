@@ -26,12 +26,6 @@ export const Amenities = () => {
     "Airport Shuttle",
     "Business Center",
     "Meeting Rooms",
-    "Concierge Service",
-    "Gift Shop",
-    "Pet-Friendly",
-    "Elevator",
-    "Safety Deposit Box",
-    "Spa Facilities",
   ];
 
   // Splitting the amenities array into two halves
@@ -44,8 +38,8 @@ export const Amenities = () => {
         <span className="text-black">Ame</span>nities
       </h2>
       <br />
-      <div className="flex">
-        <ul className="flex flex-col w-2/3 pr-4">
+      <div className="flex flex-wrap">
+        <ul className="flex flex-col w-full md:w-1/2 pr-4">
           {firstHalf.map((amenity, index) => (
             <li key={index} className="flex items-center">
               <span className="text-white bg-green-500 my-1 rounded-md mr-2 flex items-center justify-center w-6 h-6">
@@ -68,7 +62,7 @@ export const Amenities = () => {
             </li>
           ))}
         </ul>
-        <ul className="flex flex-col w-1/3">
+        <ul className="flex flex-col w-full md:w-1/2">
           {secondHalf.map((amenity, index) => (
             <li key={index} className="flex items-center">
               <span className="text-white bg-green-500 my-1 rounded-md mr-2 flex items-center justify-center w-6 h-6">
