@@ -1,12 +1,12 @@
 import React from "react";
 import "./App.css";
-import { ProductPage } from "./components/ProductPage";
+import { SearchPage } from "./components/SearchPage";
 // import AdminLogin from "./components/AdminLogin";
 
 function App() {
   return (
     <>
-      <ProductPage />
+      <SearchPage />
     </>
   );
 }

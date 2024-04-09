@@ -24,13 +24,13 @@ export const Filter = () => {
   return (
     <div className="bg-gray-200 w-72 text-left p-4">
       <div>
-        <h1 className="text-xl font-bold mb-4">Filters</h1>
+        <h1 className="text-xl font-bold mb-2">Filters</h1>
         <p className="mb-2">Popular locations in <br/> Kathmandu, Bagmati, Nepal</p>
         <h2 className="text-lg font-bold ">Prices</h2>
         <p>Estimated Cost (Nightly)</p>
-        <div className="flex items-center space-x-36">
-          <p className="w-1/3 rounded-md bg-gray-200 p-2">{range.min}</p>
-          <p className="w-1/3 rounded-md bg-gray-200 p-2">{range.max}</p>
+        <div className="flex items-center space-x-28 mt-2">
+          <p className="w-1/3 rounded-md bg-gray-200 ">Rs. {range.min}</p>
+          <p className="w-1/3 rounded-md bg-gray-200">Rs. {range.max}</p>
         </div>
         <RangeSlider
           defaultValue={[range.min, range.max]}
