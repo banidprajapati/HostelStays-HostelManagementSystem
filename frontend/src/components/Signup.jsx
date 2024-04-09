@@ -5,8 +5,9 @@ export const SignUp = ({ email, handleLogin }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSignUp = () => {
-    // Here you can perform signup logic, for simplicity, we're just checking if passwords match
-    if (password === confirmPassword) {
+    if (password.trim() === "" || confirmPassword.trim() === "") {
+      alert("Please fill in all fields.");
+    } else if (password === confirmPassword) {
       alert("Signed up successfully!");
       handleLogin(); // Automatically login after signup for simplicity
     } else {
@@ -23,7 +24,6 @@ export const SignUp = ({ email, handleLogin }) => {
           className="w-full h-full object-cover p-0"
         />
       </div>
-
       <div className="w-1/2 flex items-center justify-center p-8">
         <div className="text-left m-0 p-0">
           <h1 className="text-3xl font-bold mb-4">Create an Account</h1>
