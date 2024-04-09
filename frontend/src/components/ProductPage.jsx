@@ -12,7 +12,7 @@ export const ProductPage = () => {
   return (
     <div className="">
       <Header />
-      <div className="grid grid-cols-2 grid-rows-3 gap-24">
+      <div className="grid grid-cols-2 grid-rows-3 gap-12 mt-8">
         <Gallery className="col-span-2 row-span-2" />
         <Description className="col-span-1" />
         <Amenities className="col-span-1" />
