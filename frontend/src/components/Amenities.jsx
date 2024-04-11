@@ -25,7 +25,6 @@ export const Amenities = () => {
     "Luggage Storage",
     "Airport Shuttle",
     "Business Center",
-    "Meeting Rooms",
   ];
 
   // Splitting the amenities array into two halves
@@ -34,22 +33,21 @@ export const Amenities = () => {
 
   return (
     <div className="text-left">
-      <h2 className="text-3xl font-bold">
-        <span className="text-black">Ame</span>nities
+      <h2 className="text-3xl font-bold mb-4">
+        <span className="text-black">Amenities</span>
       </h2>
-      <br />
-      <div className="flex flex-wrap">
-        <ul className="flex flex-col w-full md:w-1/2 pr-4">
+      <div className="flex h-auto">
+        {/* Left Side ========================================================================= */}
+        <ul className="flex flex-col md:w-1/2">
           {firstHalf.map((amenity, index) => (
             <li key={index} className="flex items-center">
-              <span className="text-white bg-green-500 my-1 rounded-md mr-2 flex items-center justify-center w-6 h-6">
+              <span className="text-white bg-green-500 my-1 rounded-md mr-2 justify-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  className="h-4 w-4"
-                >
+                  className="h-6 w-6">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -62,17 +60,17 @@ export const Amenities = () => {
             </li>
           ))}
         </ul>
-        <ul className="flex flex-col w-full md:w-1/2">
+        {/* Right Side ========================================================================= */}
+        <ul className="flex flex-col md:w-1/2">
           {secondHalf.map((amenity, index) => (
             <li key={index} className="flex items-center">
-              <span className="text-white bg-green-500 my-1 rounded-md mr-2 flex items-center justify-center w-6 h-6">
+              <span className="text-white bg-green-500 my-1 rounded-md mr-2 justify-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  className="h-4 w-4"
-                >
+                  className="h-6 w-6">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
