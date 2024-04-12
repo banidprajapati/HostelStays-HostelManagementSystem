@@ -2,6 +2,7 @@
 
 const router = require("express").Router();
 const CustomerDetails = require("../models/customerDetails");
+const mongoose = require("mongoose");
 
 router.post("/add", async (req, res) => {
   try {

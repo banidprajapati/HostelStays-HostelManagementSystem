@@ -1,16 +1,16 @@
-// Import required modules
+require('dotenv').config(); // Load environment variables from .env file
 const express = require("express");
 const mongoose = require("./db"); // Import Mongoose instance from db.js
 const customerDetailsRoutes = require("./routes/customerDetails");
+const customerSchemaRoutes = require("./routes/customerSchemaRoutes");
 
-// Create an Express application
 const app = express();
 
-// Middleware setup
 app.use(express.json());
 
 // Mount customer details routes
 app.use("/api/customerDetails", customerDetailsRoutes);
+app.use("/api/customerSchema", customerSchemaRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -19,7 +19,7 @@ app.use((err, req, res, next) => {
 });
 
 // Start server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000; // Use PORT environment variable or default to 3000
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
