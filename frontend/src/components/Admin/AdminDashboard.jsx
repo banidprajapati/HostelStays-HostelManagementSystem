@@ -1,6 +1,6 @@
 import React from "react";
-import { AdminBoxes } from "./AdminBoxes";
-import { AdminSideBar } from "./AdminSideBar";
+import {AdminBoxes} from "./AdminBoxes";
+import {AdminSideBar} from "./AdminSideBar";
 
 export const AdminDashboard = () => {
   return (
