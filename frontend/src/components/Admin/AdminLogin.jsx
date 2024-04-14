@@ -1,5 +1,5 @@
 // AdminLogin.jsx
-import React, { useState } from "react";
+import React, {useState} from "react";
 import axios from "axios";
 
 export const AdminLogin = () => {
@@ -62,8 +62,7 @@ export const AdminLogin = () => {
             />
             <button
               className="bg-blue-500 text-white px-4 py-2 rounded-md"
-              onClick={handleLogin}
-            >
+              onClick={handleLogin}>
               Continue
             </button>
           </div>

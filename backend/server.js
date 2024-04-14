@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "", // Enter your MySQL password here
+  password: "",
   database: "hostelstays",
 });
 
@@ -27,11 +27,11 @@ db.connect((err) => {
 
 // Endpoint to handle login
 app.post("/login", (req, res) => {
-  const { email, password } = req.body;
+  const {email, password} = req.body;
   if (!email || !password) {
     res
       .status(400)
-      .json({ success: false, message: "Email and password are required" });
+      .json({success: false, message: "Email and password are required"});
   } else {
     // Query the database to check if the provided email and password are correct
     const query =
@@ -41,16 +41,16 @@ app.post("/login", (req, res) => {
         console.error("Error executing query:", err);
         res
           .status(500)
-          .json({ success: false, message: "Internal server error" });
+          .json({success: false, message: "Internal server error"});
       } else {
         if (results.length > 0) {
           // If user found, return success response
-          res.status(200).json({ success: true, message: "Login successful" });
+          res.status(200).json({success: true, message: "Login successful"});
         } else {
           // If user not found or password incorrect, return error response
           res
             .status(401)
-            .json({ success: false, message: "Invalid email or password" });
+            .json({success: false, message: "Invalid email or password"});
         }
       }
     });
