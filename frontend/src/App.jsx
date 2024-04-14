@@ -1,11 +1,12 @@
 import React from "react";
 import "./App.css";
-import { AdminLogin } from "./components/Admin/AdminLogin";
+import { SearchPage } from "./components/SearchPage";
+// import AdminLogin from "./components/AdminLogin";
 
 function App() {
   return (
     <>
-      <AdminLogin />
+      <SearchPage />
     </>
   );
 }

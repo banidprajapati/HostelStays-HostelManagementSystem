@@ -1,5 +1,5 @@
 import React from "react";
-import AdminSideBar from "./AdminSideBar";
+import {AdminSideBar} from "./AdminSideBar";
 import {
   Table,
   Thead,

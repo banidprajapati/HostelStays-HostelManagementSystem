@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 
 const images = [
   "https://images.pexels.com/photos/1054218/pexels-photo-1054218.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2",
@@ -24,7 +24,7 @@ export const Gallery = () => {
   };
 
   const displayImages = images.slice(0, 4);
-  const imageSize = 80 / displayImages.length + "%";
+  // const imageSize = 80 / displayImages.length + "%";
   const remainingImages = images.length - displayImages.length;
 
   return (
@@ -42,8 +42,7 @@ export const Gallery = () => {
       <div className="flex justify-center items-center w-full sm:w-auto px-4 mb-1">
         <button
           className="mx-1 text-black font-bold text-2xl px-4 py-3 rounded-full focus:outline-none"
-          onClick={prevImage}
-        >
+          onClick={prevImage}>
           &lt;
         </button>
         {displayImages.map((image, index) => (
@@ -62,8 +61,7 @@ export const Gallery = () => {
         )}
         <button
           className="mx-1 text-black font-bold text-2xl px-4 py-3 rounded-full focus:outline-none"
-          onClick={nextImage}
-        >
+          onClick={nextImage}>
           &gt;
         </button>
       </div>

@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
-import { DateRange } from "react-date-range";
+import React, {useState, useRef, useEffect} from "react";
+import {DateRange} from "react-date-range";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 
@@ -16,7 +16,7 @@ export const BookStay = () => {
   const dateInputRef = useRef(null); // Ref for date input field
 
   const handleGuestsChange = (event) => {
-    const { value } = event.target;
+    const {value} = event.target;
     setGuests(value);
   };
 
@@ -88,12 +88,10 @@ export const BookStay = () => {
           Total Price (including all taxes)
         </h3>
         <h4 className="text-black mb-4 text-left">{roomsRequired}</h4>
-        <div className="flex flex-col">
-          <h3 className="font-bold text-lg text-black text-left text-3xl">
+        <div className="flex flex-row justify-between">
+          <h3 className="font-bold text-black text-left text-4xl">
             NPR {totalPrice}
           </h3>
-        </div>
-        <div className="flex justify-end">
           <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
             Confirm Booking
           </button>
