@@ -31,7 +31,7 @@ const bodyParser = require("body-parser");
 const mysql = require("mysql");
 
 const app = express();
-const PORT = process.env.PORT || 5173; // Change the port to 5173
+const PORT = process.env.PORT || 3000; // Change the port to 5173
 
 app.use(cors());
 app.use(bodyParser.json());
