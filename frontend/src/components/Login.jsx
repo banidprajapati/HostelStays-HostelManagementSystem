@@ -1,28 +1,33 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleLogin = () => {
-    // Here you can check if the email and password are correct
-    // ========================
-    // error handling thiyo eta
-  };
+  const handleLogin = async () => {
+    try {
+      if (!email.trim() || !password.trim()) {
+        setErrorMessage("Email and password cannot be empty.");
+        return;
+      }
 
-  const handleInputChange = (e) => {
-    const {name, value} = e.target;
-    if (name === "email") setEmail(value);
-    else if (name === "password") setPassword(value);
-  };
+      const response = await axios.post("http://localhost:3000/user_details", {
+        email,
+        password,
+      });
 
-  const handleContinue = () => {
-    if (!email.trim() || !password.trim()) {
-      setErrorMessage("Email and password cannot be empty.");
-      return;
+      if (response.data === "Login successful") {
+        console.log("Login successful!");
+        // Redirect or perform other actions on successful login
+      } else {
+        setErrorMessage("Invalid email or password.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setErrorMessage("An error occurred. Please try again later.");
     }
-    handleLogin();
   };
 
   return (
@@ -35,37 +40,36 @@ export const Login = () => {
         />
       </div>
 
-      <div className="w-1/2 flex items-center justify-center p-8">
-        <div className="text-left">
+      <div className="w-1/2 flex items-center justify-center p-8 ">
+        <div className="text-left m-0 p-0">
           <h1 className="text-3xl font-bold mb-4">Log in</h1>
           {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-          <div className="mb-4 max-w-85">
-            <p className="mb-2">Email Address:</p>
+          <p className="mb-2">Email Address:</p>
+          <div className="mb-4 max-w-85 flex flex-col">
             <input
               type="text"
-              name="email"
               placeholder="Enter your email address"
               className="border-b border-gray-400 focus:outline-none mb-2 p-2"
               value={email}
-              onChange={handleInputChange}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div className="mb-4 max-w-85">
-            <p className="mb-2">Password:</p>
+          <p className="mb-2">Password:</p>
+          <div className="mb-4 max-w-85 flex flex-col">
             <input
               type="password"
-              name="password"
               placeholder="Enter your password"
               className="border-b border-gray-400 focus:outline-none mb-2 p-2"
               value={password}
-              onChange={handleInputChange}
+              onChange={(e) => setPassword(e.target.value)}
             />
+            <button
+              className="bg-blue-500 text-white px-4 py-2 rounded-md"
+              onClick={handleLogin}
+            >
+              Continue
+            </button>
           </div>
-          <button
-            className="bg-blue-500 text-white px-4 py-2 rounded-md"
-            onClick={handleContinue}>
-            Continue
-          </button>
           <div className="text-blue-500">Forget Password?</div>
         </div>
       </div>

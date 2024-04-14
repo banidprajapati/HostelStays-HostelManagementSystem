@@ -1,37 +1,39 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
-export const SignUp = () => {
+export const SignUp = ({ email: emailProp }) => {
   const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(""); // Initialize email state as empty string
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleInputChange = (e) => {
-    const {name, value} = e.target;
-    if (name === "email") setEmail(value);
-    else if (name === "password") setPassword(value);
-    // You can add handling for other input fields if needed
+  const handleSignUp = async () => {
+    try {
+      if (password !== confirmPassword) {
+        setErrorMessage("Passwords do not match.");
+        return;
+      }
+
+      const response = await axios.post("http://localhost:3000/user_details", {
+        fullName,
+        email,
+        password,
+      });
+
+      if (response.data.message) {
+        console.log("User signed up successfully:", response.data.message);
+        // Redirect to login page or perform other actions
+      } else {
+        setErrorMessage("Signup failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error signing up:", error);
+      setErrorMessage("An error occurred. Please try again later.");
+    }
   };
 
-  const handleSignUp = () => {
-    if (
-      !fullName.trim() ||
-      !email.trim() ||
-      !password.trim() ||
-      !confirmPassword.trim()
-    ) {
-      setErrorMessage("All fields are required.");
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      setErrorMessage("Passwords do not match.");
-      return;
-    }
-
-    // Perform sign-up process
-  };
+  // Render your signup form here
 
   return (
     <div className="flex h-screen">
@@ -48,7 +50,7 @@ export const SignUp = () => {
           <h1 className="text-3xl font-bold mb-4">Create an Account</h1>
           {errorMessage && <p className="text-red-500">{errorMessage}</p>}
           <p className="mb-2">Create a new account</p>
-
+          <p className="font-bold">{emailProp}</p>
           <div className="flex flex-col my-3 mb-4 w-full">
             <input
               type="text"
@@ -60,11 +62,10 @@ export const SignUp = () => {
 
             <input
               type="text"
-              name="email"
-              placeholder="Enter email address"
+              placeholder="Email"
               className="border-b border-gray-400 focus:outline-none mb-2 p-2"
-              value={email}
-              onChange={handleInputChange}
+              defaultValue={emailProp} // Use defaultValue instead of value
+              onChange={(e) => setEmail(e.target.value)}
             />
 
             <input
@@ -83,7 +84,8 @@ export const SignUp = () => {
             />
             <button
               className="bg-blue-500 text-white px-4 py-2 rounded-md"
-              onClick={handleSignUp}>
+              onClick={handleSignUp}
+            >
               Sign Up
             </button>
           </div>
