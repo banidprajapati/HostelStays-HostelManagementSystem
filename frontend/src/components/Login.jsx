@@ -21,7 +21,7 @@ export const Login = () => {
 
       if (response.data === "Login successful") {
         console.log("Login successful!");
-        navigate("/landingPage")
+        navigate("/")
         // Redirect or perform other actions on successful login
       } else {
         setErrorMessage("Invalid email or password.");
@@ -43,10 +43,10 @@ export const Login = () => {
       </div>
 
       <div className="w-1/2 flex items-center justify-center p-8 ">
-        <div className="text-left m-0 p-0">
+        <div className="text-left w-96">
           <h1 className="text-3xl font-bold mb-4">Log in</h1>
           {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-          <p className="mb-2">Email Address:</p>
+          <p className="">Email Address:</p>
           <div className="mb-4 max-w-85 flex flex-col">
             <input
               type="text"
@@ -56,7 +56,7 @@ export const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <p className="mb-2">Password:</p>
+          <p className="">Password:</p>
           <div className="mb-4 max-w-85 flex flex-col">
             <input
               type="password"
@@ -72,12 +72,12 @@ export const Login = () => {
               Continue
             </button>
           </div>
-          <div className="inline-block text-blue-500 mr-4">
-            Forget Password?
+          <div className="flex flex-col mr-4">
+            <a href="/signup" className="text-blue-500 inline-block">Create a new account?</a>
+            <a href="/signup" className="text-blue-500 inline-block">Forget Password?</a>
+            
           </div>
-          <p className="text-blue-500 inline-block">
-            <a href="/signup">Sign Up</a>
-          </p>
+          
         </div>
       </div>
     </div>

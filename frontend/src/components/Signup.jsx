@@ -46,7 +46,7 @@ export const SignUp = ({ email: emailProp }) => {
       </div>
 
       <div className="w-1/2 flex items-center justify-center p-8">
-        <div className="text-left">
+        <div className="text-left w-96">
           <h1 className="text-3xl font-bold mb-4">Create an Account</h1>
           {errorMessage && <p className="text-red-500">{errorMessage}</p>}
           <p className="mb-2">Create a new account</p>
@@ -88,7 +88,7 @@ export const SignUp = ({ email: emailProp }) => {
             >
               Sign Up
             </button>
-          <p className="text-blue-500 text-right mt-3">
+          <p className="text-blue-500 text-left mt-3">
             <a href="/login">Already have an account?</a>
           </p>
           </div>

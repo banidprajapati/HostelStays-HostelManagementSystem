@@ -6,11 +6,12 @@ import { SearchPage } from "./components/SearchPage";
 import { Login } from "./components/Login";
 import { LandingPage } from "./components/LandingPage";
 import { AdminLogin } from "./components/Admin/AdminLogin";
-import { SignUp } from "./components/SignUp";
+import { SignUp } from "./components/Signup";
 import { AdminDashboard } from "./components/Admin/AdminDashboard";
 import { AdminSettings } from "./components/Admin/AdminSettings";
 import { AdminUserDetails } from "./components/Admin/AdminUserDetails";
 import { AdminBookings } from "./components/Admin/AdminBookings"; // Import AdminBookings
+import { ProductPage } from "./components/ProductPage";
 
 function App() {
   return (
@@ -23,13 +24,11 @@ function App() {
         <Route path="/dashboard" element={<AdminDashboard />} />
         <Route path="/settings" element={<AdminSettings />} />
         <Route path="/user-details" element={<AdminUserDetails />} />
-        <Route path="/bookings" element={<AdminBookings />} />{" "}
-        {/* Add this route */}
+        <Route path="/bookings" element={<AdminBookings />} />
+        <Route path="/productpage" element={<ProductPage />} />
         <Route path="/signup" element={<SignUp />} />
-        {/* Add more routes as needed */}
       </Routes>
       {/* SignUp component is rendered outside of the Routes */}
-      <SignUp />
     </>
   );
 }
