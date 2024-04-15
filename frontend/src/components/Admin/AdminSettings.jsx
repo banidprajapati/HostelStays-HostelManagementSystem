@@ -1,6 +1,6 @@
+// AdminSettings.jsx
 import React from "react";
-import {AdminSideBar} from "./AdminSideBar";
-import {Button} from "@chakra-ui/react";
+import { AdminSideBar } from "./AdminSideBar";
 
 export const AdminSettings = () => {
   const handleAddAdmin = () => {
@@ -19,9 +19,12 @@ export const AdminSettings = () => {
         </div>
         <div className="mb-4">
           <h2 className="text-xl font-bold mb-2">Add Admin</h2>
-          <Button colorScheme="blue" onClick={handleAddAdmin}>
+          <button
+            className="text-xl bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md"
+            onClick={handleAddAdmin}
+          >
             Add Admin
-          </Button>
+          </button>
         </div>
       </div>
     </div>

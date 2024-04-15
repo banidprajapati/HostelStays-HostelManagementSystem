@@ -1,5 +1,6 @@
+// AdminBookings.jsx
 import React from "react";
-import {AdminSideBar} from "./AdminSideBar";
+import { AdminSideBar } from "./AdminSideBar";
 import {
   Table,
   Thead,
@@ -11,51 +12,55 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 
-export const AdminUserDetails = () => {
-  // Sample data for user details
-  const userDetails = [
+export const AdminBookings = () => {
+  // Sample data for bookings
+  const bookings = [
     {
+      bookingId: "BKG123",
       customerId: "CUS123",
-      name: "John Doe",
-      location: "New York",
-      contact: "+1234567890",
-      email: "john@example.com",
+      hostelId: "HSTL456",
+      checkIn: "2024-04-15",
+      checkOut: "2024-04-20",
+      status: "Confirmed",
     },
     {
+      bookingId: "BKG456",
       customerId: "CUS456",
-      name: "Alice Smith",
-      location: "Los Angeles",
-      contact: "+9876543210",
-      email: "alice@example.com",
+      hostelId: "HSTL789",
+      checkIn: "2024-04-18",
+      checkOut: "2024-04-22",
+      status: "Pending",
     },
-    // Add more user detail data here
+    // Add more booking data here
   ];
 
   return (
     <div className="flex h-screen">
       <AdminSideBar />
       <div className="flex-1 p-8 bg-gray-100">
-        <h1 className="text-3xl font-bold mb-4 text-left">User Details</h1>
+        <h1 className="text-3xl font-bold mb-4 text-left">Bookings</h1>
         <TableContainer>
           <Table variant="simple">
-            <TableCaption>User Details</TableCaption>
+            <TableCaption>Bookings</TableCaption>
             <Thead>
               <Tr>
+                <Th>Booking ID</Th>
                 <Th>Customer ID</Th>
-                <Th>Name</Th>
-                <Th>Location</Th>
-                <Th>Contact</Th>
-                <Th>Email</Th>
+                <Th>Hostel ID</Th>
+                <Th>Check-In</Th>
+                <Th>Check-Out</Th>
+                <Th>Status</Th>
               </Tr>
             </Thead>
             <Tbody>
-              {userDetails.map((user, index) => (
+              {bookings.map((booking, index) => (
                 <Tr key={index}>
-                  <Td>{user.customerId}</Td>
-                  <Td>{user.name}</Td>
-                  <Td>{user.location}</Td>
-                  <Td>{user.contact}</Td>
-                  <Td>{user.email}</Td>
+                  <Td>{booking.bookingId}</Td>
+                  <Td>{booking.customerId}</Td>
+                  <Td>{booking.hostelId}</Td>
+                  <Td>{booking.checkIn}</Td>
+                  <Td>{booking.checkOut}</Td>
+                  <Td>{booking.status}</Td>
                 </Tr>
               ))}
             </Tbody>
