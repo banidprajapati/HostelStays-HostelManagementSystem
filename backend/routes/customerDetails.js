@@ -1,23 +1,28 @@
-// routes/customerDetails.js
-
-const router = require("express").Router();
+const express = require("express");
+const router = express.Router();
+const {validateCustomerDetails} = require("../middlewares/customerValidation");
 const CustomerDetails = require("../models/customerDetails");
+const mongoose = require("mongoose");
 
-router.post("/add", async (req, res) => {
+// Create a new customer
+router.post("/", validateCustomerDetails, async (req, res) => {
   try {
-    const user = new User({
-      _id: mongoose.Types.ObjectId(),
-      name: req.body.name,
-      username: req.body.username,
-      email: req.body.email,
-      license: req.body.license,
-      license_number: req.body.license_number,
+    // Create a new customer object
+    const newCustomer = new CustomerDetails({
+      customerName: req.body.customerName,
+      customerPassword: req.body.customerPassword,
+      customerContactInfo: req.body.customerContactInfo,
+      customerEmail: req.body.customerEmail,
     });
-    const response = await User.addUser(user);
-    res.json({success: true, msg: "User added"});
-  } catch (err) {
-    console.error(err);
-    res.json({success: false, msg: "Failed to add user"});
+
+    // Save the new customer to the database
+    const savedCustomer = await newCustomer.save();
+
+    // Send the newly created customer back in the response
+    return res.status(201).json(savedCustomer);
+  } catch (error) {
+    // Pass the error to the error handling middleware
+    next(error);
   }
 });
 
