@@ -7,6 +7,7 @@ import {LandingPage} from "./components/LandingPage";
 import {AdminLogin} from "./components/Admin/AdminLogin";
 import {SignUp} from "./components/Signup";
 import {AdminDashboard} from "./components/Admin/AdminDashboard"
+import {ProductPage} from "./components/ProductPage"
 
 function App() {
   return (
@@ -17,11 +18,11 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/dashboard" element={<AdminDashboard />} />
+        <Route path="/signup" element={<SignUp/>}/>
+        <Route path="/productPage" element={<ProductPage/>}/>
         
-        {/* Add more routes as needed */}
+
       </Routes>
-      {/* SignUp component is rendered outside of the Routes */}
-      <SignUp />
     </>
   );
 }
