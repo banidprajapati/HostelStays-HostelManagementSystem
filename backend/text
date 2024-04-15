@@ -3,3 +3,12 @@ mongodb://atlas-sql-660569a9c195af4a4a8075d0-h9cxa.a.query.mongodb.net/HostelSta
 
 mongodb+srv://admin:admin@hostelstays.k6jcr9t.mongodb.net/
 ![alt text](image-1.png)
+
+frontend
+npm install axios
+
+backend
+npm install dotenv
+npm install coes
+
+db.js ma connection ko file halne

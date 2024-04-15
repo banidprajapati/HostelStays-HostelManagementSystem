@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
+  const navigate = useNavigate();
   const handleLogin = async () => {
     try {
       if (!email.trim() || !password.trim()) {
@@ -20,6 +21,7 @@ export const Login = () => {
 
       if (response.data === "Login successful") {
         console.log("Login successful!");
+        navigate("/landingPage")
         // Redirect or perform other actions on successful login
       } else {
         setErrorMessage("Invalid email or password.");
@@ -70,7 +72,12 @@ export const Login = () => {
               Continue
             </button>
           </div>
-          <div className="text-blue-500">Forget Password?</div>
+          <div className="inline-block text-blue-500 mr-4">
+            Forget Password?
+          </div>
+          <p className="text-blue-500 inline-block">
+            <a href="/signup">Sign Up</a>
+          </p>
         </div>
       </div>
     </div>

@@ -21,7 +21,9 @@ export const LandingPage = () => {
       <DiscoverNepal />
       <h1 className="font-bold text-2xl text-left">Handpicked by us.</h1>
       <div className="grid grid-cols-3 grid-rows-2 gap-4">
+       <a href="/productPage">
         <Room />
+        </a>
         <Room />
         <Room />
         <Room />

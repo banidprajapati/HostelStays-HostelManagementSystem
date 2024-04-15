@@ -88,6 +88,9 @@ export const SignUp = ({ email: emailProp }) => {
             >
               Sign Up
             </button>
+          <p className="text-blue-500 text-right mt-3">
+            <a href="/login">Already have an account?</a>
+          </p>
           </div>
         </div>
       </div>
