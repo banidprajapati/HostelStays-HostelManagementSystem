@@ -12,12 +12,27 @@ import { AdminDetails } from "./components/Admin/AdminDetails";
 import { AdminUserDetails } from "./components/Admin/AdminUserDetails";
 import { AdminBookings } from "./components/Admin/AdminBookings";
 import { ProductPage } from "./components/ProductPage";
+import { AdminHostels } from "./components/Admin/AdminHostels";
 
 function App() {
+  // Assuming hostels is defined or fetched here
+  const hostels = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/hostel_details");
+      if (!response.ok) {
+        throw new Error("Failed to fetch hostels");
+      }
+      const data = await response.json();
+      setHostels(data);
+    } catch (error) {
+      console.error("Error fetching hostels:", error);
+    }
+  }; // Define hostels or fetch from an API
+
   return (
     <>
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={<LandingPage hostels={hostels} />} />
         <Route path="/admin" element={<AdminLogin />} />
         <Route path="/login" element={<Login />} />
         <Route path="/search" element={<SearchPage />} />
@@ -27,9 +42,8 @@ function App() {
         <Route path="/bookings" element={<AdminBookings />} />
         <Route path="/productpage" element={<ProductPage />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/hostel-list" element={<AdminHostels />} />
       </Routes>
-      {/* SignUp component is rendered outside of the Routes */}
-      <LandingPage />
     </>
   );
 }

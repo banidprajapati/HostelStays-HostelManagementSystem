@@ -6,14 +6,7 @@ import { AboutUs } from "./AboutUs";
 import { Footer } from "./Footer";
 import { SearchBar } from "./SearchBar";
 
-export const LandingPage = () => {
-  const dummyData = {
-    name: "Cozy Room",
-    address: "123 Main Street, Cityville",
-    rating: 4.5,
-    reviews: 35,
-    price: "$100 per night",
-  };
+export const LandingPage =() => {
 
   return (
     <div className="flex flex-col gap-8 font-poppins">
@@ -31,14 +24,15 @@ export const LandingPage = () => {
       </a>
       <h1 className="font-bold text-2xl text-left">Handpicked by us.</h1>
       <div className="grid grid-cols-3 grid-rows-2 gap-4">
-        <a href="/productPage">
-          <Room {...dummyData} />
-        </a>
-        <Room {...dummyData} />
-        <Room {...dummyData} />
-        <Room {...dummyData} />
-        <Room {...dummyData} />
-        <Room {...dummyData} />
+        
+          <a href="/productPage">
+            <Room />
+          </a>
+        <Room/>
+        <Room  />
+        <Room  />
+        <Room  />
+        <Room />
       </div>
       <div className="border-t-2 border-gray-400 my-4"></div>
 

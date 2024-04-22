@@ -1,6 +1,11 @@
 import React from "react";
 
-export const Room = ({ name, address, rating, reviews, price }) => {
+export const Room = ({ hostel }) => {
+  if (!hostel) {
+    // Handle case where hostel object is undefined or null
+    return <div>No hostel data available</div>;
+  }
+
   return (
     <div className="max-w-96 bg-gray-200 rounded-lg text-left">
       <img
@@ -9,17 +14,17 @@ export const Room = ({ name, address, rating, reviews, price }) => {
         className="rounded-tl-lg rounded-tr-lg w-96"
       />
       <div className="px-4 py-2 flex flex-col gap-1">
-        <h2 className="text-2xl font-semibold">{name}</h2>
-        <p>{address}</p>
+        <h2 className="text-2xl font-semibold">{hostel.hostel_name}</h2>
+        <p>{hostel.hostel_location}</p>
         <div className="flex flex-row gap-2">
           <div className="bg-green-500 text-white px-2 py-1 rounded">
-            ★ {rating}
+            ★ {hostel.ratings}
           </div>
           <div>
-            <p className="mt-1">{reviews} reviews</p>
+            <p className="mt-1">{hostel.reviews} reviews</p>
           </div>
         </div>
-        <h1 className="text-2xl font-semibold">{price}</h1>
+        <h1 className="text-2xl font-semibold">{hostel.price}</h1>
       </div>
     </div>
   );

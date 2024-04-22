@@ -195,5 +195,130 @@ app.get("/user_details", (req, res) => {
   });
 });
 // End of User Details =======================================================================================================================
+// Start of  Hostel list=======================================================================================================================
+app.get("/hostel_details", (req, res) => {
+  // Query to select all hostels from the hostel_details table
+  const query =
+    "SELECT hostel_name, hostel_location, facilities, ratings, photos, reviews, hostel_description, total_beds, beds_per_room, price FROM hostel_details";
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error("Error executing hostel query:", err);
+      res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
+    } else {
+      res.status(200).json(results);
+    }
+  });
+});
 
+app.post("/hostel_details/add", (req, res) => {
+  const {
+    hostel_name,
+    hostel_location,
+    facilities,
+    ratings,
+    photos,
+    reviews,
+    hostel_description,
+    total_beds,
+    beds_per_room,
+    price,
+  } = req.body;
+  const insertQuery =
+    "INSERT INTO hostel_details (hostel_name, hostel_location, facilities, ratings, photos, reviews, hostel_description, total_beds, beds_per_room, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+  db.query(
+    insertQuery,
+    [
+      hostel_name,
+      hostel_location,
+      facilities,
+      ratings,
+      photos,
+      reviews,
+      hostel_description,
+      total_beds,
+      beds_per_room,
+      price,
+    ],
+    (err, result) => {
+      if (err) {
+        console.error("Error adding hostel:", err);
+        res
+          .status(500)
+          .json({ success: false, message: "Internal server error" });
+      } else {
+        res.status(200).json({ success: true, message: "Hostel added" });
+      }
+    }
+  );
+});
+
+
+app.put("/hostel_details/update/:hostelName", (req, res) => {
+  const hostelName = req.params.hostelName;
+  const {
+    hostel_location,
+    facilities,
+    ratings,
+    photos,
+    reviews,
+    hostel_description,
+    total_beds,
+    beds_per_room,
+    price,
+  } = req.body;
+  const updateQuery =
+    "UPDATE hostel_details SET hostel_location = ?, facilities = ?, ratings = ?, photos = ?, reviews = ?, hostel_description = ?, total_beds = ?, beds_per_room = ?, price = ? WHERE hostel_name = ?";
+  db.query(
+    updateQuery,
+    [
+      hostel_location,
+      facilities,
+      ratings,
+      photos,
+      reviews,
+      hostel_description,
+      total_beds,
+      beds_per_room,
+      price,
+      hostelName,
+    ],
+    (err, result) => {
+      if (err) {
+        console.error("Error updating hostel:", err);
+        res
+          .status(500)
+          .json({ success: false, message: "Internal server error" });
+      } else if (result.affectedRows === 0) {
+        // If no rows were affected, it means the hostel with the provided name doesn't exist
+        res.status(404).json({ success: false, message: "Hostel not found" });
+      } else {
+        res.status(200).json({ success: true, message: "Hostel updated" });
+      }
+    }
+  );
+});
+
+
+
+app.delete("/hostel_details/:hostelName", (req, res) => {
+  const hostelName = req.params.hostelName;
+  const deleteQuery = "DELETE FROM hostel_details WHERE hostel_name = ?";
+  db.query(deleteQuery, [hostelName], (err, result) => {
+    if (err) {
+      console.error("Error deleting hostel:", err);
+      res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
+    } else if (result.affectedRows === 0) {
+      // If no rows were affected, it means the hostel with the provided name doesn't exist
+      res.status(404).json({ success: false, message: "Hostel not found" });
+    } else {
+      res.status(200).json({ success: true, message: "Hostel deleted" });
+    }
+  });
+});
+
+//End of Hostel List=======================================================================================================================
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
