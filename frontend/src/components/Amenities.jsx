@@ -37,7 +37,6 @@ export const Amenities = () => {
         <span className="text-black">Amenities</span>
       </h2>
       <div className="flex h-auto">
-        {/* Left Side ========================================================================= */}
         <ul className="flex flex-col md:w-1/2">
           {firstHalf.map((amenity, index) => (
             <li key={index} className="flex items-center">
@@ -47,7 +46,8 @@ export const Amenities = () => {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  className="h-6 w-6">
+                  className="h-6 w-6"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -60,7 +60,6 @@ export const Amenities = () => {
             </li>
           ))}
         </ul>
-        {/* Right Side ========================================================================= */}
         <ul className="flex flex-col md:w-1/2">
           {secondHalf.map((amenity, index) => (
             <li key={index} className="flex items-center">
@@ -70,7 +69,8 @@ export const Amenities = () => {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  className="h-6 w-6">
+                  className="h-6 w-6"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
