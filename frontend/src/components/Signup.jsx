@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate from React Router
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export const SignUp = ({ email: emailProp }) => {
@@ -8,20 +8,56 @@ export const SignUp = ({ email: emailProp }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const navigate = useNavigate(); // Initialize navigate function
+  const navigate = useNavigate();
+
+  // Regular expression for email validation
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  // Regular expression for password validation
+  const validatePassword = (password) => {
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+    return passwordRegex.test(password);
+  };
 
   const handleSignUp = async () => {
     if (!fullName || !email || !password || !confirmPassword) {
       setErrorMessage("Please fill in all fields.");
+      setTimeout(() => {
+        setErrorMessage(""); // Clear the error message after 5 seconds
+      }, 5000);
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setErrorMessage("Please enter a valid email address.");
+      setTimeout(() => {
+        setErrorMessage(""); // Clear the error message after 5 seconds
+      }, 5000);
+      return;
+    }
+
+    if (!validatePassword(password)) {
+      setErrorMessage(
+        "Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, and one number."
+      );
+      setTimeout(() => {
+        setErrorMessage(""); // Clear the error message after 5 seconds
+      }, 5000);
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setErrorMessage("Passwords do not match.");
+      setTimeout(() => {
+        setErrorMessage(""); // Clear the error message after 5 seconds
+      }, 5000);
       return;
     }
 
     try {
-      if (password !== confirmPassword) {
-        setErrorMessage("Passwords do not match.");
-        return;
-      }
-
       const response = await axios.post("http://localhost:3000/user_details", {
         fullName,
         email,
@@ -33,10 +69,16 @@ export const SignUp = ({ email: emailProp }) => {
         navigate("/login");
       } else {
         setErrorMessage("Signup failed. Please try again.");
+        setTimeout(() => {
+          setErrorMessage(""); // Clear the error message after 5 seconds
+        }, 5000);
       }
     } catch (error) {
       console.error("Error signing up:", error);
       setErrorMessage("This user has already signed up.");
+      setTimeout(() => {
+        setErrorMessage(""); // Clear the error message after 5 seconds
+      }, 5000);
     }
   };
 

@@ -1,5 +1,6 @@
-// AdminUserDetails.jsx (clear button)
-import React, { useState } from "react";
+// AdminUserDetails.jsx
+
+import React, { useState, useEffect } from "react";
 import { AdminSideBar } from "./AdminSideBar";
 import {
   Table,
@@ -17,27 +18,32 @@ import {
 } from "@chakra-ui/react";
 
 export const AdminUserDetails = () => {
-  // Sample data for user details
   const [searchTerm, setSearchTerm] = useState("");
-  const userDetails = [
-    {
-      customerId: "CUS123",
-      name: "John Doe",
-      location: "New York",
-      contact: "+1234567890",
-      email: "john@example.com",
-    },
-    {
-      customerId: "CUS456",
-      name: "Alice Smith",
-      location: "Los Angeles",
-      contact: "+9876543210",
-      email: "alice@example.com",
-    },
-    // Add more user detail data here
-  ];
+  const [userDetails, setUserDetails] = useState([]);
+  const [showPassword, setShowPassword] = useState(false);
 
-  // Filter user details based on search term
+  useEffect(() => {
+    // Fetch user details from the backend when the component mounts
+    fetchUserDetails();
+  }, []);
+
+  const fetchUserDetails = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/user_details");
+      if (!response.ok) {
+        throw new Error("Failed to fetch user details");
+      }
+      const data = await response.json();
+      setUserDetails(data);
+    } catch (error) {
+      console.error("Error fetching user details:", error);
+    }
+  };
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   const filteredUserDetails = userDetails.filter((user) =>
     Object.values(user).some((value) =>
       value.toString().toLowerCase().includes(searchTerm.toLowerCase())
@@ -55,7 +61,7 @@ export const AdminUserDetails = () => {
               placeholder="Search"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              borderColor="blue.400" // Set border color to blue
+              borderColor="blue.400"
             />
             <InputRightElement width="4.5rem">
               <Button h="1.75rem" size="sm" onClick={() => setSearchTerm("")}>
@@ -65,44 +71,48 @@ export const AdminUserDetails = () => {
           </InputGroup>
         </div>
         <TableContainer>
-          <Table variant="simple">
+          <Table variant="striped" colorScheme="gray">
             <TableCaption>User Details</TableCaption>
             <Thead>
               <Tr>
-                <Th>Customer ID</Th>
-                <Th>Name</Th>
-                <Th>Location</Th>
-                <Th>Contact</Th>
+                <Th>User ID</Th>
+                <Th>Full Name</Th>
                 <Th>Email</Th>
+                <Th>
+                  {showPassword ? "Password" : "Password (Hidden)"}
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={toggleShowPassword}
+                    ml={2}>
+                    {showPassword ? "Hide" : "Show"}
+                  </Button>
+                </Th>
               </Tr>
             </Thead>
             <Tbody>
               {filteredUserDetails.length > 0 ? (
-                // Render filtered user details if found
                 filteredUserDetails.map((user, index) => (
                   <Tr key={index}>
-                    <Td>{user.customerId}</Td>
-                    <Td>{user.name}</Td>
-                    <Td>{user.location}</Td>
-                    <Td>{user.contact}</Td>
-                    <Td>{user.email}</Td>
+                    <Td>{user.user_ID}</Td>
+                    <Td>{user.full_name}</Td>
+                    <Td>{user.user_email}</Td>
+                    <Td>{showPassword ? user.password : "********"}</Td>
                   </Tr>
                 ))
-              ) : searchTerm.trim() !== "" ? ( // Show error message if search term is not empty but no results found
+              ) : searchTerm.trim() !== "" ? (
                 <Tr>
-                  <Td colSpan={5} className="text-red-500">
+                  <Td colSpan={4} className="text-red-500">
                     Not Found
                   </Td>
                 </Tr>
               ) : (
-                // Render all user details if search term is empty
                 userDetails.map((user, index) => (
                   <Tr key={index}>
-                    <Td>{user.customerId}</Td>
-                    <Td>{user.name}</Td>
-                    <Td>{user.location}</Td>
-                    <Td>{user.contact}</Td>
-                    <Td>{user.email}</Td>
+                    <Td>{user.user_ID}</Td>
+                    <Td>{user.full_name}</Td>
+                    <Td>{user.user_email}</Td>
+                    <Td>{showPassword ? user.password : "********"}</Td>
                   </Tr>
                 ))
               )}

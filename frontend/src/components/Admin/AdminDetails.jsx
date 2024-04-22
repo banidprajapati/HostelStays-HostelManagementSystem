@@ -1,19 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { AdminSideBar } from "./AdminSideBar";
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  TableContainer,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Button,
-} from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Th, Td, Button } from "@chakra-ui/react";
 
 export const AdminDetails = () => {
   const [admins, setAdmins] = useState([]); // State to store fetched admins
@@ -45,9 +32,14 @@ export const AdminDetails = () => {
     }
   };
 
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   const handleAddAdmin = () => {
     // Make POST request to add admin
-    fetch("http://localhost:3000/admin_details", {
+    fetch("http://localhost:3000/admin_details/add", {
+      // Updated endpoint
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -63,9 +55,7 @@ export const AdminDetails = () => {
       .then((data) => {
         alert("Admin added successfully");
         fetchAdmins(); // Fetch updated admin details
-        // Reset form fields
         setAdminInfo({ fullName: "", email: "", password: "" });
-        // Hide add admin form
         setShowAddAdminForm(false);
       })
       .catch((error) => {

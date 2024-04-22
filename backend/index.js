@@ -24,6 +24,7 @@ db.connect((err) => {
   console.log("MySQL Connected...");
 });
 
+// Start of admin =======================================================================================================================
 // Endpoint to fetch admin details
 app.get("/admin_details", (req, res) => {
   // Query to select all admins from the admin_details table
@@ -63,11 +64,11 @@ app.put("/admin_details/:adminName", (req, res) => {
   );
 });
 
-// Endpoint to handle deleting an admin by Name
-app.delete("/admin_details/:adminName", (req, res) => {
-  const adminName = req.params.adminName;
-  const deleteQuery = "DELETE FROM admin_details WHERE admin_FullName = ?";
-  db.query(deleteQuery, [adminName], (err, result) => {
+// Endpoint to handle deleting an admin by ID
+app.delete("/admin_details/:adminID", (req, res) => {
+  const adminID = req.params.adminID;
+  const deleteQuery = "DELETE FROM admin_details WHERE admin_ID = ?";
+  db.query(deleteQuery, [adminID], (err, result) => {
     if (err) {
       console.error("Error deleting admin:", err);
       res
@@ -111,6 +112,26 @@ app.post("/admin_details", (req, res) => {
     }
   });
 });
+
+// Endpoint to handle adding a new admin
+app.post("/admin_details/add", (req, res) => {
+  const { fullName, email, password } = req.body;
+  const insertQuery =
+    "INSERT INTO admin_details (admin_FullName, admin_Email, admin_Password) VALUES (?, ?, ?)";
+  db.query(insertQuery, [fullName, email, password], (err, result) => {
+    if (err) {
+      console.error("Error adding admin:", err);
+      res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
+    } else {
+      res.status(200).json({ success: true, message: "Admin added" });
+    }
+  });
+});
+// End of admin =======================================================================================================================
+
+// Start of User Details =======================================================================================================================
 
 app.post("/user_details", (req, res) => {
   const { fullName, email, password } = req.body;
@@ -157,5 +178,22 @@ app.post("/user_details", (req, res) => {
     }
   });
 });
+
+// Endpoint to fetch user details
+app.get("/user_details", (req, res) => {
+  // Query to select all users from the user_details table
+  const query = "SELECT * FROM user_details";
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error("Error fetching user details:", err);
+      res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
+    } else {
+      res.status(200).json(results);
+    }
+  });
+});
+// End of User Details =======================================================================================================================
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

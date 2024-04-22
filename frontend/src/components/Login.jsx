@@ -21,7 +21,7 @@ export const Login = () => {
 
       if (response.data === "Login successful") {
         console.log("Login successful!");
-        navigate("/")
+        navigate("/");
       } else {
         setErrorMessage("Invalid email or password.");
       }
@@ -66,17 +66,18 @@ export const Login = () => {
             />
             <button
               className="bg-blue-500 text-white px-4 py-2 rounded-md"
-              onClick={handleLogin}
-            >
+              onClick={handleLogin}>
               Continue
             </button>
           </div>
           <div className="flex flex-col mr-4">
-            <a href="/signup" className="text-blue-500 inline-block">Create a new account?</a>
-            <a href="/signup" className="text-blue-500 inline-block">Forget Password?</a>
-            
+            <a href="/signup" className="text-blue-500 inline-block">
+              Create a new account?
+            </a>
+            <a href="/signup" className="text-blue-500 inline-block">
+              Forget Password?
+            </a>
           </div>
-          
         </div>
       </div>
     </div>
