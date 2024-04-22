@@ -98,7 +98,6 @@ app.post("/admin_details", (req, res) => {
   });
 });
 
-// Endpoint to handle user signup
 app.post("/user_details", (req, res) => {
   const { fullName, email, password } = req.body;
 
@@ -113,8 +112,15 @@ app.post("/user_details", (req, res) => {
     }
 
     if (result.length > 0) {
-      // Email exists in the database, send error
-      res.status(409).json({ error: "Email already exists." });
+      // Email exists in the database, check password
+      const storedPassword = result[0].password;
+      if (password === storedPassword) {
+        // Password matches, login successful
+        res.status(200).send("Login successful");
+      } else {
+        // Password doesn't match, send unauthorized error
+        res.status(401).send("Invalid email or password");
+      }
     } else {
       // Email doesn't exist in the database, insert new user
       const insertUserQuery =

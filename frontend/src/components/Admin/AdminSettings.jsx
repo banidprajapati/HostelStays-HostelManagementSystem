@@ -161,8 +161,7 @@ export const AdminSettings = () => {
         <div className="mb-4 flex justify-between items-center pl-2">
           <button
             className="text-xl bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md"
-            onClick={() => setShowAddAdminForm(true)}
-          >
+            onClick={() => setShowAddAdminForm(true)}>
             Add Admin
           </button>
           <span className="text-lg font-bold">
@@ -180,13 +179,11 @@ export const AdminSettings = () => {
               } else {
                 handleAddAdmin(); // Call handleAddAdmin if adding a new admin
               }
-            }}
-          >
+            }}>
             <div className="mb-4">
               <label
                 htmlFor="fullName"
-                className="block text-sm font-bold mb-1"
-              >
+                className="block text-sm font-bold mb-1">
                 FullName
               </label>
               <input
@@ -216,8 +213,7 @@ export const AdminSettings = () => {
             <div className="mb-4">
               <label
                 htmlFor="password"
-                className="block text-sm font-bold mb-1"
-              >
+                className="block text-sm font-bold mb-1">
                 Password
               </label>
               <input
@@ -232,8 +228,7 @@ export const AdminSettings = () => {
             </div>
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md mt-2 block mx-auto"
-            >
+              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md mt-2 block mx-auto">
               {editAdmin ? "Update" : "Submit"}
             </button>
           </form>
@@ -278,14 +273,12 @@ export const AdminSettings = () => {
                     <td className="px-4 py-2 border border-black">
                       <button
                         className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-1 rounded-md mr-2"
-                        onClick={() => handleEdit(admin)}
-                      >
+                        onClick={() => handleEdit(admin)}>
                         Edit
                       </button>
                       <button
                         className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded-md"
-                        onClick={() => handleDelete(admin.fullName)}
-                      >
+                        onClick={() => handleDelete(admin.fullName)}>
                         Delete
                       </button>
                     </td>

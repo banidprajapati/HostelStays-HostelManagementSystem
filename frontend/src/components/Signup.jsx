@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate from React Router
 import axios from "axios";
 
 export const SignUp = ({ email: emailProp }) => {
@@ -7,6 +8,7 @@ export const SignUp = ({ email: emailProp }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate(); // Initialize navigate function
 
   const handleSignUp = async () => {
     if (!fullName || !email || !password || !confirmPassword) {
@@ -28,6 +30,7 @@ export const SignUp = ({ email: emailProp }) => {
 
       if (response.data.message) {
         console.log("User signed up successfully:", response.data.message);
+        navigate("/login");
       } else {
         setErrorMessage("Signup failed. Please try again.");
       }
@@ -86,13 +89,12 @@ export const SignUp = ({ email: emailProp }) => {
             />
             <button
               className="bg-blue-500 text-white px-4 py-2 rounded-md"
-              onClick={handleSignUp}
-            >
+              onClick={handleSignUp}>
               Sign Up
             </button>
-          <p className="text-blue-500 text-left mt-3">
-            <a href="/login">Already have an account?</a>
-          </p>
+            <p className="text-blue-500 text-left mt-3">
+              <a href="/login">Already have an account?</a>
+            </p>
           </div>
         </div>
       </div>

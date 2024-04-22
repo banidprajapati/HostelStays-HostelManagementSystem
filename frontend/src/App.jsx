@@ -10,7 +10,7 @@ import { SignUp } from "./components/Signup";
 import { AdminDashboard } from "./components/Admin/AdminDashboard";
 import { AdminSettings } from "./components/Admin/AdminSettings";
 import { AdminUserDetails } from "./components/Admin/AdminUserDetails";
-import { AdminBookings } from "./components/Admin/AdminBookings"; // Import AdminBookings
+import { AdminBookings } from "./components/Admin/AdminBookings";
 import { ProductPage } from "./components/ProductPage";
 
 function App() {
@@ -29,6 +29,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
       </Routes>
       {/* SignUp component is rendered outside of the Routes */}
+      <LandingPage />
     </>
   );
 }
