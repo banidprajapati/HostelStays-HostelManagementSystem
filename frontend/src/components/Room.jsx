@@ -1,31 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-export const Room = ({ hostel }) => {
-  if (!hostel) {
-    // Handle case where hostel object is undefined or null
-    return <div>No hostel data available</div>;
-  }
+// Hostel component to display details of each hostel
+const Hostel = ({ hostel }) => (
+  <div>
+    <h2>{hostel.hostel_name}</h2>
+    <p>Location: {hostel.hostel_location}</p>
+    <p>Ratings: {hostel.ratings}</p>
+    <img src={hostel.photos} alt={`Image of ${hostel.hostel_name}`} />
+    {/* Add more details as needed */}
+  </div>
+);
+
+export const Room = () => {
+  const [hostelDetails, setHostelDetails] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/hostel_details")
+      .then((response) => {
+        setHostelDetails(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching hostel details:", error);
+      });
+  }, []);
 
   return (
-    <div className="max-w-96 bg-gray-200 rounded-lg text-left">
-      <img
-        src="https://images.pexels.com/photos/1054218/pexels-photo-1054218.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2"
-        alt="About Us Image"
-        className="rounded-tl-lg rounded-tr-lg w-96"
-      />
-      <div className="px-4 py-2 flex flex-col gap-1">
-        <h2 className="text-2xl font-semibold">{hostel.hostel_name}</h2>
-        <p>{hostel.hostel_location}</p>
-        <div className="flex flex-row gap-2">
-          <div className="bg-green-500 text-white px-2 py-1 rounded">
-            ★ {hostel.ratings}
-          </div>
-          <div>
-            <p className="mt-1">{hostel.reviews} reviews</p>
-          </div>
-        </div>
-        <h1 className="text-2xl font-semibold">{hostel.price}</h1>
-      </div>
+    <div>
+      <h1>Hostel Details</h1>
+      {hostelDetails.map((hostel, index) => (
+        <Hostel key={index} hostel={hostel} />
+      ))}
     </div>
   );
 };

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Header } from "./Header";
 import { DiscoverNepal } from "./DiscoverNepal";
 import { Room } from "./Room";
@@ -6,7 +7,19 @@ import { AboutUs } from "./AboutUs";
 import { Footer } from "./Footer";
 import { SearchBar } from "./SearchBar";
 
-export const LandingPage =() => {
+export const LandingPage = () => {
+  const [hostelDetails, setHostelDetails] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/hostel_details")
+      .then((response) => {
+        setHostelDetails(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching hostel details:", error);
+      });
+  }, []);
 
   return (
     <div className="flex flex-col gap-8 font-poppins">
@@ -24,18 +37,13 @@ export const LandingPage =() => {
       </a>
       <h1 className="font-bold text-2xl text-left">Handpicked by us.</h1>
       <div className="grid grid-cols-3 grid-rows-2 gap-4">
-        
-          <a href="/productPage">
-            <Room />
+        {hostelDetails.map((hostel, index) => (
+          <a href={`/productPage/${index}`} key={index}>
+            <Room hostel={hostel} />
           </a>
-        <Room/>
-        <Room  />
-        <Room  />
-        <Room  />
-        <Room />
+        ))}
       </div>
       <div className="border-t-2 border-gray-400 my-4"></div>
-
       <AboutUs />
       <Footer />
     </div>

@@ -15,24 +15,10 @@ import { ProductPage } from "./components/ProductPage";
 import { AdminHostels } from "./components/Admin/AdminHostels";
 
 function App() {
-  // Assuming hostels is defined or fetched here
-  const hostels = async () => {
-    try {
-      const response = await fetch("http://localhost:3000/hostel_details");
-      if (!response.ok) {
-        throw new Error("Failed to fetch hostels");
-      }
-      const data = await response.json();
-      setHostels(data);
-    } catch (error) {
-      console.error("Error fetching hostels:", error);
-    }
-  }; // Define hostels or fetch from an API
-
   return (
     <>
       <Routes>
-        <Route path="/" element={<LandingPage hostels={hostels} />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/admin" element={<AdminLogin />} />
         <Route path="/login" element={<Login />} />
         <Route path="/search" element={<SearchPage />} />

@@ -1,5 +1,5 @@
 import React from "react";
-import {useToast, Button} from "@chakra-ui/react";
+import { useToast, Button } from "@chakra-ui/react";
 
 export const RoomSmall = () => {
   return (
