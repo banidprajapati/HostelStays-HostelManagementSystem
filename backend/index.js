@@ -28,7 +28,7 @@ db.connect((err) => {
 app.get("/admin_details", (req, res) => {
   // Query to select all admins from the admin_details table
   const query =
-    "SELECT admin_FullName AS fullName, admin_Email AS email, admin_Password AS password FROM admin_details";
+    "SELECT admin_ID, admin_FullName AS fullName, admin_Email AS email, admin_Password AS password FROM admin_details";
   db.query(query, (err, results) => {
     if (err) {
       console.error("Error executing admin query:", err);
@@ -81,19 +81,33 @@ app.delete("/admin_details/:adminName", (req, res) => {
   });
 });
 
-// Endpoint to handle adding a new admin
+// Endpoint to handle admin login
 app.post("/admin_details", (req, res) => {
-  const { fullName, email, password } = req.body;
-  const insertQuery =
-    "INSERT INTO admin_details (admin_FullName, admin_Email, admin_Password) VALUES (?, ?, ?)";
-  db.query(insertQuery, [fullName, email, password], (err, result) => {
+  const { email, password } = req.body;
+  const query = "SELECT * FROM admin_details WHERE admin_Email = ? LIMIT 1";
+  db.query(query, [email], (err, results) => {
     if (err) {
-      console.error("Error adding admin:", err);
+      console.error("Error executing login query:", err);
       res
         .status(500)
         .json({ success: false, message: "Internal server error" });
     } else {
-      res.status(200).json({ success: true, message: "Admin added" });
+      if (results.length === 0) {
+        // Email not found in the database
+        res.status(401).json({ success: false, message: "Email not found" });
+      } else {
+        // Email found, check password
+        const admin = results[0];
+        if (admin.admin_Password === password) {
+          // Password matches, login successful
+          res.status(200).json({ success: true, message: "Login successful" });
+        } else {
+          // Password does not match
+          res
+            .status(401)
+            .json({ success: false, message: "Incorrect password" });
+        }
+      }
     }
   });
 });

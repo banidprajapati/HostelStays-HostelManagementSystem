@@ -40,21 +40,20 @@ export const AdminLogin = () => {
         />
       </div>
 
-      <div className="w-1/2 flex items-center justify-center p-8">
-        <div className="text-left m-0 p-0">
+      <div className="w-1/2 flex items-center justify-center p-8 ">
+        <div className="text-left m-0  w-96 p-0">
           {message && (
             <div
               className={`${
                 message.includes("successful")
                   ? "text-green-500"
                   : "text-red-500"
-              } mb-2`}
-            >
+              } mb-2`}>
               {message}
             </div>
           )}
           <h1 className="text-3xl font-bold mb-4">Admin Login</h1>
-          <div className="mb-4 max-w-85 flex flex-col">
+          <div className="mb-4 max- flex flex-col">
             <input
               type="text"
               placeholder="Enter your email"
@@ -71,8 +70,7 @@ export const AdminLogin = () => {
             />
             <button
               className="bg-blue-500 text-white px-4 py-2 rounded-md"
-              onClick={handleLogin}
-            >
+              onClick={handleLogin}>
               Continue
             </button>
           </div>

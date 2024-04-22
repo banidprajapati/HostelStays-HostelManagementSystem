@@ -8,7 +8,7 @@ import { LandingPage } from "./components/LandingPage";
 import { AdminLogin } from "./components/Admin/AdminLogin";
 import { SignUp } from "./components/Signup";
 import { AdminDashboard } from "./components/Admin/AdminDashboard";
-import { AdminSettings } from "./components/Admin/AdminSettings";
+import { AdminDetails } from "./components/Admin/AdminDetails";
 import { AdminUserDetails } from "./components/Admin/AdminUserDetails";
 import { AdminBookings } from "./components/Admin/AdminBookings";
 import { ProductPage } from "./components/ProductPage";
@@ -22,7 +22,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/dashboard" element={<AdminDashboard />} />
-        <Route path="/settings" element={<AdminSettings />} />
+        <Route path="/admindetails" element={<AdminDetails />} />
         <Route path="/user-details" element={<AdminUserDetails />} />
         <Route path="/bookings" element={<AdminBookings />} />
         <Route path="/productpage" element={<ProductPage />} />

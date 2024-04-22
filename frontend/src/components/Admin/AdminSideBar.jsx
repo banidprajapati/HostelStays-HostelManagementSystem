@@ -11,41 +11,36 @@ export const AdminSideBar = () => {
           <li className="mb-4">
             <Link
               to="/dashboard"
-              className="text-xl font-semibold hover:text-blue-800"
-            >
+              className="text-xl font-semibold hover:text-blue-800">
               Dashboard
             </Link>
           </li>
           <li className="mb-4">
             <Link
               to="/hostel-list"
-              className="text-xl font-semibold hover:text-blue-800"
-            >
+              className="text-xl font-semibold hover:text-blue-800">
               Hostel List
             </Link>
           </li>
           <li className="mb-4">
             <Link
               to="/bookings"
-              className="text-xl font-semibold hover:text-blue-800"
-            >
+              className="text-xl font-semibold hover:text-blue-800">
               Bookings
             </Link>
           </li>
           <li className="mb-4">
             <Link
               to="/user-details"
-              className="text-xl font-semibold hover:text-blue-800"
-            >
+              className="text-xl font-semibold hover:text-blue-800">
               User Details
             </Link>
           </li>
           <li className="mb-4">
             <Link
-              to="/settings"
-              className="text-xl font-semibold hover:text-blue-800"
-            >
-              Settings
+              to="/admindetails"
+              className="text-xl font-semibold hover:text-blue-800">
+              Admin Details
             </Link>
           </li>
         </ul>
@@ -57,8 +52,7 @@ export const AdminSideBar = () => {
               console.log("Logged out");
               // Redirect to AdminLogin
               window.location.href = "/admin";
-            }}
-          >
+            }}>
             Logout
           </button>
         </div>

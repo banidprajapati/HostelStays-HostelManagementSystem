@@ -1,7 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
 import { AdminSideBar } from "./AdminSideBar";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer,
+  Input,
+  InputGroup,
+  InputRightElement,
+  Button,
+} from "@chakra-ui/react";
 
-export const AdminSettings = () => {
+export const AdminDetails = () => {
   const [admins, setAdmins] = useState([]); // State to store fetched admins
   const [showAddAdminForm, setShowAddAdminForm] = useState(false);
   const [editAdmin, setEditAdmin] = useState(null); // State to store currently edited admin
@@ -157,21 +171,12 @@ export const AdminSettings = () => {
     <div className="flex h-screen">
       <AdminSideBar />
       <div className="flex-1 p-8 bg-gray-100 relative">
-        <h1 className="text-3xl font-bold mb-4 text-left">Settings</h1>
-        <div className="mb-4 flex justify-between items-center pl-2">
-          <button
-            className="text-xl bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md"
-            onClick={() => setShowAddAdminForm(true)}>
-            Add Admin
-          </button>
-          <span className="text-lg font-bold">
-            Total Admin = {admins.length}
-          </span>
-        </div>
+        <h1 className="text-3xl font-bold mb-4 text-left">Admin Details</h1>
+
         {showAddAdminForm && (
           <form
             ref={formRef}
-            className="absolute top-0 left-0 right-0 bg-white p-4 rounded-md shadow-lg max-w-md mx-auto border border-transparent hover:border-blue-500"
+            className="absolute top-0 left-0 right-0 bg-white p-6 rounded-lg shadow-md max-w-md mx-auto border border-gray-300"
             onSubmit={(e) => {
               e.preventDefault();
               if (editAdmin) {
@@ -183,7 +188,7 @@ export const AdminSettings = () => {
             <div className="mb-4">
               <label
                 htmlFor="fullName"
-                className="block text-sm font-bold mb-1">
+                className="block text-sm font-semibold text-gray-700 mb-1">
                 FullName
               </label>
               <input
@@ -192,12 +197,14 @@ export const AdminSettings = () => {
                 name="fullName"
                 value={adminInfo.fullName}
                 onChange={handleInputChange}
-                className="border-solid border border-black rounded-md px-3 py-2 w-full text-sm bg-gray-200 focus:outline-none focus:border-blue-500"
+                className="border border-gray-300 rounded-md px-3 py-2 w-full text-sm bg-gray-100 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="email" className="block text-sm font-bold mb-1">
+              <label
+                htmlFor="email"
+                className="block text-sm font-semibold text-gray-700 mb-1">
                 Email
               </label>
               <input
@@ -206,14 +213,14 @@ export const AdminSettings = () => {
                 name="email"
                 value={adminInfo.email}
                 onChange={handleInputChange}
-                className="border-solid border border-black rounded-md px-3 py-2 w-full text-sm bg-gray-200 focus:outline-none focus:border-blue-500"
+                className="border border-gray-300 rounded-md px-3 py-2 w-full text-sm bg-gray-100 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
               <label
                 htmlFor="password"
-                className="block text-sm font-bold mb-1">
+                className="block text-sm font-semibold text-gray-700 mb-1">
                 Password
               </label>
               <input
@@ -222,73 +229,64 @@ export const AdminSettings = () => {
                 name="password"
                 value={adminInfo.password}
                 onChange={handleInputChange}
-                className="border-solid border border-black rounded-md px-3 py-2 w-full text-sm bg-gray-200 focus:outline-none focus:border-blue-500"
+                className="border border-gray-300 rounded-md px-3 py-2 w-full text-sm bg-gray-100 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md mt-2 block mx-auto">
+              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md mt-4 block mx-auto">
               {editAdmin ? "Update" : "Submit"}
             </button>
           </form>
         )}
-        <div className="mb-2"></div> {/* Reduce space below the form */}
-        {/* Table and Add Admin button container */}
-        <div className="flex justify-center">
-          <div className="flex flex-col items-center">
-            <div className="mb-4"></div>
-            <div className="mb-4"></div> {/* Reduce space below the table */}
-            {/* Table displaying admin information */}
-            <table className="table-auto border-collapse border border-black">
-              <thead>
-                <tr>
-                  <th className="px-4 py-2 border border-black">Admin ID</th>
-                  <th className="px-4 py-2 border border-black">
-                    Admin FullName
-                  </th>
-                  <th className="px-4 py-2 border border-black">Admin Email</th>
-                  <th className="px-4 py-2 border border-black">
-                    Admin Password
-                  </th>
-                  <th className="px-4 py-2 border border-black">Actions</th>{" "}
-                  {/* New column for actions */}
-                </tr>
-              </thead>
-              <tbody>
-                {admins.map((admin, index) => (
-                  <tr key={index}>
-                    <td className="px-4 py-2 border border-black">
-                      {index + 1}
-                    </td>
-                    <td className="px-4 py-2 border border-black">
-                      {admin.fullName}
-                    </td>
-                    <td className="px-4 py-2 border border-black">
-                      {admin.email}
-                    </td>
-                    <td className="px-4 py-2 border border-black">
-                      {admin.password}
-                    </td>
-                    <td className="px-4 py-2 border border-black">
-                      <button
-                        className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-1 rounded-md mr-2"
-                        onClick={() => handleEdit(admin)}>
-                        Edit
-                      </button>
-                      <button
-                        className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded-md"
-                        onClick={() => handleDelete(admin.fullName)}>
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+        {/* Table =================================================================================================================================== */}
+        <div className="flex justify-center w-full  flex-col items-center">
+          {/* Table displaying admin information */}
+          <Table variant="striped" colorScheme="gray">
+            <Thead>
+              <Tr>
+                <Th>Admin ID</Th>
+                <Th>Admin FullName</Th>
+                <Th>Admin Email</Th>
+                <Th>Admin Password</Th>
+                <Th>Actions</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {admins.map((admin) => (
+                <Tr key={admin.admin_ID}>
+                  <Td>{admin.admin_ID}</Td>
+                  <Td>{admin.fullName}</Td>
+                  <Td>{admin.email}</Td>
+                  <Td>{admin.password}</Td>
+                  <Td>
+                    <Button
+                      colorScheme="blue"
+                      variant="solid"
+                      size="sm"
+                      onClick={() => handleEdit(admin)}
+                      mr={2}>
+                      Edit
+                    </Button>
+                    <Button
+                      colorScheme="red"
+                      variant="solid"
+                      size="sm"
+                      onClick={() => handleDelete(admin.admin_ID)}>
+                      Delete
+                    </Button>
+                  </Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
         </div>
-        <div className="mb-2"></div> {/* Reduce space below the table */}
+        <button
+          className="text-xl bg-blue-500 hover:bg-blue-600 text-white px-4 p-2 rounded-md"
+          onClick={() => setShowAddAdminForm(true)}>
+          Add Admin
+        </button>
       </div>
     </div>
   );
