@@ -26,19 +26,19 @@ db.connect((err) => {
 
 // Start of admin =======================================================================================================================
 // Endpoint to fetch admin details
-app.get("/hostel_details", (req, res) => {
-  const query = "SELECT * FROM hostel_details";
+app.get("/admin_details", (req, res) => {
+  // Query to select all admins from the admin_details table
+  const query =
+    "SELECT admin_ID, admin_FullName AS fullName, admin_Email AS email, admin_Password AS password FROM admin_details";
   db.query(query, (err, results) => {
     if (err) {
-      console.error("Error executing hostel query:", err);
+      console.error("Error executing admin query:", err);
       res
         .status(500)
         .json({ success: false, message: "Internal server error" });
-      return;
+    } else {
+      res.status(200).json(results);
     }
-    // Convert the result to an array if it's not already
-    const data = Array.isArray(results) ? results : [results];
-    res.status(200).json(data);
   });
 });
 
@@ -198,46 +198,22 @@ app.get("/user_details", (req, res) => {
 
 // Start of  Hostel list=======================================================================================================================
 app.get("/hostel_details", (req, res) => {
-  const { sort } = req.query;
-  let orderBy = "hostel_ID"; // Default order by hostel_ID
-  if (sort) {
-    const sortParams = sort.split(" ");
-    if (sortParams.length === 2) {
-      const [sortField, sortOrder] = sortParams;
-      if (
-        [
-          "hostel_name",
-          "hostel_location",
-          "facilities",
-          "ratings",
-          "photos",
-          "reviews",
-          "hostel_description",
-          "total_beds",
-          "beds_per_room",
-          "price",
-        ].includes(sortField) &&
-        ["ASC", "DESC"].includes(sortOrder.toUpperCase())
-      ) {
-        orderBy = `${sortField} ${sortOrder.toUpperCase()}`;
-      }
-    }
-  }
-  const query = `SELECT * FROM hostel_details ORDER BY ${orderBy}`;
+  // Query to select all hostels from the hostel_details table
+  const query =
+    "SELECT hostel_name, hostel_location, facilities, ratings, photos, reviews, hostel_description, total_beds, beds_per_room, price FROM hostel_details";
   db.query(query, (err, results) => {
     if (err) {
       console.error("Error executing hostel query:", err);
       res
         .status(500)
         .json({ success: false, message: "Internal server error" });
-      return;
+    } else {
+      res.status(200).json(results);
     }
-    res.status(200).json(results);
   });
 });
 
-// POST create a new hostel
-app.post("/hostel_details", (req, res) => {
+app.post("/hostel_details/add", (req, res) => {
   const {
     hostel_name,
     hostel_location,
@@ -272,21 +248,16 @@ app.post("/hostel_details", (req, res) => {
         res
           .status(500)
           .json({ success: false, message: "Internal server error" });
-        return;
+      } else {
+        res.status(200).json({ success: true, message: "Hostel added" });
       }
-      res.status(201).json({
-        success: true,
-        message: "Hostel added",
-        insertedId: result.insertId,
-      });
     }
   );
 });
-
-// PUT update hostel details
-app.put("/hostel_details/:hostelId", (req, res) => {
-  const hostelId = req.params.hostelId;
+app.put("/hostel_details/:hostelName", (req, res) => {
+  const hostelName = req.params.hostelName;
   const {
+    hostel_name,
     hostel_location,
     facilities,
     ratings,
@@ -298,10 +269,11 @@ app.put("/hostel_details/:hostelId", (req, res) => {
     price,
   } = req.body;
   const updateQuery =
-    "UPDATE hostel_details SET hostel_location = ?, facilities = ?, ratings = ?, photos = ?, reviews = ?, hostel_description = ?, total_beds = ?, beds_per_room = ?, price = ? WHERE hostel_ID = ?";
+    "UPDATE hostel_details SET hostel_name = ?, hostel_location = ?, facilities = ?, ratings = ?, photos = ?, reviews = ?, hostel_description = ?, total_beds = ?, beds_per_room = ?, price = ? WHERE hostel_name = ?";
   db.query(
     updateQuery,
     [
+      hostel_name,
       hostel_location,
       facilities,
       ratings,
@@ -311,7 +283,7 @@ app.put("/hostel_details/:hostelId", (req, res) => {
       total_beds,
       beds_per_room,
       price,
-      hostelId,
+      hostelName,
     ],
     (err, result) => {
       if (err) {
@@ -319,36 +291,34 @@ app.put("/hostel_details/:hostelId", (req, res) => {
         res
           .status(500)
           .json({ success: false, message: "Internal server error" });
-        return;
-      }
-      if (result.affectedRows === 0) {
+      } else if (result.affectedRows === 0) {
+        // If no rows were affected, it means the hostel with the provided name doesn't exist
         res.status(404).json({ success: false, message: "Hostel not found" });
-        return;
+      } else {
+        res.status(200).json({ success: true, message: "Hostel updated" });
       }
-      res.status(200).json({ success: true, message: "Hostel updated" });
     }
   );
 });
+  
 
-// DELETE delete a hostel
-app.delete("/hostel_details/:hostelId", (req, res) => {
-  const hostelId = req.params.hostelId;
-  const deleteQuery = "DELETE FROM hostel_details WHERE hostel_ID = ?";
-  db.query(deleteQuery, [hostelId], (err, result) => {
+
+app.delete("/hostel_details/:hostelName", (req, res) => {
+  const hostelName = req.params.hostelName;
+  const deleteQuery = "DELETE FROM hostel_details WHERE hostel_name = ?";
+  db.query(deleteQuery, [hostelName], (err, result) => {
     if (err) {
       console.error("Error deleting hostel:", err);
       res
         .status(500)
         .json({ success: false, message: "Internal server error" });
-      return;
-    }
-    if (result.affectedRows === 0) {
+    } else if (result.affectedRows === 0) {
+      // If no rows were affected, it means the hostel with the provided name doesn't exist
       res.status(404).json({ success: false, message: "Hostel not found" });
-      return;
+    } else {
+      res.status(200).json({ success: true, message: "Hostel deleted" });
     }
-    res.status(200).json({ success: true, message: "Hostel deleted" });
   });
 });
-
 //End of Hostel List=======================================================================================================================
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
