@@ -14,12 +14,10 @@ export const SearchPage = () => {
         <SearchBar />
         </div>
     <div className="flex flex-col md:flex-row justify-between  mt-8">
-      {/* Left section */}
       <div className="md:w-1/4">
         <Filter />
       </div>
       
-      {/* Right section */}
       <div className="md:w-3/4 md:pl-4 mb-10">
         <RoomDetails />
         <Line />

@@ -24,7 +24,6 @@ export const Gallery = () => {
   };
 
   const displayImages = images.slice(0, 4);
-  // const imageSize = 80 / displayImages.length + "%";
   const remainingImages = images.length - displayImages.length;
 
   return (

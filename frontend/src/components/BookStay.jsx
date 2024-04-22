@@ -69,9 +69,9 @@ export const BookStay = () => {
               type="text"
               className="w-full h-10 bg-gray-200 px-2 focus:outline-none rounded"
               placeholder="Date"
-              onClick={toggleCalendar} // Toggle calendar visibility on click
+              onClick={toggleCalendar} 
             />
-            {showCalendar && ( // Render calendar if showCalendar is true
+            {showCalendar && ( 
               <div className="absolute top-full bg-gray-200 rounded mt-1 w-full z-10">
                 <DateRange
                   ranges={dateRange}

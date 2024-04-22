@@ -8,7 +8,6 @@ export const AuthenticationPage = () => {
   const [loggedIn, setLoggedIn] = useState(false);
 
   const handleLogin = () => {
-    // Check if the user is admin and password is correct
     if (email === "karkiaayush901@gmail.com" && password === "Helloworld") {
       setLoggedIn(true);
     } else {

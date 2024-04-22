@@ -22,13 +22,12 @@ export const Login = () => {
       if (response.data === "Login successful") {
         console.log("Login successful!");
         navigate("/")
-        // Redirect or perform other actions on successful login
       } else {
         setErrorMessage("Invalid email or password.");
       }
     } catch (error) {
       console.error("Error:", error);
-      setErrorMessage("An error occurred. Please try again later.");
+      setErrorMessage("Login failed. Please check your details and try again.");
     }
   };
 

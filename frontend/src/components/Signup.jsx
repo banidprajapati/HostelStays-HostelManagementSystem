@@ -3,12 +3,17 @@ import axios from "axios";
 
 export const SignUp = ({ email: emailProp }) => {
   const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState(""); // Initialize email state as empty string
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleSignUp = async () => {
+    if (!fullName || !email || !password || !confirmPassword) {
+      setErrorMessage("Please fill in all fields.");
+      return;
+    }
+
     try {
       if (password !== confirmPassword) {
         setErrorMessage("Passwords do not match.");
@@ -23,17 +28,14 @@ export const SignUp = ({ email: emailProp }) => {
 
       if (response.data.message) {
         console.log("User signed up successfully:", response.data.message);
-        // Redirect to login page or perform other actions
       } else {
         setErrorMessage("Signup failed. Please try again.");
       }
     } catch (error) {
       console.error("Error signing up:", error);
-      setErrorMessage("An error occurred. Please try again later.");
+      setErrorMessage("This user has already signed up.");
     }
   };
-
-  // Render your signup form here
 
   return (
     <div className="flex h-screen">
@@ -64,7 +66,7 @@ export const SignUp = ({ email: emailProp }) => {
               type="text"
               placeholder="Email"
               className="border-b border-gray-400 focus:outline-none mb-2 p-2"
-              defaultValue={emailProp} // Use defaultValue instead of value
+              defaultValue={emailProp}
               onChange={(e) => setEmail(e.target.value)}
             />
 

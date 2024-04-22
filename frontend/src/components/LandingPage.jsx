@@ -1,13 +1,12 @@
 import React from "react";
-import {Header} from "./Header";
-import {DiscoverNepal} from "./DiscoverNepal";
-import {Room} from "./Room";
-import {AboutUs} from "./AboutUs";
-import {Footer} from "./Footer";
-import {SearchBar} from "./SearchBar";
+import { Header } from "./Header";
+import { DiscoverNepal } from "./DiscoverNepal";
+import { Room } from "./Room";
+import { AboutUs } from "./AboutUs";
+import { Footer } from "./Footer";
+import { SearchBar } from "./SearchBar";
 
 export const LandingPage = () => {
-
   const dummyData = {
     name: "Cozy Room",
     address: "123 Main Street, Cityville",
@@ -27,17 +26,19 @@ export const LandingPage = () => {
         Search for residence all over Nepal
       </h2>
       <SearchBar />
-      <DiscoverNepal />
+      <a href="/search">
+        <DiscoverNepal />
+      </a>
       <h1 className="font-bold text-2xl text-left">Handpicked by us.</h1>
       <div className="grid grid-cols-3 grid-rows-2 gap-4">
-       <a href="/productPage">
-        <Room  {...dummyData}/>
+        <a href="/productPage">
+          <Room {...dummyData} />
         </a>
-        <Room {...dummyData}/>
-        <Room {...dummyData}/>
-        <Room {...dummyData}/>
-        <Room {...dummyData}/>
-        <Room {...dummyData}/>
+        <Room {...dummyData} />
+        <Room {...dummyData} />
+        <Room {...dummyData} />
+        <Room {...dummyData} />
+        <Room {...dummyData} />
       </div>
       <div className="border-t-2 border-gray-400 my-4"></div>
 

@@ -16,17 +16,14 @@ export const AdminDashboard = () => {
             <AdminBoxes title="No of Guests:" />
             <AdminBoxes title="Beds Reserved:">15</AdminBoxes>
             <AdminBoxes title="Settings:" />
-            {/* Add more AdminBoxes components here */}
           </div>
         </div>
-        {/* Finances Section */}
         <div className="mt-8">
           <h1 className="text-3xl font-bold mb-4 text-left">Finances</h1>
           <div className="grid grid-cols-3 gap-4">
             <AdminBoxes title="Total Revenue:" />
             <AdminBoxes title="Total Expenses:" />
             <AdminBoxes title="Net Profit:" />
-            {/* Add more AdminBoxes components here */}
           </div>
         </div>
       </div>
