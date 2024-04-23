@@ -194,6 +194,31 @@ app.get("/user_details", (req, res) => {
     }
   });
 });
+
+// Endpoint to handle forget password request
+app.post("/forget_password", (req, res) => {
+  const { email, newPassword } = req.body;
+
+  const updatePasswordQuery =
+    "UPDATE user_details SET password = ? WHERE user_email = ?";
+  db.query(updatePasswordQuery, [newPassword, email], (err, result) => {
+    if (err) {
+      console.error("Error updating password:", err);
+      res
+        .status(500)
+        .json({ error: "An error occurred. Please try again later." });
+    } else {
+      if (result.affectedRows > 0) {
+        // Password updated successfully
+        res.status(200).send("Password updated");
+      } else {
+        // No user found with the provided email
+        res.status(404).send("User not found");
+      }
+    }
+  });
+});
+
 // End of User Details =======================================================================================================================
 
 // Start of  Hostel list=======================================================================================================================
@@ -300,8 +325,6 @@ app.put("/hostel_details/:hostelName", (req, res) => {
     }
   );
 });
-  
-
 
 app.delete("/hostel_details/:hostelName", (req, res) => {
   const hostelName = req.params.hostelName;
