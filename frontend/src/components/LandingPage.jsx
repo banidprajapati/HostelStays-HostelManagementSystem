@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Header } from "./Header";
 import { DiscoverNepal } from "./DiscoverNepal";
 import { Room } from "./Room";
 import { AboutUs } from "./AboutUs";
@@ -23,7 +22,6 @@ export const LandingPage = () => {
 
   return (
     <div className="flex flex-col gap-8 font-poppins">
-      <Header />
       <h1 className="mt-14 text-left text-5xl font-bold">
         Discover Nepal - <br />
         One sleep at a time

@@ -1,10 +1,11 @@
-import React, {useState, useRef, useEffect} from "react";
-import {DateRange} from "react-date-range";
+import React, { useState, useRef, useEffect } from "react";
+import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { useNavigate } from "react-router-dom";
 
-export const BookStay = () => {
+export const BookStay = ({ isLoggedIn }) => {
+  // Pass isLoggedIn as a prop
   const [guests, setGuests] = useState("");
   const [dateRange, setDateRange] = useState([
     {
@@ -19,7 +20,7 @@ export const BookStay = () => {
   const dateInputRef = useRef(null); // Ref for date input field
 
   const handleGuestsChange = (event) => {
-    const {value} = event.target;
+    const { value } = event.target;
     setGuests(value);
   };
 
@@ -54,9 +55,16 @@ export const BookStay = () => {
         : `${guests} ${guestText}, 1 Room required`;
     totalPrice = roomsNeeded * 2500; // Cost per room is NPR 2500
   }
-  function handleClick(){
-    navigate("/login")
-  }
+
+  // Function to handle click on confirm booking button
+  const handleConfirmBooking = () => {
+    if (isLoggedIn) {
+      navigate("/billing");
+    } else {
+      navigate("/login");
+    }
+  };
+
   return (
     <div className="flex flex-col items-start w-11/12 h-auto">
       <h2 className="text-3xl font-bold mb-4">
@@ -69,9 +77,9 @@ export const BookStay = () => {
               type="text"
               className="w-full h-10 bg-gray-200 px-2 focus:outline-none rounded"
               placeholder="Date"
-              onClick={toggleCalendar} 
+              onClick={toggleCalendar}
             />
-            {showCalendar && ( 
+            {showCalendar && (
               <div className="absolute top-full bg-gray-200 rounded mt-1 w-full z-10">
                 <DateRange
                   ranges={dateRange}
@@ -97,7 +105,9 @@ export const BookStay = () => {
           <h3 className="font-bold text-black text-left text-4xl">
             NPR {totalPrice}
           </h3>
-          <button onClick={handleClick} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+          <button
+            onClick={handleConfirmBooking}
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
             Confirm Booking
           </button>
         </div>

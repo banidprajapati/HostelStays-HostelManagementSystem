@@ -8,7 +8,6 @@ const Hostel = ({ hostel }) => (
     <p>Location: {hostel.hostel_location}</p>
     <p>Ratings: {hostel.ratings}</p>
     <img src={hostel.photos} alt={`Image of ${hostel.hostel_name}`} />
-    {/* Add more details as needed */}
   </div>
 );
 

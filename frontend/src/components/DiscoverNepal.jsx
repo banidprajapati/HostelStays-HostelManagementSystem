@@ -28,7 +28,7 @@ export const DiscoverNepal = () => {
         "https://images.pexels.com/photos/1054218/pexels-photo-1054218.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2",
     },
     {
-      name: "Nepalgunj",
+      name: "Dang",
       image:
         "https://images.pexels.com/photos/1054218/pexels-photo-1054218.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2",
     },

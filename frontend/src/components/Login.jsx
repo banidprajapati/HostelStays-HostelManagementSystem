@@ -2,15 +2,19 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export const Login = () => {
+export const Login = ({ handleLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-  const handleLogin = async () => {
+
+  const loginUser = async () => {
     try {
       if (!email.trim() || !password.trim()) {
         setErrorMessage("Email and password cannot be empty.");
+        setTimeout(() => {
+          setErrorMessage(""); // Clear the error message after 5 seconds
+        }, 5000);
         return;
       }
 
@@ -19,15 +23,21 @@ export const Login = () => {
         password,
       });
 
-      if (response.data === "Login successful") {
-        console.log("Login successful!");
-        navigate("/");
+      if (response.status === 200 && response.data === "Login successful") {
+        handleLogin({ fullName: email }); // Call handleLogin with user data
+        navigate("/"); // Redirect to homepage
       } else {
         setErrorMessage("Invalid email or password.");
+        setTimeout(() => {
+          setErrorMessage(""); // Clear the error message after 5 seconds
+        }, 5000);
       }
     } catch (error) {
       console.error("Error:", error);
       setErrorMessage("Login failed. Please check your details and try again.");
+      setTimeout(() => {
+        setErrorMessage(""); // Clear the error message after 5 seconds
+      }, 5000);
     }
   };
 
@@ -66,15 +76,15 @@ export const Login = () => {
             />
             <button
               className="bg-blue-500 text-white px-4 py-2 rounded-md"
-              onClick={handleLogin}>
+              onClick={loginUser}>
               Continue
             </button>
           </div>
-          <div className="flex flex-col mr-4">
+          <div className="flex flex-col gap-4">
             <a href="/signup" className="text-blue-500 inline-block">
               Create a new account?
             </a>
-            <a href="/signup" className="text-blue-500 inline-block">
+            <a href="/forgetpassword" className="text-blue-500 inline-block">
               Forget Password?
             </a>
           </div>
