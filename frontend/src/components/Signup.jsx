@@ -68,7 +68,7 @@ export const SignUp = ({ email: emailProp }) => {
         console.log("User signed up successfully:", response.data.message);
         navigate("/login");
       } else {
-        setErrorMessage("Signup failed. Please try again.");
+        setErrorMessage("The Email is already regiestered in the database.");
         setTimeout(() => {
           setErrorMessage(""); // Clear the error message after 5 seconds
         }, 5000);
