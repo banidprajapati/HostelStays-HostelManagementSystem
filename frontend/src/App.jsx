@@ -17,20 +17,27 @@ import { Billing } from "./components/Billing";
 import { Header } from "./components/Header"; // Import the Header component without curly braces
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userFullName, setUserFullName] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("isLoggedIn") === "true" || false
+  );
+  const [userFullName, setUserFullName] = useState(
+    localStorage.getItem("userFullName") || ""
+  );
 
   // Function to handle user login
   const handleLogin = (user) => {
-    // Assuming userData contains the user's full name fetched from the database
     setUserFullName(user.fullName);
     setIsLoggedIn(true);
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("userFullName", user.fullName);
   };
 
   // Function to handle user logout
   const handleLogout = () => {
     setIsLoggedIn(false);
     setUserFullName("");
+    localStorage.setItem("isLoggedIn", "false");
+    localStorage.removeItem("userFullName");
   };
 
   return (
