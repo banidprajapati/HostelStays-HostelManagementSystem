@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-export const AdminLogin = () => {
+export const AdminLogin = ({ handleAdminLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
@@ -19,8 +21,10 @@ export const AdminLogin = () => {
       if (response.data.success) {
         setMessage("Login successful!");
         console.log("Login successful!");
+        // Call handleAdminLogin to update isAdminLoggedIn state
+        handleAdminLogin();
         // Redirect to admin dashboard
-        window.location.href = "/dashboard";
+        navigate("/dashboard");
       } else {
         setMessage("Invalid email or password.");
       }

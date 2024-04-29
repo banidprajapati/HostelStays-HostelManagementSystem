@@ -1,8 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import { AdminSideBar } from "./AdminSideBar";
 import { Table, Thead, Tbody, Tr, Th, Td, Button } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
-export const AdminHostels = () => {
+export const AdminHostels = ({ isAdminLoggedIn, handleAdminLogout }) => {
+  const navigate = useNavigate(); // Initialize useNavigate hook
+
+  useEffect(() => {
+    // Redirect to admin login if not logged in
+    if (!isAdminLoggedIn) {
+      navigate("/admin");
+    }
+  }, [isAdminLoggedIn, navigate]);
+
   const [hostels, setHostels] = useState([]); // State to store fetched hostels
   const [showAddHostelForm, setShowAddHostelForm] = useState(false);
   const [editHostel, setEditHostel] = useState(null); // State to store currently edited hostel
@@ -169,7 +179,8 @@ export const AdminHostels = () => {
 
   return (
     <div className="flex h-screen">
-      <AdminSideBar />
+      <AdminSideBar handleAdminLogout={handleAdminLogout} />
+
       <div className="flex-1 p-8 bg-gray-100 relative">
         <h1 className="text-3xl font-bold mb-4 text-left">Hostel Details</h1>
 
@@ -185,14 +196,12 @@ export const AdminHostels = () => {
               } else {
                 handleAddHostel(); // Call function for adding hostel
               }
-            }}
-          >
+            }}>
             {/* Input fields for hostel information */}
             <div className="mb-4">
               <label
                 htmlFor="hostel_name"
-                className="block text-sm font-semibold text-gray-700 mb-1"
-              >
+                className="block text-sm font-semibold text-gray-700 mb-1">
                 Hostel Name
               </label>
               <input
@@ -209,8 +218,7 @@ export const AdminHostels = () => {
             <div className="mb-4">
               <label
                 htmlFor="hostel_location"
-                className="block text-sm font-semibold text-gray-700 mb-1"
-              >
+                className="block text-sm font-semibold text-gray-700 mb-1">
                 Hostel Location
               </label>
               <input
@@ -227,8 +235,7 @@ export const AdminHostels = () => {
             <div className="mb-4">
               <label
                 htmlFor="facilities"
-                className="block text-sm font-semibold text-gray-700 mb-1"
-              >
+                className="block text-sm font-semibold text-gray-700 mb-1">
                 Facilities
               </label>
               <input
@@ -245,8 +252,7 @@ export const AdminHostels = () => {
             <div className="mb-4">
               <label
                 htmlFor="ratings"
-                className="block text-sm font-semibold text-gray-700 mb-1"
-              >
+                className="block text-sm font-semibold text-gray-700 mb-1">
                 Ratings
               </label>
               <input
@@ -263,8 +269,7 @@ export const AdminHostels = () => {
             <div className="mb-4">
               <label
                 htmlFor="photos"
-                className="block text-sm font-semibold text-gray-700 mb-1"
-              >
+                className="block text-sm font-semibold text-gray-700 mb-1">
                 Photos
               </label>
               <input
@@ -281,8 +286,7 @@ export const AdminHostels = () => {
             <div className="mb-4">
               <label
                 htmlFor="reviews"
-                className="block text-sm font-semibold text-gray-700 mb-1"
-              >
+                className="block text-sm font-semibold text-gray-700 mb-1">
                 Reviews
               </label>
               <input
@@ -299,8 +303,7 @@ export const AdminHostels = () => {
             <div className="mb-4">
               <label
                 htmlFor="hostel_description"
-                className="block text-sm font-semibold text-gray-700 mb-1"
-              >
+                className="block text-sm font-semibold text-gray-700 mb-1">
                 Hostel Description
               </label>
               <textarea
@@ -316,8 +319,7 @@ export const AdminHostels = () => {
             <div className="mb-4">
               <label
                 htmlFor="total_beds"
-                className="block text-sm font-semibold text-gray-700 mb-1"
-              >
+                className="block text-sm font-semibold text-gray-700 mb-1">
                 Total Beds
               </label>
               <input
@@ -334,8 +336,7 @@ export const AdminHostels = () => {
             <div className="mb-4">
               <label
                 htmlFor="beds_per_room"
-                className="block text-sm font-semibold text-gray-700 mb-1"
-              >
+                className="block text-sm font-semibold text-gray-700 mb-1">
                 Beds Per Room
               </label>
               <input
@@ -352,8 +353,7 @@ export const AdminHostels = () => {
             <div className="mb-4">
               <label
                 htmlFor="price"
-                className="block text-sm font-semibold text-gray-700 mb-1"
-              >
+                className="block text-sm font-semibold text-gray-700 mb-1">
                 Price
               </label>
               <input
@@ -369,8 +369,7 @@ export const AdminHostels = () => {
 
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md mt-4 block mx-auto"
-            >
+              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md mt-4 block mx-auto">
               {editHostel ? "Update" : "Submit"}
             </button>
           </form>
@@ -412,16 +411,14 @@ export const AdminHostels = () => {
                       colorScheme="blue"
                       variant="solid"
                       size="sm"
-                      onClick={() => handleEditHostel(hostel)}
-                    >
+                      onClick={() => handleEditHostel(hostel)}>
                       Edit
                     </Button>
                     <Button
                       colorScheme="red"
                       variant="solid"
                       size="sm"
-                      onClick={() => handleDeleteHostel(hostel.hostel_name)}
-                    >
+                      onClick={() => handleDeleteHostel(hostel.hostel_name)}>
                       Delete
                     </Button>
                   </Td>
@@ -434,8 +431,7 @@ export const AdminHostels = () => {
         {/* Button to toggle add hostel form */}
         <button
           className="text-xl bg-blue-500 hover:bg-blue-600 text-white px-4 p-2 rounded-md"
-          onClick={() => setShowAddHostelForm(true)}
-        >
+          onClick={() => setShowAddHostelForm(true)}>
           Add Hostel
         </button>
       </div>

@@ -1,5 +1,7 @@
 // AdminBookings.jsx
 import React from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { AdminSideBar } from "./AdminSideBar";
 import {
   Table,
@@ -12,7 +14,15 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 
-export const AdminBookings = () => {
+export const AdminBookings = ({ isAdminLoggedIn, handleAdminLogout }) => {
+  const navigate = useNavigate(); // Initialize useNavigate hook
+
+  useEffect(() => {
+    // Redirect to admin login if not logged in
+    if (!isAdminLoggedIn) {
+      navigate("/admin");
+    }
+  }, [isAdminLoggedIn, navigate]);
   // Sample data for bookings
   const bookings = [
     {
@@ -36,7 +46,7 @@ export const AdminBookings = () => {
 
   return (
     <div className="flex h-screen">
-      <AdminSideBar />
+      <AdminSideBar handleAdminLogout={handleAdminLogout} />
       <div className="flex-1 p-8 bg-gray-100">
         <h1 className="text-3xl font-bold mb-4 text-left">Bookings</h1>
         <TableContainer>

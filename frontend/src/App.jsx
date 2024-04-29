@@ -24,6 +24,10 @@ function App() {
     localStorage.getItem("userFullName") || ""
   );
 
+  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(
+    localStorage.getItem("isAdminLoggedIn") === "true" || false
+  );
+
   // Function to handle user login
   const handleLogin = (user) => {
     setUserFullName(user.fullName);
@@ -40,32 +44,79 @@ function App() {
     localStorage.removeItem("userFullName");
   };
 
+  // Function to handle admin login
+  const handleAdminLogin = () => {
+    setIsAdminLoggedIn(true);
+    localStorage.setItem("isAdminLoggedIn", "true");
+  };
+
+  // Function to handle admin logout
+  const handleAdminLogout = () => {
+    setIsAdminLoggedIn(false);
+    localStorage.setItem("isAdminLoggedIn", "false");
+  };
+
   return (
     <>
       <Header
         isLoggedIn={isLoggedIn}
         userFullName={userFullName}
         handleLogout={handleLogout}
-      />{" "}
+      />
       {/* Pass authentication props to Header */}
       <Routes>
         <Route path="/" element={<LandingPage isLoggedIn={isLoggedIn} />} />
         <Route path="/login" element={<Login handleLogin={handleLogin} />} />
-
         <Route path="/signup" element={<SignUp />} />
         <Route path="/search" element={<SearchPage />} />
+        <Route path="/forgetpassword" element={<ForgetPassword />} />
+        <Route path="/billing" element={<Billing />} />
         <Route
           path="/productpage"
           element={<ProductPage isLoggedIn={isLoggedIn} />}
         />
-        <Route path="/admin" element={<AdminLogin />} />
+        <Route
+          path="/admin"
+          element={<AdminLogin handleAdminLogin={handleAdminLogin} />}
+        />
+
         <Route path="/hostel-list" element={<AdminHostels />} />
-        <Route path="/dashboard" element={<AdminDashboard />} />
-        <Route path="/admindetails" element={<AdminDetails />} />
-        <Route path="/user-details" element={<AdminUserDetails />} />
-        <Route path="/bookings" element={<AdminBookings />} />
-        <Route path="/forgetpassword" element={<ForgetPassword />} />
-        <Route path="/billing" element={<Billing />} />
+        <Route
+          path="/dashboard"
+          element={
+            <AdminDashboard
+              isAdminLoggedIn={isAdminLoggedIn}
+              handleAdminLogout={handleAdminLogout}
+            />
+          }
+        />
+        <Route
+          path="/admindetails"
+          element={
+            <AdminDetails
+              isAdminLoggedIn={isAdminLoggedIn}
+              handleAdminLogout={handleAdminLogout}
+            />
+          }
+        />
+        <Route
+          path="/user-details"
+          element={
+            <AdminUserDetails
+              isAdminLoggedIn={isAdminLoggedIn}
+              handleAdminLogout={handleAdminLogout}
+            />
+          }
+        />
+        <Route
+          path="/bookings"
+          element={
+            <AdminBookings
+              isAdminLoggedIn={isAdminLoggedIn}
+              handleAdminLogout={handleAdminLogout}
+            />
+          }
+        />
       </Routes>
     </>
   );

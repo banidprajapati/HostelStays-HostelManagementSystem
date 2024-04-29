@@ -1,8 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { AdminSideBar } from "./AdminSideBar";
 import { Table, Thead, Tbody, Tr, Th, Td, Button } from "@chakra-ui/react";
 
-export const AdminDetails = () => {
+export const AdminDetails = ({ isAdminLoggedIn }) => {
+  const navigate = useNavigate(); // Initialize useNavigate hook
+
+  useEffect(() => {
+    // Redirect to admin login if not logged in
+    if (!isAdminLoggedIn) {
+      navigate("/admin");
+    }
+  }, [isAdminLoggedIn, navigate]);
   const [admins, setAdmins] = useState([]); // State to store fetched admins
   const [showAddAdminForm, setShowAddAdminForm] = useState(false);
   const [editAdmin, setEditAdmin] = useState(null); // State to store currently edited admin

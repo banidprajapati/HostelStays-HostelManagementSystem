@@ -1,11 +1,20 @@
-import React from "react";
-import {AdminBoxes} from "./AdminBoxes";
-import {AdminSideBar} from "./AdminSideBar";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { AdminBoxes } from "./AdminBoxes";
+import { AdminSideBar } from "./AdminSideBar";
 
-export const AdminDashboard = () => {
+export const AdminDashboard = ({ isAdminLoggedIn, handleAdminLogout }) => {
+  const navigate = useNavigate(); // Initialize useNavigate hook
+
+  useEffect(() => {
+    // Redirect to admin login if not logged in
+    if (!isAdminLoggedIn) {
+      navigate("/admin");
+    }
+  }, [isAdminLoggedIn, navigate]);
   return (
     <div className="flex h-screen">
-      <AdminSideBar />
+      <AdminSideBar handleAdminLogout={handleAdminLogout} />
       <div className="flex-1 p-8 bg-gray-100">
         {/* Overview Section */}
         <div>

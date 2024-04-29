@@ -16,8 +16,17 @@ import {
   InputRightElement,
   Button,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
-export const AdminUserDetails = () => {
+export const AdminUserDetails = ({ isAdminLoggedIn, handleAdminLogout }) => {
+  const navigate = useNavigate(); // Initialize useNavigate hook
+
+  useEffect(() => {
+    // Redirect to admin login if not logged in
+    if (!isAdminLoggedIn) {
+      navigate("/admin");
+    }
+  }, [isAdminLoggedIn, navigate]);
   const [searchTerm, setSearchTerm] = useState("");
   const [userDetails, setUserDetails] = useState([]);
   const [showPassword, setShowPassword] = useState(false);
@@ -52,7 +61,8 @@ export const AdminUserDetails = () => {
 
   return (
     <div className="flex h-screen">
-      <AdminSideBar />
+      <AdminSideBar handleAdminLogout={handleAdminLogout} />
+
       <div className="flex-1 p-8 bg-gray-100">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-3xl font-bold">User Details</h1>

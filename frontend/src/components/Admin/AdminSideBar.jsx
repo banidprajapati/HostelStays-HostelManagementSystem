@@ -2,7 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const AdminSideBar = () => {
+export const AdminSideBar = ({ handleAdminLogout }) => {
   return (
     <div className="flex h-screen">
       <div className="bg-gray-400 text-black w-64 h-full p-4">
@@ -48,10 +48,9 @@ export const AdminSideBar = () => {
           <button
             className="text-xl text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md"
             onClick={() => {
-              // Add logout functionality here
+              // Call handleAdminLogout function to logout
+              handleAdminLogout();
               console.log("Logged out");
-              // Redirect to AdminLogin
-              window.location.href = "/admin";
             }}>
             Logout
           </button>
