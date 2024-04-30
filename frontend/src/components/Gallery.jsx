@@ -1,30 +1,43 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
-const images = [
-  "https://images.pexels.com/photos/1054218/pexels-photo-1054218.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2",
-  "https://th.bing.com/th/id/OIP.TNiiiasFrRpuJFby6RbPJAHaEo?rs=1&pid=ImgDetMain",
-  "https://i0.wp.com/digital-photography-school.com/wp-content/uploads/2017/08/Dingle-.jpg?resize=750%2C449&ssl=1",
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3azycI9KcegvjJEqbnL3w9fsuayexAxZLRzcXStkCPA&s",
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUTxKwcLawJH8y5MbIaUgdOk7hhi5ZTR9A4PhDeuOqUQ&s",
-];
-
-export const Gallery = () => {
+export const Gallery = ({ images }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Convert images to an array if it's not already one
+  const imagesArray = Array.isArray(images) ? images : [images];
 
   const nextImage = () => {
     setCurrentImageIndex((prevIndex) =>
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      prevIndex === imagesArray.length - 1 ? 0 : prevIndex + 1
     );
   };
 
   const prevImage = () => {
     setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+      prevIndex === 0 ? imagesArray.length - 1 : prevIndex - 1
     );
   };
 
-  const displayImages = images.slice(0, 4);
-  const remainingImages = images.length - displayImages.length;
+  const displayImages = imagesArray.slice(0, 4);
+  const remainingImages = imagesArray.length - displayImages.length;
+
+  // Render only the current image if there's only one image in the array
+  if (imagesArray.length === 1) {
+    return (
+      <div className="text-left ml-auto w-full mb-1">
+        <h2 className="text-3xl font-bold text-black">Gallery</h2>
+        <div className="mt-1">
+          <div className="p-0 rounded-lg w-full mx-auto h-120 py-3 relative mb-1">
+            <img
+              src={imagesArray[0]}
+              alt={`Image 1`}
+              className="object-cover w-full h-96 rounded-lg"
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="text-left ml-auto w-full mb-1">
@@ -32,7 +45,7 @@ export const Gallery = () => {
       <div className="mt-1">
         <div className="p-0 rounded-lg w-full mx-auto h-120 py-3 relative mb-1">
           <img
-            src={images[currentImageIndex]}
+            src={imagesArray[currentImageIndex]}
             alt={`Image ${currentImageIndex + 1}`}
             className="object-cover w-full h-96 rounded-lg"
           />
@@ -67,5 +80,3 @@ export const Gallery = () => {
     </div>
   );
 };
-
-export default Gallery;

@@ -238,6 +238,23 @@ app.get("/hostel_details", (req, res) => {
   });
 });
 
+app.get("/hostel_details/:id", (req, res) => {
+  const hostelID = req.params.id;
+  const query = "SELECT * FROM hostel_details WHERE hostel_ID = ?";
+  db.query(query, [hostelID], (err, results) => {
+    if (err) {
+      console.error("Error executing hostel query:", err);
+      res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
+    } else if (results.length === 0) {
+      res.status(404).json({ success: false, message: "Hostel not found" });
+    } else {
+      res.status(200).json(results[0]);
+    }
+  });
+});
+
 app.post("/hostel_details/add", (req, res) => {
   const {
     hostel_name,
@@ -276,8 +293,8 @@ app.post("/hostel_details/add", (req, res) => {
   );
 });
 
-app.put("/hostel_details/:hostelID", (req, res) => {
-  const hostelID = req.params.hostelID;
+app.put("/hostel_details/:id", (req, res) => {
+  const hostelID = req.params.id; // Corrected parameter name
   const {
     hostel_name,
     hostel_location,
@@ -319,8 +336,8 @@ app.put("/hostel_details/:hostelID", (req, res) => {
   );
 });
 
-app.delete("/hostel_details/:hostelID", (req, res) => {
-  const hostelID = req.params.hostelID;
+app.delete("/hostel_details/:id", (req, res) => {
+  const hostelID = req.params.id; // Corrected parameter name
   const deleteQuery = "DELETE FROM hostel_details WHERE hostel_ID = ?";
   db.query(deleteQuery, [hostelID], (err, result) => {
     if (err) {

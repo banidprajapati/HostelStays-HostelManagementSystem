@@ -1,35 +1,15 @@
 import React from "react";
 
-export const Amenities = () => {
-  const amenities = [
-    "Free Wi-Fi",
-    "Parking",
-    "Community Area",
-    "Access to Kitchen",
-    "Shared / Personal Bathroom",
-    "Free Cancellation",
-    "Swimming pool",
-    "Lorem ipsum",
-    "Gym",
-    "Laundry Facilities",
-    "24/7 Reception",
-    "Barbecue Area",
-    "Bike Rental",
-    "Library",
-    "Games Room",
-    "Outdoor Terrace",
-    "Fitness Classes ",
-    "Organized Tours",
-    "Breakfast Included",
-    "Housekeeping Services",
-    "Luggage Storage",
-    "Airport Shuttle",
-    "Business Center",
-  ];
+export const Amenities = ({ amenities }) => {
+  // Ensure amenities is an array before splitting it
+  const amenitiesArray = Array.isArray(amenities) ? amenities : [];
 
   // Splitting the amenities array into two halves
-  const firstHalf = amenities.slice(0, Math.ceil(amenities.length / 2));
-  const secondHalf = amenities.slice(Math.ceil(amenities.length / 2));
+  const firstHalf = amenitiesArray.slice(
+    0,
+    Math.ceil(amenitiesArray.length / 2)
+  );
+  const secondHalf = amenitiesArray.slice(Math.ceil(amenitiesArray.length / 2));
 
   return (
     <div className="text-left">
@@ -46,8 +26,7 @@ export const Amenities = () => {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  className="h-6 w-6"
-                >
+                  className="h-6 w-6">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -69,8 +48,7 @@ export const Amenities = () => {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  className="h-6 w-6"
-                >
+                  className="h-6 w-6">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
