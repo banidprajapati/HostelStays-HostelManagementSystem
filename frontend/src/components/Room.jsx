@@ -1,36 +1,27 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
-// Hostel component to display details of each hostel
-const Hostel = ({ hostel }) => (
-  <div>
-    <h2>{hostel.hostel_name}</h2>
-    <p>Location: {hostel.hostel_location}</p>
-    <p>Ratings: {hostel.ratings}</p>
-    <img src={hostel.photos} alt={`Image of ${hostel.hostel_name}`} />
-  </div>
-);
+export const Room = ({ id, name, image, location, price }) => {
+  const navigate = useNavigate();
 
-export const Room = () => {
-  const [hostelDetails, setHostelDetails] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/hostel_details")
-      .then((response) => {
-        setHostelDetails(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching hostel details:", error);
-      });
-  }, []);
+  const handleClick = () => {
+    navigate(`/product/${id}`);
+  };
 
   return (
-    <div>
-      <h1>Hostel Details</h1>
-      {hostelDetails.map((hostel, index) => (
-        <Hostel key={index} hostel={hostel} />
-      ))}
+    <div
+      className="max-w-96 bg-gray-200 rounded-lg text-left"
+      onClick={handleClick}>
+      <img
+        src={image}
+        alt="About Us Image"
+        className="rounded-tl-lg rounded-tr-lg w-96"
+      />
+      <div className="px-4 py-2 flex flex-col gap-1">
+        <h2 className="text-2xl font-semibold">{name}</h2>
+        <p>{location}</p>
+        <h1 className="text-2xl font-semibold">NRs. {price}</h1>
+      </div>
     </div>
   );
 };

@@ -41,10 +41,6 @@ export const AdminDetails = ({ isAdminLoggedIn }) => {
     }
   };
 
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
   const handleAddAdmin = () => {
     // Make POST request to add admin
     fetch("http://localhost:3000/admin_details/add", {

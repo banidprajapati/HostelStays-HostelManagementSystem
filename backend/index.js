@@ -223,9 +223,9 @@ app.post("/forget_password", (req, res) => {
 
 // Start of  Hostel list=======================================================================================================================
 app.get("/hostel_details", (req, res) => {
-  // Query to select all hostels from the hostel_details table
+  // Query to select specific columns from the hostel_details table
   const query =
-    "SELECT hostel_name, hostel_location, facilities, ratings, photos, reviews, hostel_description, total_beds, beds_per_room, price FROM hostel_details";
+    "SELECT hostel_ID, hostel_name, hostel_location, facilities, photos, hostel_description, total_beds, beds_per_room, price FROM hostel_details";
   db.query(query, (err, results) => {
     if (err) {
       console.error("Error executing hostel query:", err);
@@ -243,25 +243,21 @@ app.post("/hostel_details/add", (req, res) => {
     hostel_name,
     hostel_location,
     facilities,
-    ratings,
     photos,
-    reviews,
     hostel_description,
     total_beds,
     beds_per_room,
     price,
   } = req.body;
   const insertQuery =
-    "INSERT INTO hostel_details (hostel_name, hostel_location, facilities, ratings, photos, reviews, hostel_description, total_beds, beds_per_room, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    "INSERT INTO hostel_details (hostel_name, hostel_location, facilities, photos, hostel_description, total_beds, beds_per_room, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
   db.query(
     insertQuery,
     [
       hostel_name,
       hostel_location,
       facilities,
-      ratings,
       photos,
-      reviews,
       hostel_description,
       total_beds,
       beds_per_room,
@@ -279,36 +275,33 @@ app.post("/hostel_details/add", (req, res) => {
     }
   );
 });
-app.put("/hostel_details/:hostelName", (req, res) => {
-  const hostelName = req.params.hostelName;
+
+app.put("/hostel_details/:hostelID", (req, res) => {
+  const hostelID = req.params.hostelID;
   const {
     hostel_name,
     hostel_location,
     facilities,
-    ratings,
     photos,
-    reviews,
     hostel_description,
     total_beds,
     beds_per_room,
     price,
   } = req.body;
   const updateQuery =
-    "UPDATE hostel_details SET hostel_name = ?, hostel_location = ?, facilities = ?, ratings = ?, photos = ?, reviews = ?, hostel_description = ?, total_beds = ?, beds_per_room = ?, price = ? WHERE hostel_name = ?";
+    "UPDATE hostel_details SET hostel_name = ?, hostel_location = ?, facilities = ?,  photos = ?, hostel_description = ?, total_beds = ?, beds_per_room = ?, price = ? WHERE hostel_ID = ?";
   db.query(
     updateQuery,
     [
       hostel_name,
       hostel_location,
       facilities,
-      ratings,
       photos,
-      reviews,
       hostel_description,
       total_beds,
       beds_per_room,
       price,
-      hostelName,
+      hostelID,
     ],
     (err, result) => {
       if (err) {
@@ -316,8 +309,8 @@ app.put("/hostel_details/:hostelName", (req, res) => {
         res
           .status(500)
           .json({ success: false, message: "Internal server error" });
-      } else if (result.affectedRows === 0) {
-        // If no rows were affected, it means the hostel with the provided name doesn't exist
+      } else if (result.changedRows === 0) {
+        // If no rows were changed, it means the hostel with the provided ID doesn't exist
         res.status(404).json({ success: false, message: "Hostel not found" });
       } else {
         res.status(200).json({ success: true, message: "Hostel updated" });
@@ -326,22 +319,23 @@ app.put("/hostel_details/:hostelName", (req, res) => {
   );
 });
 
-app.delete("/hostel_details/:hostelName", (req, res) => {
-  const hostelName = req.params.hostelName;
-  const deleteQuery = "DELETE FROM hostel_details WHERE hostel_name = ?";
-  db.query(deleteQuery, [hostelName], (err, result) => {
+app.delete("/hostel_details/:hostelID", (req, res) => {
+  const hostelID = req.params.hostelID;
+  const deleteQuery = "DELETE FROM hostel_details WHERE hostel_ID = ?";
+  db.query(deleteQuery, [hostelID], (err, result) => {
     if (err) {
       console.error("Error deleting hostel:", err);
       res
         .status(500)
         .json({ success: false, message: "Internal server error" });
     } else if (result.affectedRows === 0) {
-      // If no rows were affected, it means the hostel with the provided name doesn't exist
+      // If no rows were affected, it means the hostel with the provided ID doesn't exist
       res.status(404).json({ success: false, message: "Hostel not found" });
     } else {
       res.status(200).json({ success: true, message: "Hostel deleted" });
     }
   });
 });
+
 //End of Hostel List=======================================================================================================================
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

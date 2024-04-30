@@ -72,7 +72,7 @@ function App() {
         <Route path="/forgetpassword" element={<ForgetPassword />} />
         <Route path="/billing" element={<Billing />} />
         <Route
-          path="/productpage"
+          path="/product/:id"
           element={<ProductPage isLoggedIn={isLoggedIn} />}
         />
         <Route
