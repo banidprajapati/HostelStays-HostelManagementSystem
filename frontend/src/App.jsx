@@ -47,6 +47,7 @@ function App() {
   // Function to handle admin login
   const handleAdminLogin = () => {
     setIsAdminLoggedIn(true);
+    setIsLoggedIn(false);
     localStorage.setItem("isAdminLoggedIn", "true");
   };
 

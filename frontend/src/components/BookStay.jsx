@@ -1,48 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
-import { DateRange } from "react-date-range";
-import "react-date-range/dist/styles.css"; // main style file
-import "react-date-range/dist/theme/default.css"; // theme css file
 import { useNavigate } from "react-router-dom";
 
 export const BookStay = ({ isLoggedIn }) => {
   // Pass isLoggedIn as a prop
   const [guests, setGuests] = useState("");
-  const [dateRange, setDateRange] = useState([
-    {
-      startDate: null,
-      endDate: null,
-      key: "selection",
-    },
-  ]);
   const navigate = useNavigate();
-
-  const [showCalendar, setShowCalendar] = useState(false); // State to control calendar visibility
-  const dateInputRef = useRef(null); // Ref for date input field
 
   const handleGuestsChange = (event) => {
     const { value } = event.target;
     setGuests(value);
   };
-
-  // Function to toggle calendar visibility
-  const toggleCalendar = () => {
-    setShowCalendar(!showCalendar);
-  };
-
-  // Function to handle click outside of calendar to close it
-  const handleClickOutside = (event) => {
-    if (dateInputRef.current && !dateInputRef.current.contains(event.target)) {
-      setShowCalendar(false);
-    }
-  };
-
-  // Add event listener for clicks outside of calendar
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
   let roomsRequired = "";
   let totalPrice = 2500; // Initial total price
@@ -72,26 +39,21 @@ export const BookStay = ({ isLoggedIn }) => {
       </h2>
       <div className="relative bg-gray-300 p-8 border rounded-lg w-full flex flex-col justify-between">
         <div className="flex justify-between mb-4">
-          <div ref={dateInputRef} className="relative">
+          <div className="relative">
             <input
-              type="text"
-              className="w-full h-10 bg-gray-200 px-2 focus:outline-none rounded"
-              placeholder="Date"
-              onClick={toggleCalendar}
+              type="date"
+              placeholder="Check in"
+              className="h-10 bg-gray-200  px-2 focus:outline-none rounded"
             />
-            {showCalendar && (
-              <div className="absolute top-full bg-gray-200 rounded mt-1 w-full z-10">
-                <DateRange
-                  ranges={dateRange}
-                  onChange={(ranges) => setDateRange([ranges.selection])}
-                  className="px-2 focus:outline-none"
-                />
-              </div>
-            )}
+            <input
+              type="date"
+              placeholder="Check out"
+              className="h-10 bg-gray-200   px-2 focus:outline-none rounded"
+            />
           </div>
           <input
             type="text"
-            className="w-1/2 h-10 bg-gray-200 px-2 focus:outline-none rounded"
+            className="h-10 bg-gray-200   px-2 focus:outline-none rounded"
             placeholder="Guests"
             value={guests}
             onChange={handleGuestsChange}
