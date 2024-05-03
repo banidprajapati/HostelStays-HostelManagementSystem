@@ -18,20 +18,21 @@ import { Header } from "./components/Header"; // Import the Header component wit
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
-    localStorage.getItem("isLoggedIn") === "true" || false
+    localStorage.getItem("isLoggedIn") === "false"
   );
   const [userFullName, setUserFullName] = useState(
     localStorage.getItem("userFullName") || ""
   );
 
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(
-    localStorage.getItem("isAdminLoggedIn") === "true" || false
+    localStorage.getItem("isAdminLoggedIn") === "false"
   );
 
   // Function to handle user login
   const handleLogin = (user) => {
     setUserFullName(user.fullName);
     setIsLoggedIn(true);
+    setIsAdminLoggedIn(false);
     localStorage.setItem("isLoggedIn", "true");
     localStorage.setItem("userFullName", user.fullName);
   };
@@ -81,7 +82,15 @@ function App() {
           element={<AdminLogin handleAdminLogin={handleAdminLogin} />}
         />
 
-        <Route path="/hostel-list" element={<AdminHostels />} />
+        <Route
+          path="/hostel-list"
+          element={
+            <AdminHostels
+              isAdminLoggedIn={isAdminLoggedIn}
+              handleAdminLogout={handleAdminLogout}
+            />
+          }
+        />
         <Route
           path="/dashboard"
           element={

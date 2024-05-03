@@ -4,51 +4,52 @@ import { Link } from "react-router-dom";
 
 export const AdminSideBar = ({ handleAdminLogout }) => {
   return (
-    <div className="flex h-screen">
-      <div className="bg-gray-400 text-black w-64 h-full p-4">
-        <div className="text-white text-xl font-bold mb-8">Admin Dashboard</div>
-        <ul>
+    <div className="flex h-screen justify-center items-center">
+      <div className="bg-neutral-300 text-black w-80 h-full p-4">
+        <div className="text-black text-2xl font-bold mb-8 mt-6">
+          Admin Dashboard
+        </div>
+        <ul className="text-xl font-medium">
           <li className="mb-4">
             <Link
               to="/dashboard"
-              className="text-xl font-semibold hover:text-blue-800">
+              className="hover:text-blue-600 hover:underline">
               Dashboard
             </Link>
           </li>
           <li className="mb-4">
             <Link
               to="/hostel-list"
-              className="text-xl font-semibold hover:text-blue-800">
+              className="hover:text-blue-600 hover:underline">
               Hostel List
             </Link>
           </li>
           <li className="mb-4">
             <Link
               to="/bookings"
-              className="text-xl font-semibold hover:text-blue-800">
+              className="hover:text-blue-600 hover:underline">
               Bookings
             </Link>
           </li>
           <li className="mb-4">
             <Link
               to="/user-details"
-              className="text-xl font-semibold hover:text-blue-800">
+              className="hover:text-blue-600 hover:underline">
               User Details
             </Link>
           </li>
           <li className="mb-4">
             <Link
               to="/admindetails"
-              className="text-xl font-semibold hover:text-blue-800">
+              className="hover:text-blue-600 hover:underline">
               Admin Details
             </Link>
           </li>
         </ul>
-        <div className="mt-auto">
+        <div className="mt-auto ">
           <button
-            className="text-xl text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md"
+            className="text-xl text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md mt-14"
             onClick={() => {
-              // Call handleAdminLogout function to logout
               handleAdminLogout();
               console.log("Logged out");
             }}>
