@@ -11,6 +11,7 @@ import { AdminDashboard } from "./components/Admin/AdminDashboard";
 import { AdminDetails } from "./components/Admin/AdminDetails";
 import { AdminUserDetails } from "./components/Admin/AdminUserDetails";
 import { AdminBookings } from "./components/Admin/AdminBookings";
+import { AdminCancelled } from "./components/Admin/AdminCancelled";
 import { ProductPage } from "./components/ProductPage";
 import { AdminHostels } from "./components/Admin/AdminHostels";
 import { Billing } from "./components/Billing";
@@ -28,12 +29,14 @@ function App() {
     localStorage.getItem("isAdminLoggedIn") === "true" || false
   );
 
-  // Function to handle user login
   const handleLogin = (user) => {
     setUserFullName(user.fullName);
     setIsLoggedIn(true);
+    setIsAdminLoggedIn(false);
     localStorage.setItem("isLoggedIn", "true");
     localStorage.setItem("userFullName", user.fullName);
+    localStorage.setItem("userID", user.id);
+    localStorage.setItem("isAdminLoggedIn", "false");
   };
 
   // Function to handle user logout
@@ -42,6 +45,8 @@ function App() {
     setUserFullName("");
     localStorage.setItem("isLoggedIn", "false");
     localStorage.removeItem("userFullName");
+    // Also ensure admin login status is set to false
+    localStorage.setItem("isAdminLoggedIn", "false");
   };
 
   // Function to handle admin login
@@ -49,6 +54,8 @@ function App() {
     setIsAdminLoggedIn(true);
     setIsLoggedIn(false);
     localStorage.setItem("isAdminLoggedIn", "true");
+    // Also ensure user login status is set to false
+    localStorage.setItem("isLoggedIn", "false");
   };
 
   // Function to handle admin logout
@@ -56,7 +63,6 @@ function App() {
     setIsAdminLoggedIn(false);
     localStorage.setItem("isAdminLoggedIn", "false");
   };
-
   return (
     <>
       <Header
@@ -81,7 +87,15 @@ function App() {
           element={<AdminLogin handleAdminLogin={handleAdminLogin} />}
         />
 
-        <Route path="/hostel-list" element={<AdminHostels />} />
+        <Route
+          path="/hostel-list"
+          element={
+            <AdminHostels
+              isAdminLoggedIn={isAdminLoggedIn}
+              handleAdminLogout={handleAdminLogout}
+            />
+          }
+        />
         <Route
           path="/dashboard"
           element={
@@ -113,6 +127,15 @@ function App() {
           path="/bookings"
           element={
             <AdminBookings
+              isAdminLoggedIn={isAdminLoggedIn}
+              handleAdminLogout={handleAdminLogout}
+            />
+          }
+        />
+        <Route
+          path="/cancelled"
+          element={
+            <AdminCancelled
               isAdminLoggedIn={isAdminLoggedIn}
               handleAdminLogout={handleAdminLogout}
             />

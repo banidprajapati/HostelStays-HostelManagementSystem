@@ -18,13 +18,17 @@ export const Login = ({ handleLogin }) => {
         return;
       }
 
-      const response = await axios.post("http://localhost:3000/user_details", {
+      const response = await axios.post("http://localhost:3000/user_login", {
         email,
         password,
       });
 
-      if (response.status === 200 && response.data === "Login successful") {
-        handleLogin({ fullName: email }); // Call handleLogin with user data
+      if (
+        response.status === 200 &&
+        response.data.message === "Login successful"
+      ) {
+        const user = response.data.user;
+        handleLogin(user); // Call handleLogin with user data
         navigate("/"); // Redirect to homepage
       } else {
         setErrorMessage("Invalid email or password.");

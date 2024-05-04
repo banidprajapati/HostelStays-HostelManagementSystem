@@ -58,7 +58,7 @@ export const SignUp = ({ email: emailProp }) => {
     }
 
     try {
-      const response = await axios.post("http://localhost:3000/user_details", {
+      const response = await axios.post("http://localhost:3000/user_register", {
         fullName,
         email,
         password,

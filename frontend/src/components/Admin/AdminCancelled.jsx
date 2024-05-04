@@ -12,7 +12,7 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 
-export const AdminBookings = ({ isAdminLoggedIn, handleAdminLogout }) => {
+export const AdminCancelled = ({ isAdminLoggedIn, handleAdminLogout }) => {
   const navigate = useNavigate();
   const [bookings, setBookings] = useState([]);
   const [bookingsCount, setBookingsCount] = useState(0);
@@ -36,7 +36,7 @@ export const AdminBookings = ({ isAdminLoggedIn, handleAdminLogout }) => {
 
   const fetchBookings = async () => {
     try {
-      const response = await fetch("http://localhost:3000/booked_details", {
+      const response = await fetch("http://localhost:3000/cancelled_details", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

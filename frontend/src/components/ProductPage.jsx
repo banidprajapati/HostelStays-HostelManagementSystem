@@ -26,7 +26,6 @@ export const ProductPage = ({ isLoggedIn }) => {
 
     fetchHostelDetails();
   }, [id]);
-
   return (
     <div className="">
       {hostelDetails && (
@@ -48,6 +47,7 @@ export const ProductPage = ({ isLoggedIn }) => {
             className="col-span-1"
           />
           <BookStay
+            hostelID={id}
             price={hostelDetails.price}
             className="col-span-1"
             isLoggedIn={isLoggedIn}

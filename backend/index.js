@@ -24,6 +24,18 @@ db.connect((err) => {
   console.log("MySQL Connected...");
 });
 
+function executeQuery(query) {
+  return new Promise((resolve, reject) => {
+    db.query(query, (err, results) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+}
+
 // Start of admin =======================================================================================================================
 // Endpoint to fetch admin details
 app.get("/admin_details", (req, res) => {
@@ -132,9 +144,8 @@ app.post("/admin_details/add", (req, res) => {
 // End of admin =======================================================================================================================
 
 // Start of User Details =======================================================================================================================
-
-app.post("/user_details", (req, res) => {
-  const { fullName, email, password } = req.body;
+app.post("/user_login", (req, res) => {
+  const { email, password } = req.body;
 
   const checkUserQuery = "SELECT * FROM user_details WHERE user_email = ?";
   db.query(checkUserQuery, [email], (err, result) => {
@@ -149,32 +160,39 @@ app.post("/user_details", (req, res) => {
     if (result.length > 0) {
       // Email exists in the database, check password
       const storedPassword = result[0].password;
-      if (password === storedPassword) {
-        // Password matches, login successful
-        res.status(200).send("Login successful");
+
+      // Check if the stored password matches the provided password
+      if (storedPassword === password) {
+        const user = {
+          fullName: result[0].full_name,
+          email: result[0].user_email,
+          id: result[0].user_ID,
+        };
+        res.status(200).json({ message: "Login successful", user }); // Send user data in the response
       } else {
-        // Password doesn't match, send unauthorized error
         res.status(401).send("Invalid email or password");
       }
     } else {
-      // Email doesn't exist in the database, insert new user
-      const insertUserQuery =
-        "INSERT INTO user_details (full_name, user_email, password) VALUES (?, ?, ?)";
-      db.query(
-        insertUserQuery,
-        [fullName, email, password],
-        (insertErr, insertResult) => {
-          if (insertErr) {
-            console.error("Error inserting user:", insertErr);
-            res
-              .status(500)
-              .json({ error: "An error occurred. Please try again later." });
-          } else {
-            console.log("User signed up successfully:", insertResult);
-            res.status(200).json({ message: "User signed up successfully." });
-          }
-        }
-      );
+      // User not found, send unauthorized error
+      res.status(401).send("Invalid email or password");
+    }
+  });
+});
+
+app.post("/user_register", (req, res) => {
+  const { fullName, email, password } = req.body;
+
+  const insertUserQuery =
+    "INSERT INTO user_details (full_name, user_email, password) VALUES (?, ?, ?)";
+  db.query(insertUserQuery, [fullName, email, password], (err, result) => {
+    if (err) {
+      console.error("Error inserting user:", err);
+      res
+        .status(500)
+        .json({ error: "An error occurred. Please try again later." });
+    } else {
+      console.log("User signed up successfully:", result);
+      res.status(200).json({ message: "User signed up successfully." });
     }
   });
 });
@@ -350,6 +368,164 @@ app.delete("/hostel_details/:id", (req, res) => {
       res.status(404).json({ success: false, message: "Hostel not found" });
     } else {
       res.status(200).json({ success: true, message: "Hostel deleted" });
+    }
+  });
+});
+
+app.get("/combined_data", (req, res) => {
+  let hostelCountQuery = "SELECT COUNT(*) AS hostelCount FROM hostel_details";
+  let userCountQuery = "SELECT COUNT(*) AS userCount FROM user_details";
+  let adminCountQuery = "SELECT COUNT(*) AS adminCount FROM admin_details";
+
+  // Execute queries in parallel using Promise.all
+  Promise.all([
+    executeQuery(hostelCountQuery),
+    executeQuery(userCountQuery),
+    executeQuery(adminCountQuery),
+  ])
+    .then(([hostelResult, userResult, adminResult]) => {
+      const hostelCount = hostelResult[0].hostelCount;
+      const userCount = userResult[0].userCount;
+      const adminCount = adminResult[0].adminCount;
+      res
+        .status(200)
+        .json({ success: true, hostelCount, userCount, adminCount });
+    })
+    .catch((error) => {
+      console.error("Error executing queries:", error);
+      res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
+    });
+});
+
+app.get("/combined_data_booking", (req, res) => {
+  const userId = req.query.userId; // Assuming user ID is provided in the query params
+  const hostelId = req.query.hostelId; // Assuming hostel ID is provided in the query params
+
+  let userDataQuery = `SELECT full_name, user_ID, user_email FROM user_details WHERE user_ID = ${userId}`;
+  let hostelDataQuery = `SELECT hostel_name, hostel_location, hostel_ID FROM hostel_details WHERE hostel_ID = ${hostelId}`;
+
+  // Execute queries in parallel using Promise.all
+  Promise.all([executeQuery(userDataQuery), executeQuery(hostelDataQuery)])
+    .then(([userDataResult, hostelDataResult]) => {
+      res
+        .status(200)
+        .json({ userData: userDataResult, hostelData: hostelDataResult });
+    })
+    .catch((error) => {
+      console.error("Error executing queries:", error);
+      res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
+    });
+});
+
+app.post("/booking/add", (req, res) => {
+  // Extract data from request body
+  const {
+    user_name,
+    user_email,
+    user_id,
+    no_guests,
+    check_in,
+    check_out,
+    no_rooms,
+    hostel_name,
+    hostel_id,
+    status,
+    hostel_cost,
+  } = req.body;
+
+  // Validate data
+  if (
+    !user_name ||
+    !user_email ||
+    !user_id ||
+    !no_guests ||
+    !check_in ||
+    !check_out ||
+    !no_rooms ||
+    !hostel_name ||
+    !hostel_id ||
+    !status ||
+    !hostel_cost
+  ) {
+    return res.status(400).send("Missing required fields");
+  }
+
+  // Perform database insertion
+  const query = `
+    INSERT INTO booking_details (user_name, user_email, user_id, no_guests, check_in, check_out, no_rooms, hostel_name, hostel_id, status, hostel_cost)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `;
+  const values = [
+    user_name,
+    user_email,
+    user_id,
+    no_guests,
+    check_in,
+    check_out,
+    no_rooms,
+    hostel_name,
+    hostel_id,
+    status,
+    hostel_cost,
+  ];
+
+  db.query(query, values, (err, result) => {
+    if (err) {
+      console.error("Error inserting data into booking_details:", err);
+      res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
+    } else {
+      console.log("Booking details inserted successfully");
+      res.status(200).json({ success: true, message: "Booking successful" });
+    }
+  });
+});
+
+app.post("/booked_details", (req, res) => {
+  const { email, password } = req.body;
+  const query = `SELECT * FROM booking_details WHERE status = "booked"`;
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error("Error executing booking details query:", err);
+      res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
+    } else {
+      // Process the results
+      if (results.length > 0) {
+        // Bookings found, handle success
+        res.status(200).json({ success: true, bookings: results });
+      } else {
+        // No bookings found
+        res.status(404).json({ success: false, message: "No bookings found" });
+      }
+    }
+  });
+});
+
+app.post("/cancelled_details", (req, res) => {
+  const { email, password } = req.body;
+  const query = `SELECT * FROM booking_details WHERE status = "cancelled"`;
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error("Error executing booking details query:", err);
+      res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
+    } else {
+      // Process the results
+      if (results.length > 0) {
+        // Bookings found, handle success
+        res.status(200).json({ success: true, bookings: results });
+      } else {
+        // No bookings found
+        res.status(404).json({ success: false, message: "No bookings found" });
+      }
     }
   });
 });
