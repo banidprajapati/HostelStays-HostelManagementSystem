@@ -25,6 +25,7 @@ export const LandingPage = () => {
   }, []);
 
   // Slice the hostelDetails array to display only six hostels
+  const limitedHostels = hostelDetails.slice(0, 6);
 
   return (
     <div className="flex flex-col gap-8 font-poppins">
@@ -39,19 +40,16 @@ export const LandingPage = () => {
       <DiscoverNepal />
       <h1 className="font-bold text-2xl text-left">Handpicked by us.</h1>
       <div className="grid grid-cols-3 grid-rows-2 gap-4">
-        {hostelDetails
-          .slice()
-          .reverse()
-          .map((hostel) => (
-            <Room
-              key={hostel.hostel_ID}
-              id={hostel.hostel_ID}
-              name={hostel.hostel_name}
-              image={hostel.photos}
-              location={hostel.hostel_location}
-              price={hostel.price}
-            />
-          ))}
+        {limitedHostels.map((hostel) => (
+          <Room
+            key={hostel.hostel_ID}
+            id={hostel.hostel_ID}
+            name={hostel.hostel_name}
+            image={hostel.photos}
+            location={hostel.hostel_location}
+            price={hostel.price}
+          />
+        ))}
       </div>
       <div className="border-t-2 border-gray-400 my-4"></div>
 

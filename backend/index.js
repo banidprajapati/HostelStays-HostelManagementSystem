@@ -3,18 +3,6 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const mysql = require("mysql");
 
-function executeQuery(query) {
-  return new Promise((resolve, reject) => {
-    db.query(query, (err, results) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(results);
-      }
-    });
-  });
-}
-
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -367,31 +355,4 @@ app.delete("/hostel_details/:id", (req, res) => {
 });
 
 //End of Hostel List=======================================================================================================================
-// Endpoint to fetch data from multiple tables and get counts
-app.get("/combined_data", (req, res) => {
-  let hostelCountQuery = "SELECT COUNT(*) AS hostelCount FROM hostel_details";
-  let userCountQuery = "SELECT COUNT(*) AS userCount FROM user_details";
-  let adminCountQuery = "SELECT COUNT(*) AS adminCount FROM admin_details";
-
-  // Execute queries in parallel using Promise.all
-  Promise.all([
-    executeQuery(hostelCountQuery),
-    executeQuery(userCountQuery),
-    executeQuery(adminCountQuery),
-  ])
-    .then(([hostelResult, userResult, adminResult]) => {
-      const hostelCount = hostelResult[0].hostelCount;
-      const userCount = userResult[0].userCount;
-      const adminCount = adminResult[0].adminCount;
-      res
-        .status(200)
-        .json({ success: true, hostelCount, userCount, adminCount });
-    })
-    .catch((error) => {
-      console.error("Error executing queries:", error);
-      res
-        .status(500)
-        .json({ success: false, message: "Internal server error" });
-    });
-});
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
