@@ -11,9 +11,6 @@ export const Footer = () => {
               <a href="#">Help Center</a>
             </li>
             <li>
-              <a href="#">Disability Support</a>
-            </li>
-            <li>
               <a href="#">Cancellation</a>
             </li>
             <li>
@@ -28,7 +25,7 @@ export const Footer = () => {
               <a href="#">About Us</a>
             </li>
             <li>
-              <a href="#">Blogs</a>
+              <a href="/privacy">Privacy Policy</a>
             </li>
             <li>
               <a href="#">FAQ</a>

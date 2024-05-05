@@ -15,8 +15,9 @@ import { AdminCancelled } from "./components/Admin/AdminCancelled";
 import { ProductPage } from "./components/ProductPage";
 import { AdminHostels } from "./components/Admin/AdminHostels";
 import { Billing } from "./components/Billing";
-import { Header } from "./components/Header"; // Import the Header component without curly braces
+import { Header } from "./components/Header"; 
 import { Profile } from "./components/Profile";
+import { Privacy } from "./components/Privacy";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -80,6 +81,7 @@ function App() {
         <Route path="/forgetpassword" element={<ForgetPassword />} />
         <Route path="/billing" element={<Billing />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/privacy" element={<Privacy />} />
         <Route
           path="/product/:id"
           element={<ProductPage isLoggedIn={isLoggedIn} />}

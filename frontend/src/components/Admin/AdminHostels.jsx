@@ -180,12 +180,14 @@ export const AdminHostels = ({ isAdminLoggedIn, handleAdminLogout }) => {
               } else {
                 handleAddHostel(); // Call function for adding hostel
               }
-            }}>
+            }}
+          >
             {/* Input fields for hostel information */}
             <div className="mb-4">
               <label
                 htmlFor="hostel_name"
-                className="block text-sm font-semibold text-gray-700 mb-1">
+                className="block text-sm font-semibold text-gray-700 mb-1"
+              >
                 Hostel Name
               </label>
               <input
@@ -202,7 +204,8 @@ export const AdminHostels = ({ isAdminLoggedIn, handleAdminLogout }) => {
             <div className="mb-4">
               <label
                 htmlFor="hostel_location"
-                className="block text-sm font-semibold text-gray-700 mb-1">
+                className="block text-sm font-semibold text-gray-700 mb-1"
+              >
                 Hostel Location
               </label>
               <input
@@ -219,7 +222,8 @@ export const AdminHostels = ({ isAdminLoggedIn, handleAdminLogout }) => {
             <div className="mb-4">
               <label
                 htmlFor="facilities"
-                className="block text-sm font-semibold text-gray-700 mb-1">
+                className="block text-sm font-semibold text-gray-700 mb-1"
+              >
                 Facilities
               </label>
               <input
@@ -236,7 +240,8 @@ export const AdminHostels = ({ isAdminLoggedIn, handleAdminLogout }) => {
             <div className="mb-4">
               <label
                 htmlFor="photos"
-                className="block text-sm font-semibold text-gray-700 mb-1">
+                className="block text-sm font-semibold text-gray-700 mb-1"
+              >
                 Photos
               </label>
               <input
@@ -253,7 +258,8 @@ export const AdminHostels = ({ isAdminLoggedIn, handleAdminLogout }) => {
             <div className="mb-4">
               <label
                 htmlFor="hostel_description"
-                className="block text-sm font-semibold text-gray-700 mb-1">
+                className="block text-sm font-semibold text-gray-700 mb-1"
+              >
                 Hostel Description
               </label>
               <textarea
@@ -269,7 +275,8 @@ export const AdminHostels = ({ isAdminLoggedIn, handleAdminLogout }) => {
             <div className="mb-4">
               <label
                 htmlFor="price"
-                className="block text-sm font-semibold text-gray-700 mb-1">
+                className="block text-sm font-semibold text-gray-700 mb-1"
+              >
                 Price
               </label>
               <input
@@ -285,7 +292,8 @@ export const AdminHostels = ({ isAdminLoggedIn, handleAdminLogout }) => {
 
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md mt-4 block mx-auto">
+              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md mt-4 block mx-auto"
+            >
               {editHostel ? "Update" : "Submit"}
             </button>
           </form>
@@ -317,14 +325,16 @@ export const AdminHostels = ({ isAdminLoggedIn, handleAdminLogout }) => {
                       colorScheme="blue"
                       variant="solid"
                       size="sm"
-                      onClick={() => handleEditHostel(hostel)}>
+                      onClick={() => handleEditHostel(hostel)}
+                    >
                       Edit
                     </Button>
                     <Button
                       colorScheme="red"
                       variant="solid"
                       size="sm"
-                      onClick={() => handleDeleteHostel(hostel.hostel_name)}>
+                      onClick={() => handleDeleteHostel(hostel.hostel_name)}
+                    >
                       Delete
                     </Button>
                   </Td>
@@ -337,7 +347,8 @@ export const AdminHostels = ({ isAdminLoggedIn, handleAdminLogout }) => {
         {/* Button to toggle add hostel form */}
         <button
           className="text-xl bg-blue-500 hover:bg-blue-600 text-white px-4 p-2 rounded-md"
-          onClick={() => setShowAddHostelForm(true)}>
+          onClick={() => setShowAddHostelForm(true)}
+        >
           Add Hostel
         </button>
       </div>
