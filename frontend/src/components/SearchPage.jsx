@@ -5,6 +5,7 @@ import { RoomDetails } from "./RoomDetails";
 import { SearchBar } from "./SearchBar";
 import { Filter } from "./Filter";
 import { Footer } from "./Footer";
+import { Line } from "./Line";
 
 export const SearchPage = () => {
   const [hostels, setHostels] = useState([]);
@@ -34,21 +35,22 @@ export const SearchPage = () => {
       <div className="mt-7">
         <SearchBar cityName={cityName} /> {/* Pass cityName as prop */}
       </div>
-      <div className="flex flex-col md:flex-row justify-between mt-8">
-        <div className="md:w-1/4">
+      {/* <div className="flex flex-col md:flex-row justify-between mt-8"> */}
+        {/* <div className="md:w-1/4">
           <Filter />
-        </div>
+        </div> */}
 
-        <div className="md:w-3/4 md:pl-4 mb-10">
+        <div className=" md:pl-4 mb-10">
           {hostels.map((hostel) => (
             <div key={hostel.id}>
               <RoomDetails
-                hostelId={hostel.hostel_ID} // Pass hostel ID as prop
+                hostelId={hostel.hostel_ID}
               />
+              <Line key={`line_${hostel.id}`} /> {/* Use key prop for Line component */}
             </div>
           ))}
         </div>
-      </div>
+      {/* </div> */}
       <Footer />
     </div>
   );

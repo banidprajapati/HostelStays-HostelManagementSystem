@@ -37,10 +37,11 @@ export const ProductPage = ({ isLoggedIn }) => {
           <Description
             name={hostelDetails.hostel_name}
             description={hostelDetails.hostel_description}
-            address={hostelDetails.hostel_location}
+            address={`${hostelDetails.hostel_location}, ${hostelDetails.hostel_city}`} // Combine location and city
             amenities={hostelDetails.facilities}
             className="col-span-1"
           />
+
           <HostelPolicies
             totalBeds={hostelDetails.total_beds}
             bedsPerRoom={hostelDetails.beds_per_room}

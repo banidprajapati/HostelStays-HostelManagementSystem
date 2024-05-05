@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 export const RoomDetails = ({ hostelId }) => {
   const [hostelDetails, setHostelDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     const fetchHostelDetails = async () => {
@@ -20,6 +22,11 @@ export const RoomDetails = ({ hostelId }) => {
     fetchHostelDetails();
   }, [hostelId]);
 
+  const handleViewDetails = () => {
+    // Navigate to product page with the hostel ID as a parameter
+    navigate(`/product/${hostelId}`);
+  };
+
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -27,7 +34,6 @@ export const RoomDetails = ({ hostelId }) => {
   if (!hostelDetails) {
     return <p>Hostel details not found</p>;
   }
-  console.log(hostelDetails)
 
   return (
     <div className="flex font-poppins">
@@ -45,13 +51,13 @@ export const RoomDetails = ({ hostelId }) => {
             <p className="text-lg font-bold mt-7">NRs. {hostelDetails.price}</p>
           </div>
           <div className="flex gap-2">
-            <button className="bg-transparent  border-black border-2 text-black px-3 py-2 rounded-lg shadow-md transition-shadow duration-300 focus:outline-none hover:shadow-lg hover:bg-gray-100">
+            <button
+              className="bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 focus:outline-none"
+              onClick={handleViewDetails} // Call handleViewDetails on button click
+            >
               View Details
             </button>
 
-            <button className="bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 focus:outline-none">
-              Book Now
-            </button>
           </div>
         </div>
       </div>

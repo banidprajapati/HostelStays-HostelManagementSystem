@@ -10,7 +10,7 @@ export const Room = ({ id, name, image, location, price }) => {
 
   return (
     <div
-      className="max-w-96 bg-gray-200 rounded-lg text-left"
+      className="max-w-96 bg-gray-200 rounded-lg text-left cursor-pointer"
       onClick={handleClick}>
       <img
         src={image}

@@ -54,13 +54,13 @@ export const SearchBar = () => {
             id="cityNameInput"
             type="text"
             placeholder="City Name"
-            className="px-4 py-3 border-r-2 border-gray-400 bg-gray-200 focus:bg-gray-200 focus:outline-none h-12 rounded-l-lg placeholder-gray-700 w-1/4" // Updated width to w-full
+            className="px-4 py-3 border-r-2 border-gray-400 bg-gray-200 focus:bg-gray-200 focus:outline-none h-12 rounded-l-lg placeholder-gray-700 w-3/5" // Updated width to w-full
             value={cityName}
             onChange={(e) => setCityName(e.target.value)}
           />
           <button
             type="submit"
-            className="bg-blue-500 text-xl text-white px-10 py-2 rounded-lg hover:bg-blue-600 focus:outline-none rounded-l-none h-12">
+            className="bg-blue-500 text-xl text-white px-10 py-2 rounded-lg hover:bg-blue-600 focus:outline-none rounded-l-none h-12 w-1/4">
             Search
           </button>
         </div>
