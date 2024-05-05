@@ -372,6 +372,28 @@ app.delete("/hostel_details/:id", (req, res) => {
   });
 });
 
+
+
+app.get("/search/:cityName", (req, res) => {
+  const city = req.params.cityName; // Access cityName from URL parameters
+  const query = "SELECT * FROM hostel_details WHERE hostel_city = ?";
+  db.query(query, [city], (err, results) => {
+    if (err) {
+      console.error("Error executing hostel query:", err);
+      res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
+    } else if (results.length === 0) {
+      res.status(404).json({ success: false, message: "Hostel not found" });
+    } else {
+      res.status(200).json(results); // Send all matching hostels
+    }
+  });
+});
+
+
+
+
 app.get("/combined_data", (req, res) => {
   let hostelCountQuery = "SELECT COUNT(*) AS hostelCount FROM hostel_details";
   let userCountQuery = "SELECT COUNT(*) AS userCount FROM user_details";

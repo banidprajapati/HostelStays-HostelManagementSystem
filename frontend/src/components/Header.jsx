@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import photo from'../photo/2.png';
 
 export const Header = ({ isLoggedIn, userFullName, handleLogout }) => {
   const navigate = useNavigate();
@@ -12,9 +13,7 @@ export const Header = ({ isLoggedIn, userFullName, handleLogout }) => {
     <div className="bg-gray-200 h-16 flex items-center justify-between px-4">
       <h1 className="text-lg font-bold text-black">
         <button onClick={() => navigate("/")} className="text-black float-left">
-          Hostel
-          <br />
-          Stays.
+          <img src={photo} alt="Logo" className="h-48 w-auto"/>
         </button>
       </h1>
       <div className="flex space-x-4">

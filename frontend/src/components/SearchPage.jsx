@@ -1,31 +1,52 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 import { RoomDetails } from "./RoomDetails";
-import { Line } from "./Line";
 import { SearchBar } from "./SearchBar";
 import { Filter } from "./Filter";
 import { Footer } from "./Footer";
 
 export const SearchPage = () => {
+  const [hostels, setHostels] = useState([]);
+  const [error, setError] = useState("");
+  const { cityName } = useParams(); // Get cityName from URL params
+
+  useEffect(() => {
+    if (cityName) {
+      fetchHostelDetails(cityName);
+    }
+  }, [cityName]);
+
+  const fetchHostelDetails = (city) => {
+    axios.get(`http://localhost:3000/search/${city}`)
+      .then((response) => {
+        setHostels(response.data);
+        setError("");
+      })
+      .catch((error) => {
+        setHostels([]);
+        setError("Hostel not found or internal server error.");
+      });
+  };
+
   return (
     <div>
       <div className="mt-7">
-        <SearchBar />
+        <SearchBar cityName={cityName} /> {/* Pass cityName as prop */}
       </div>
-      <div className="flex flex-col md:flex-row justify-between  mt-8">
+      <div className="flex flex-col md:flex-row justify-between mt-8">
         <div className="md:w-1/4">
           <Filter />
         </div>
 
         <div className="md:w-3/4 md:pl-4 mb-10">
-          <RoomDetails />
-          <Line />
-          <RoomDetails />
-          <Line />
-          <RoomDetails />
-          <Line />
-          <RoomDetails />
-          <Line />
-          <RoomDetails />
+          {hostels.map((hostel) => (
+            <div key={hostel.id}>
+              <RoomDetails
+                hostelId={hostel.hostel_ID} // Pass hostel ID as prop
+              />
+            </div>
+          ))}
         </div>
       </div>
       <Footer />

@@ -15,9 +15,10 @@ import { AdminCancelled } from "./components/Admin/AdminCancelled";
 import { ProductPage } from "./components/ProductPage";
 import { AdminHostels } from "./components/Admin/AdminHostels";
 import { Billing } from "./components/Billing";
-import { Header } from "./components/Header"; 
+import { Header } from "./components/Header";
 import { Profile } from "./components/Profile";
 import { Privacy } from "./components/Privacy";
+import { RoomDetails } from "./components/RoomDetails";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -72,12 +73,13 @@ function App() {
         userFullName={userFullName}
         handleLogout={handleLogout}
       />
+
       {/* Pass authentication props to Header */}
       <Routes>
         <Route path="/" element={<LandingPage isLoggedIn={isLoggedIn} />} />
         <Route path="/login" element={<Login handleLogin={handleLogin} />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/search" element={<SearchPage />} />
+        <Route path="/search/:cityName" element={<SearchPage />} />
         <Route path="/forgetpassword" element={<ForgetPassword />} />
         <Route path="/billing" element={<Billing />} />
         <Route path="/profile" element={<Profile />} />
