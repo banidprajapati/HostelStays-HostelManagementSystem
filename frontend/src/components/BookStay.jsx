@@ -91,13 +91,21 @@ export const BookStay = ({ isLoggedIn, hostelID }) => {
               placeholder="Check in"
               className="h-10 bg-gray-200  px-2 focus:outline-none rounded"
               value={checkIn}
+              min={new Date().toISOString().split("T")[0]}
               onChange={(e) => setCheckIn(e.target.value)}
             />
             <input
               type="date"
               placeholder="Check out"
-              className="h-10 bg-gray-200   px-2 focus:outline-none rounded"
+              className="h-10 bg-gray-200 px-2 focus:outline-none rounded"
               value={checkOut}
+              min={
+                checkIn
+                  ? new Date(new Date(checkIn).getTime() + 86400000)
+                      .toISOString()
+                      .split("T")[0]
+                  : new Date().toISOString().split("T")[0]
+              }
               onChange={(e) => setCheckOut(e.target.value)}
             />
           </div>
@@ -119,7 +127,8 @@ export const BookStay = ({ isLoggedIn, hostelID }) => {
           </h3>
           <button
             onClick={handleConfirmBooking}
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          >
             Confirm Booking
           </button>
         </div>
