@@ -40,7 +40,7 @@ export const SearchPage = () => {
           <Filter />
         </div> */}
 
-        <div className=" md:pl-4 mb-10">
+        <div className=" md:pl-4 mb-10 mt-10">
           {hostels.map((hostel) => (
             <div key={hostel.id}>
               <RoomDetails

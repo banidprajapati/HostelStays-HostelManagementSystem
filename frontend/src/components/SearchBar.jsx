@@ -66,9 +66,6 @@ export const SearchBar = () => {
         </div>
       </form>
 
-      <div className="mt-4 text-center">
-        {cityName && <h1 className="text-2xl font-bold">{cityName}</h1>}
-      </div>
     </div>
   );
 };
