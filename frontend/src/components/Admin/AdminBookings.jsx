@@ -37,14 +37,10 @@ export const AdminBookings = ({ isAdminLoggedIn, handleAdminLogout }) => {
   const fetchBookings = async () => {
     try {
       const response = await fetch("http://localhost:3000/booked_details", {
-        method: "POST",
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          email: "admin@example.com",
-          password: "admin123",
-        }),
       });
       if (!response.ok) {
         throw new Error("Failed to fetch bookings");
@@ -64,7 +60,7 @@ export const AdminBookings = ({ isAdminLoggedIn, handleAdminLogout }) => {
       />
       <div className="flex-1 p-8 bg-gray-100">
         <h1 className="text-3xl font-bold mb-4 text-left">Bookings</h1>
-        <TableContainer>
+        <TableContainer maxW="800px" wordWrap="break-word">
           <Table variant="simple">
             <TableCaption>Bookings</TableCaption>
             <Thead>
@@ -72,13 +68,11 @@ export const AdminBookings = ({ isAdminLoggedIn, handleAdminLogout }) => {
                 <Th>Booking ID</Th>
                 <Th>User Name</Th>
                 <Th>User Email</Th>
-                <Th>User ID</Th>
                 <Th>No of Guests</Th>
                 <Th>Check-in</Th>
                 <Th>Check-out</Th>
                 <Th>No of Rooms</Th>
                 <Th>Hostel Name</Th>
-                <Th>Hostel Id</Th>
                 <Th>Total Cost</Th>
               </Tr>
             </Thead>
@@ -88,13 +82,11 @@ export const AdminBookings = ({ isAdminLoggedIn, handleAdminLogout }) => {
                   <Td>{booking.booking_id}</Td>
                   <Td>{booking.user_name}</Td>
                   <Td>{booking.user_email}</Td>
-                  <Td>{booking.user_id}</Td>
                   <Td>{booking.no_guests}</Td>
                   <Td>{booking.check_in}</Td>
                   <Td>{booking.check_out}</Td>
                   <Td>{booking.no_rooms}</Td>
                   <Td>{booking.hostel_name}</Td>
-                  <Td>{booking.hostel_id}</Td>
                   <Td>{booking.hostel_cost}</Td>
                 </Tr>
               ))}

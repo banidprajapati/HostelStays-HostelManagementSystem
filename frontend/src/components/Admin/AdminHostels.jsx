@@ -383,12 +383,7 @@ export const AdminHostels = ({ isAdminLoggedIn, handleAdminLogout }) => {
                 <Th>Hostel Name</Th>
                 <Th>Location</Th>
                 <Th>Facilities</Th>
-                <Th>Ratings</Th>
-                <Th>Photos</Th>
-                <Th>Reviews</Th>
                 <Th>Description</Th>
-                <Th>Total Beds</Th>
-                <Th>Beds Per Room</Th>
                 <Th>Price</Th>
                 <Th>Actions</Th>
               </Tr>
@@ -399,12 +394,7 @@ export const AdminHostels = ({ isAdminLoggedIn, handleAdminLogout }) => {
                   <Td>{hostel.hostel_name}</Td>
                   <Td>{hostel.hostel_location}</Td>
                   <Td>{hostel.facilities}</Td>
-                  <Td>{hostel.ratings}</Td>
-                  <Td>{hostel.photos}</Td>
-                  <Td>{hostel.reviews}</Td>
                   <Td>{hostel.hostel_description}</Td>
-                  <Td>{hostel.total_beds}</Td>
-                  <Td>{hostel.beds_per_room}</Td>
                   <Td>{hostel.price}</Td>
                   <Td>
                     <Button

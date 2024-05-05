@@ -486,7 +486,7 @@ app.post("/booking/add", (req, res) => {
   });
 });
 
-app.post("/booked_details", (req, res) => {
+app.get("/booked_details", (req, res) => {
   const { email, password } = req.body;
   const query = `SELECT * FROM booking_details WHERE status = "booked"`;
   db.query(query, (err, results) => {
@@ -508,7 +508,7 @@ app.post("/booked_details", (req, res) => {
   });
 });
 
-app.post("/cancelled_details", (req, res) => {
+app.get("/cancelled_details", (req, res) => {
   const { email, password } = req.body;
   const query = `SELECT * FROM booking_details WHERE status = "cancelled"`;
   db.query(query, (err, results) => {
@@ -528,6 +528,52 @@ app.post("/cancelled_details", (req, res) => {
       }
     }
   });
+});
+
+app.post("/cancel_booking", (req, res) => {
+  const { bookingId } = req.body;
+
+  // Update the database to mark the booking as canceled
+  const query =
+    'UPDATE booking_details SET status = "cancelled" WHERE booking_id = ?';
+  db.query(query, [bookingId], (err, result) => {
+    if (err) {
+      console.error("Error canceling booking:", err);
+      res
+        .status(500)
+        .json({ success: false, message: "Failed to cancel booking" });
+    } else {
+      if (result.affectedRows > 0) {
+        // Booking successfully canceled
+        res
+          .status(200)
+          .json({ success: true, message: "Booking canceled successfully" });
+      } else {
+        // No booking found with the given ID
+        res.status(404).json({ success: false, message: "Booking not found" });
+      }
+    }
+  });
+});
+
+app.get("/user_hostel_booking", (req, res) => {
+  const userId = req.query.userId; // Assuming user ID is provided in the query params
+
+  const userBookedQuery = `SELECT * FROM booking_details WHERE status = 'booked' AND user_id = ${userId}`;
+  const userCancelledQuery = `SELECT * FROM booking_details WHERE status = 'cancelled' AND user_id = ${userId}`;
+
+  Promise.all([executeQuery(userBookedQuery), executeQuery(userCancelledQuery)])
+    .then(([userDataResult, hostelDataResult]) => {
+      res
+        .status(200)
+        .json({ booked: userDataResult, cancelled: hostelDataResult });
+    })
+    .catch((error) => {
+      console.error("Error executing queries:", error);
+      res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
+    });
 });
 
 //End of Hostel List=======================================================================================================================
