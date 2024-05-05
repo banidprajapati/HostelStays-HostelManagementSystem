@@ -51,7 +51,7 @@ export const AdminBookings = ({ isAdminLoggedIn, handleAdminLogout }) => {
       throw new Error(`Error fetching bookings: ${error.message}`);
     }
   };
-
+  console.log(bookings);
   return (
     <div className="flex h-screen">
       <AdminSideBar
@@ -60,7 +60,7 @@ export const AdminBookings = ({ isAdminLoggedIn, handleAdminLogout }) => {
       />
       <div className="flex-1 p-8 bg-gray-100">
         <h1 className="text-3xl font-bold mb-4 text-left">Bookings</h1>
-        <TableContainer maxW="800px" wordWrap="break-word">
+        <TableContainer maxW="800px">
           <Table variant="simple">
             <TableCaption>Bookings</TableCaption>
             <Thead>

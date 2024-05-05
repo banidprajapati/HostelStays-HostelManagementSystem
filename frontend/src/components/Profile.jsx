@@ -82,7 +82,7 @@ export const Profile = () => {
   return (
     <div>
       <p className="text-left text-2xl font-bold p-8">Hostel Bookings</p>
-      <TableContainer wordWrap="break-word">
+      <TableContainer>
         <Table variant="simple">
           <TableCaption>Bookings</TableCaption>
           <Thead>

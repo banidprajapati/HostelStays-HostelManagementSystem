@@ -37,14 +37,10 @@ export const AdminCancelled = ({ isAdminLoggedIn, handleAdminLogout }) => {
   const fetchBookings = async () => {
     try {
       const response = await fetch("http://localhost:3000/cancelled_details", {
-        method: "Get",
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          email: "admin@example.com",
-          password: "admin123",
-        }),
       });
       if (!response.ok) {
         throw new Error("Failed to fetch bookings");
@@ -55,6 +51,7 @@ export const AdminCancelled = ({ isAdminLoggedIn, handleAdminLogout }) => {
       throw new Error(`Error fetching bookings: ${error.message}`);
     }
   };
+  console.log(bookings);
 
   return (
     <div className="flex h-screen">
@@ -66,7 +63,7 @@ export const AdminCancelled = ({ isAdminLoggedIn, handleAdminLogout }) => {
         <h1 className="text-3xl font-bold mb-4 text-left">
           Cancelled Bookings
         </h1>
-        <TableContainer maxW="800px" wordWrap="break-word">
+        <TableContainer maxW="800px">
           <Table variant="simple">
             <TableCaption>Bookings</TableCaption>
             <Thead>

@@ -20,12 +20,8 @@ export const AdminHostels = ({ isAdminLoggedIn, handleAdminLogout }) => {
     hostel_name: "",
     hostel_location: "",
     facilities: "",
-    ratings: "",
     photos: "",
-    reviews: "",
     hostel_description: "",
-    total_beds: "",
-    beds_per_room: "",
     price: "",
   });
 
@@ -71,12 +67,8 @@ export const AdminHostels = ({ isAdminLoggedIn, handleAdminLogout }) => {
           hostel_name: "",
           hostel_location: "",
           facilities: "",
-          ratings: 0,
           photos: "",
-          reviews: "",
           hostel_description: "",
-          total_beds: 0,
-          beds_per_room: 0,
           price: 0,
         });
         setShowAddHostelForm(false);
@@ -103,12 +95,8 @@ export const AdminHostels = ({ isAdminLoggedIn, handleAdminLogout }) => {
       hostel_name: hostel.hostel_name,
       hostel_location: hostel.hostel_location,
       facilities: hostel.facilities,
-      ratings: hostel.ratings,
       photos: hostel.photos,
-      reviews: hostel.reviews,
       hostel_description: hostel.hostel_description,
-      total_beds: hostel.total_beds,
-      beds_per_room: hostel.beds_per_room,
       price: hostel.price,
     });
     // Show the add hostel form
@@ -139,12 +127,8 @@ export const AdminHostels = ({ isAdminLoggedIn, handleAdminLogout }) => {
           hostel_name: "",
           hostel_location: "",
           facilities: "",
-          ratings: 0,
           photos: "",
-          reviews: "",
           hostel_description: "",
-          total_beds: 0,
-          beds_per_room: 0,
           price: 0,
         });
         // Hide add hostel form
@@ -251,23 +235,6 @@ export const AdminHostels = ({ isAdminLoggedIn, handleAdminLogout }) => {
 
             <div className="mb-4">
               <label
-                htmlFor="ratings"
-                className="block text-sm font-semibold text-gray-700 mb-1">
-                Ratings
-              </label>
-              <input
-                type="number"
-                id="ratings"
-                name="ratings"
-                value={hostelInfo.ratings}
-                onChange={handleInputChange}
-                className="border border-gray-300 rounded-md px-3 py-2 w-full text-sm bg-gray-100 focus:outline-none focus:border-blue-500"
-                required
-              />
-            </div>
-
-            <div className="mb-4">
-              <label
                 htmlFor="photos"
                 className="block text-sm font-semibold text-gray-700 mb-1">
                 Photos
@@ -285,23 +252,6 @@ export const AdminHostels = ({ isAdminLoggedIn, handleAdminLogout }) => {
 
             <div className="mb-4">
               <label
-                htmlFor="reviews"
-                className="block text-sm font-semibold text-gray-700 mb-1">
-                Reviews
-              </label>
-              <input
-                type="text"
-                id="reviews"
-                name="reviews"
-                value={hostelInfo.reviews}
-                onChange={handleInputChange}
-                className="border border-gray-300 rounded-md px-3 py-2 w-full text-sm bg-gray-100 focus:outline-none focus:border-blue-500"
-                required
-              />
-            </div>
-
-            <div className="mb-4">
-              <label
                 htmlFor="hostel_description"
                 className="block text-sm font-semibold text-gray-700 mb-1">
                 Hostel Description
@@ -310,40 +260,6 @@ export const AdminHostels = ({ isAdminLoggedIn, handleAdminLogout }) => {
                 id="hostel_description"
                 name="hostel_description"
                 value={hostelInfo.hostel_description}
-                onChange={handleInputChange}
-                className="border border-gray-300 rounded-md px-3 py-2 w-full text-sm bg-gray-100 focus:outline-none focus:border-blue-500"
-                required
-              />
-            </div>
-
-            <div className="mb-4">
-              <label
-                htmlFor="total_beds"
-                className="block text-sm font-semibold text-gray-700 mb-1">
-                Total Beds
-              </label>
-              <input
-                type="number"
-                id="total_beds"
-                name="total_beds"
-                value={hostelInfo.total_beds}
-                onChange={handleInputChange}
-                className="border border-gray-300 rounded-md px-3 py-2 w-full text-sm bg-gray-100 focus:outline-none focus:border-blue-500"
-                required
-              />
-            </div>
-
-            <div className="mb-4">
-              <label
-                htmlFor="beds_per_room"
-                className="block text-sm font-semibold text-gray-700 mb-1">
-                Beds Per Room
-              </label>
-              <input
-                type="number"
-                id="beds_per_room"
-                name="beds_per_room"
-                value={hostelInfo.beds_per_room}
                 onChange={handleInputChange}
                 className="border border-gray-300 rounded-md px-3 py-2 w-full text-sm bg-gray-100 focus:outline-none focus:border-blue-500"
                 required
