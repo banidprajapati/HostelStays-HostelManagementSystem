@@ -243,7 +243,7 @@ app.post("/forget_password", (req, res) => {
 app.get("/hostel_details", (req, res) => {
   // Query to select specific columns from the hostel_details table
   const query =
-    "SELECT hostel_ID, hostel_name, hostel_location, facilities, photos, hostel_description, total_beds, beds_per_room, price FROM hostel_details";
+    "SELECT hostel_ID, hostel_name, hostel_location, facilities, photos, hostel_description, hostel_city, price FROM hostel_details";
   db.query(query, (err, results) => {
     if (err) {
       console.error("Error executing hostel query:", err);
@@ -277,25 +277,25 @@ app.post("/hostel_details/add", (req, res) => {
   const {
     hostel_name,
     hostel_location,
+    hostel_city,
     facilities,
     photos,
     hostel_description,
-    total_beds,
-    beds_per_room,
     price,
   } = req.body;
+
   const insertQuery =
-    "INSERT INTO hostel_details (hostel_name, hostel_location, facilities, photos, hostel_description, total_beds, beds_per_room, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    "INSERT INTO hostel_details (hostel_name, hostel_location, hostel_city, facilities, photos, hostel_description, price) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
   db.query(
     insertQuery,
     [
       hostel_name,
       hostel_location,
+      hostel_city,
       facilities,
       photos,
       hostel_description,
-      total_beds,
-      beds_per_room,
       price,
     ],
     (err, result) => {
