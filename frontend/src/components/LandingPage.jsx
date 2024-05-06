@@ -15,7 +15,9 @@ export const LandingPage = () => {
         const response = await axios.get(
           "http://localhost:3000/hostel_details"
         );
-        setHostelDetails(response.data);
+        // Reverse the order of hostel details array
+        const reversedHostelDetails = response.data.reverse();
+        setHostelDetails(reversedHostelDetails);
       } catch (error) {
         console.error("Error fetching hostel details:", error);
       }
@@ -23,9 +25,6 @@ export const LandingPage = () => {
 
     fetchHostelDetails();
   }, []);
-
-  // Slice the hostelDetails array to display only six hostels
-  const limitedHostels = hostelDetails.slice(0, 6);
 
   return (
     <div className="flex flex-col gap-8 font-poppins">
@@ -37,10 +36,10 @@ export const LandingPage = () => {
         Search for residence all over Nepal
       </h2>
       <SearchBar />
-      <DiscoverNepal />
+      {/* <DiscoverNepal /> */}
       <h1 className="font-bold text-2xl text-left">Handpicked by us.</h1>
       <div className="grid grid-cols-3 grid-rows-2 gap-4">
-        {limitedHostels.map((hostel) => (
+        {hostelDetails.map((hostel) => (
           <Room
             key={hostel.hostel_ID}
             id={hostel.hostel_ID}

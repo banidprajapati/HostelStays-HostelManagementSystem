@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -8,29 +8,57 @@ export const BookStay = ({ isLoggedIn, hostelID }) => {
   const [guests, setGuests] = useState(1);
   const [roomsRequired, setRoomsRequired] = useState("");
   const [totalPrice, setTotalPrice] = useState("");
-  // Initial total price
+  const [error, setError] = useState(""); // New state for error message
   const navigate = useNavigate();
 
   const handleGuestsChange = (event) => {
     const { value } = event.target;
-    setGuests(value);
+    setGuests(parseInt(value));
   };
+
+  const handleConfirmBooking = () => {
+    if (!checkIn || !checkOut || guests < 1) {
+      // Check if guests is less than 1
+      setError("Please fill in all fields and ensure at least 1 guest."); // Display error if any field is empty or guests is less than 1
+    } else {
+      setError(""); // Clear error if all fields are filled and guests is at least 1
+      if (isLoggedIn) {
+        navigate("/billing", {
+          state: {
+            hostel_ID: hostelID,
+            checkIn: checkIn,
+            checkOut: checkOut,
+            guests: guests,
+            roomsRequired: roomsRequired,
+            totalPrice: totalPrice, // Pass the calculated total price to the billing page
+          },
+        });
+      } else {
+        navigate("/login");
+      }
+    }
+  };
+
   useEffect(() => {
-    // Fetch hostel details including total cost from the database
     const fetchHostelDetails = async () => {
       try {
         const response = await axios.get(
           `http://localhost:3000/hostel_details/${hostelID}`
         );
-        const { price } = response.data; // Accessing the price field from the response
-        // Set total price based on fetched total cost and number of guests
-        const roomsNeeded = Math.ceil(guests / 6);
-        setRoomsRequired(
-          roomsNeeded > 1
-            ? `${guests} Guests, ${roomsNeeded} Rooms required`
-            : `${guests} Guest, 1 Room required`
-        );
-        setTotalPrice(guests * price);
+        const { price } = response.data;
+
+        if (guests === 0) {
+          setRoomsRequired("0 Rooms required");
+          setTotalPrice(0);
+        } else {
+          const roomsNeeded = Math.ceil(guests / 6);
+          setRoomsRequired(
+            roomsNeeded > 1
+              ? `${guests} Guests, ${roomsNeeded} Rooms required`
+              : `${guests} Guest, 1 Room required`
+          );
+          setTotalPrice(guests * price);
+        }
       } catch (error) {
         console.error("Error fetching hostel details:", error);
       }
@@ -39,42 +67,17 @@ export const BookStay = ({ isLoggedIn, hostelID }) => {
     fetchHostelDetails();
   }, [hostelID, guests]);
 
-  const handleConfirmBooking = () => {
-    if (isLoggedIn) {
-      navigate("/billing", {
-        state: {
-          hostel_ID: hostelID,
-          checkIn: checkIn,
-          checkOut: checkOut,
-          guests: guests,
-          roomsRequired: roomsRequired,
-          totalPrice: totalPrice, // Pass the calculated total price to the billing page
-        },
-      });
-    } else {
-      navigate("/login");
-    }
-  };
-
   const calculateTotalPrice = (
     hostelPrice,
     guests,
     checkInDate,
     checkOutDate
   ) => {
-    // Convert check-in and check-out dates to JavaScript Date objects
     const checkIn = new Date(checkInDate);
     const checkOut = new Date(checkOutDate);
-
-    // Calculate the duration of stay in milliseconds
     const durationMs = checkOut - checkIn;
-
-    // Convert the duration to days
     const durationDays = durationMs / (1000 * 60 * 60 * 24);
-
-    // Calculate the total price
     const totalPrice = hostelPrice * guests * durationDays;
-
     return totalPrice;
   };
 
@@ -110,13 +113,14 @@ export const BookStay = ({ isLoggedIn, hostelID }) => {
             />
           </div>
           <input
-            type="text"
+            type="number"
             className="h-10 bg-gray-200   px-2 focus:outline-none rounded"
             placeholder="Guests"
             value={guests}
             onChange={handleGuestsChange}
           />
         </div>
+        {error && <p className="text-red-500 mb-4">{error}</p>}{" "}
         <h3 className="font-bold text-lg text-black mb-1 text-left">
           Total Price
         </h3>

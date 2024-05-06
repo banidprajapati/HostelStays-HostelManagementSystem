@@ -94,6 +94,8 @@ export const Billing = () => {
     postBookingData(bookingData)
       .then((data) => {
         console.log(data);
+        // Redirect to Profile page after successful booking
+        window.location.href = "/profile";
       })
       .catch((error) => {
         console.error(error.message);
@@ -137,11 +139,6 @@ export const Billing = () => {
                 <p>No of Rooms:</p>
                 <h1 className="text-2xl font-medium">{roomsRequired}</h1>
               </div>
-              <div className="text-right px-4">
-                <button className="text-black w-46 p-2 rounded-lg border-2 border-blue-600 hover:bg-blue-600 hover:text-white">
-                  Change Reservations
-                </button>
-              </div>
             </div>
           </div>
           {/* Hostel Details Section */}
@@ -169,7 +166,8 @@ export const Billing = () => {
                 </h1>
                 <button
                   onClick={handleBooking}
-                  className="text-white w-46 p-2 rounded-lg bg-blue-600  hover:bg-blue-700">
+                  className="text-white w-46 p-2 rounded-lg bg-blue-600  hover:bg-blue-700"
+                >
                   Confirm Details
                 </button>
               </div>

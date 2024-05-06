@@ -29,8 +29,18 @@ export const AdminHostels = ({ isAdminLoggedIn, handleAdminLogout }) => {
   const formRef = useRef(null);
 
   useEffect(() => {
-    // Fetch hostel data from backend on component mount
-    fetchHostels();
+    // Add event listener to detect clicks outside the form
+    const handleOutsideClick = (e) => {
+      if (formRef.current && !formRef.current.contains(e.target)) {
+        setShowAddHostelForm(false); // Close the form if click is outside
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
   }, []);
 
   const fetchHostels = async () => {
@@ -45,7 +55,7 @@ export const AdminHostels = ({ isAdminLoggedIn, handleAdminLogout }) => {
       console.error("Error fetching hostels:", error);
     }
   };
-
+fetchHostels(); // Fetch hostels on component mount
   const handleAddHostel = () => {
     // Make POST request to add hostel
     fetch("http://localhost:3000/hostel_details/add", {

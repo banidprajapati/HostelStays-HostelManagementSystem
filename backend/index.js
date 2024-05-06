@@ -319,12 +319,10 @@ app.put("/hostel_details/:id", (req, res) => {
     facilities,
     photos,
     hostel_description,
-    total_beds,
-    beds_per_room,
     price,
   } = req.body;
   const updateQuery =
-    "UPDATE hostel_details SET hostel_name = ?, hostel_location = ?, facilities = ?,  photos = ?, hostel_description = ?, total_beds = ?, beds_per_room = ?, price = ? WHERE hostel_ID = ?";
+    "UPDATE hostel_details SET hostel_name = ?, hostel_location = ?, facilities = ?,  photos = ?, hostel_description = ?, price = ? WHERE hostel_ID = ?";
   db.query(
     updateQuery,
     [
@@ -333,10 +331,8 @@ app.put("/hostel_details/:id", (req, res) => {
       facilities,
       photos,
       hostel_description,
-      total_beds,
-      beds_per_room,
       price,
-      hostelID,
+      hostelID, // Corrected variable name
     ],
     (err, result) => {
       if (err) {
@@ -353,6 +349,7 @@ app.put("/hostel_details/:id", (req, res) => {
     }
   );
 });
+
 
 app.delete("/hostel_details/:id", (req, res) => {
   const hostelID = req.params.id; // Corrected parameter name
@@ -398,21 +395,42 @@ app.get("/combined_data", (req, res) => {
   let hostelCountQuery = "SELECT COUNT(*) AS hostelCount FROM hostel_details";
   let userCountQuery = "SELECT COUNT(*) AS userCount FROM user_details";
   let adminCountQuery = "SELECT COUNT(*) AS adminCount FROM admin_details";
+  let bookingCountQuery =
+    "SELECT COUNT(*) AS bookingCount FROM booking_details";
+  let revenueCountQuery =
+    "SELECT SUM(CASE WHEN status = 'booked' THEN hostel_cost ELSE 0 END) AS totalCost FROM booking_details";
 
   // Execute queries in parallel using Promise.all
   Promise.all([
     executeQuery(hostelCountQuery),
     executeQuery(userCountQuery),
     executeQuery(adminCountQuery),
+    executeQuery(bookingCountQuery),
+    executeQuery(revenueCountQuery),
   ])
-    .then(([hostelResult, userResult, adminResult]) => {
-      const hostelCount = hostelResult[0].hostelCount;
-      const userCount = userResult[0].userCount;
-      const adminCount = adminResult[0].adminCount;
-      res
-        .status(200)
-        .json({ success: true, hostelCount, userCount, adminCount });
-    })
+    .then(
+      ([
+        hostelResult,
+        userResult,
+        adminResult,
+        bookingResult,
+        revenueResult,
+      ]) => {
+        const hostelCount = hostelResult[0].hostelCount;
+        const userCount = userResult[0].userCount;
+        const adminCount = adminResult[0].adminCount;
+        const bookingCount = bookingResult[0].bookingCount;
+        const revenueCount = revenueResult[0].totalCost;
+        res.status(200).json({
+          success: true,
+          hostelCount,
+          userCount,
+          adminCount,
+          bookingCount,
+          revenueCount,
+        });
+      }
+    )
     .catch((error) => {
       console.error("Error executing queries:", error);
       res

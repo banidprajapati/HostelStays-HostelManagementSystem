@@ -26,11 +26,18 @@ export const AdminDashboard = ({ isAdminLoggedIn, handleAdminLogout }) => {
         throw new Error("Failed to fetch data");
       }
       const data = await response.json();
-      const { success, hostelCount, userCount, adminCount } = data;
+      const {
+        success,
+        hostelCount,
+        userCount,
+        adminCount,
+        bookingCount,
+        revenueCount,
+      } = data;
       if (!success) {
         throw new Error("Failed to fetch data");
       }
-      return { hostelCount, userCount, adminCount };
+      return { hostelCount, userCount, adminCount, bookingCount, revenueCount };
     } catch (error) {
       throw new Error(error.message);
     }
@@ -57,9 +64,8 @@ export const AdminDashboard = ({ isAdminLoggedIn, handleAdminLogout }) => {
                 <AdminBoxes title="Total Hostels:">
                   {data.hostelCount}
                 </AdminBoxes>
-                <AdminBoxes title="Room Booked:">{data.hostelCount}</AdminBoxes>
                 <AdminBoxes title="No of Guests:">
-                  {data.hostelCount}
+                  {data.bookingCount}
                 </AdminBoxes>
               </div>
             </div>
@@ -75,7 +81,9 @@ export const AdminDashboard = ({ isAdminLoggedIn, handleAdminLogout }) => {
             <div className="mt-8">
               <h1 className="text-3xl font-bold mb-4 text-left">Finances</h1>
               <div className="grid grid-cols-3 gap-4">
-                <AdminBoxes title="Total Revenue:" />
+                <AdminBoxes title="Total Revenue:">
+                  Rs.{data.revenueCount}
+                </AdminBoxes>
               </div>
             </div>
           </>
