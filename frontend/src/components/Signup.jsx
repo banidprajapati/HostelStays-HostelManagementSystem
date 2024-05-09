@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Alert, AlertIcon } from "@chakra-ui/react"; // Import Alert component from Chakra UI
 
 export const SignUp = ({ email: emailProp }) => {
   const [fullName, setFullName] = useState("");
@@ -8,6 +9,7 @@ export const SignUp = ({ email: emailProp }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState(""); // State for success message
   const navigate = useNavigate();
 
   // Regular expression for email validation
@@ -65,17 +67,20 @@ export const SignUp = ({ email: emailProp }) => {
       });
 
       if (response.data.message) {
-        console.log("User signed up successfully:", response.data.message);
-        navigate("/login");
+        setSuccessMessage("User signed up successfully."); // Set success message
+        setTimeout(() => {
+          setSuccessMessage(""); // Clear success message after 2 seconds
+          navigate("/login");
+        }, 500); // Reduced timeout to 2 seconds
       } else {
-        setErrorMessage("The Email is already regiestered in the database.");
+        setErrorMessage("The Email is already registered in the database.");
         setTimeout(() => {
           setErrorMessage(""); // Clear the error message after 5 seconds
         }, 5000);
       }
     } catch (error) {
       console.error("Error signing up:", error);
-      setErrorMessage("This user has already signed up.");
+      setErrorMessage("Error signing up. Please try again later.");
       setTimeout(() => {
         setErrorMessage(""); // Clear the error message after 5 seconds
       }, 5000);
@@ -95,7 +100,8 @@ export const SignUp = ({ email: emailProp }) => {
       <div className="w-1/2 flex items-center justify-center p-8">
         <div className="text-left w-96">
           <h1 className="text-3xl font-bold mb-4">Create an Account</h1>
-          {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+          {errorMessage && <Alert status="error">{errorMessage}</Alert>}
+          {successMessage && <Alert status="success">{successMessage}</Alert>}
           <p className="mb-2">Create a new account</p>
           <p className="font-bold">{emailProp}</p>
           <div className="flex flex-col my-3 mb-4 w-full">

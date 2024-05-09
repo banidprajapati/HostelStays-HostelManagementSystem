@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"; // Import useNavigate from React Router
+import { useNavigate } from "react-router-dom";
 
 export const SearchBar = () => {
   const [cityName, setCityName] = useState("");
   const [hostelDetails, setHostelDetails] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (cityName.trim() !== "") {
@@ -18,7 +18,6 @@ export const SearchBar = () => {
             cityName: cityName,
           },
         })
-
         .then((response) => {
           setHostelDetails(response.data);
           setIsLoading(false);
@@ -39,10 +38,16 @@ export const SearchBar = () => {
       );
       setHostelDetails(response.data);
       setIsLoading(false);
-      navigate(`/search/${cityName}`); // Navigate to the /search/cityName route after successful search
+      navigate(`/search/${cityName}`);
     } catch (error) {
       setError(error.message);
       setIsLoading(false);
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch(e);
     }
   };
 
@@ -54,18 +59,19 @@ export const SearchBar = () => {
             id="cityNameInput"
             type="text"
             placeholder="City Name"
-            className="px-4 py-3 border-r-2 border-gray-400 bg-gray-200 focus:bg-gray-200 focus:outline-none h-12 rounded-l-lg placeholder-gray-700 w-3/5" // Updated width to w-full
+            className="px-4 py-3 border-r-2 border-gray-400 bg-gray-200 focus:bg-gray-200 focus:outline-none h-12 rounded-l-lg placeholder-gray-700 w-3/5"
             value={cityName}
             onChange={(e) => setCityName(e.target.value)}
+            onKeyDown={handleKeyPress} 
           />
           <button
             type="submit"
-            className="bg-blue-500 text-xl text-white px-10 py-2 rounded-lg hover:bg-blue-600 focus:outline-none rounded-l-none h-12 w-1/4">
+            className="bg-blue-500 text-xl text-white px-10 py-2 rounded-lg hover:bg-blue-600 focus:outline-none rounded-l-none h-12 w-1/4"
+          >
             Search
           </button>
         </div>
       </form>
-
     </div>
   );
 };
