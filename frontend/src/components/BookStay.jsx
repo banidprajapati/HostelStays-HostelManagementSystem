@@ -3,8 +3,14 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export const BookStay = ({ isLoggedIn, hostelID }) => {
-  const [checkIn, setCheckIn] = useState("");
-  const [checkOut, setCheckOut] = useState("");
+  const [checkIn, setCheckIn] = useState(
+    new Date().toISOString().split("T")[0]
+  );
+  const tomorrowDate = new Date();
+  tomorrowDate.setDate(tomorrowDate.getDate() + 1);
+  const [checkOut, setCheckOut] = useState(
+    tomorrowDate.toISOString().split("T")[0]
+  );
   const [guests, setGuests] = useState(1);
   const [roomsRequired, setRoomsRequired] = useState("");
   const [totalPrice, setTotalPrice] = useState("");
@@ -18,10 +24,15 @@ export const BookStay = ({ isLoggedIn, hostelID }) => {
 
   const handleConfirmBooking = () => {
     if (!checkIn || !checkOut || guests < 1) {
-      // Check if guests is less than 1
-      setError("Please fill in all fields and ensure at least 1 guest."); // Display error if any field is empty or guests is less than 1
+      setError("Please fill in all fields and ensure at least 1 guest.");
+      setTotalPrice("NAN");
+    } else if (new Date(checkIn) >= new Date(checkOut)) {
+      setError(
+        "Provide the correct date. Check-in date should be before check-out date."
+      );
+      setTotalPrice("NAN");
     } else {
-      setError(""); // Clear error if all fields are filled and guests is at least 1
+      setError("");
       if (isLoggedIn) {
         navigate("/billing", {
           state: {
@@ -30,7 +41,7 @@ export const BookStay = ({ isLoggedIn, hostelID }) => {
             checkOut: checkOut,
             guests: guests,
             roomsRequired: roomsRequired,
-            totalPrice: totalPrice, // Pass the calculated total price to the billing page
+            totalPrice: totalPrice,
           },
         });
       } else {
@@ -46,7 +57,6 @@ export const BookStay = ({ isLoggedIn, hostelID }) => {
           `http://localhost:3000/hostel_details/${hostelID}`
         );
         const { price } = response.data;
-
         if (guests === 0) {
           setRoomsRequired("0 Rooms required");
           setTotalPrice(0);
@@ -57,13 +67,13 @@ export const BookStay = ({ isLoggedIn, hostelID }) => {
               ? `${guests} Guests, ${roomsNeeded} Rooms required`
               : `${guests} Guest, 1 Room required`
           );
-          setTotalPrice(guests * price);
+          setTotalPrice(price); // Price for 1 person
         }
       } catch (error) {
         console.error("Error fetching hostel details:", error);
+        setTotalPrice("NAN");
       }
     };
-
     fetchHostelDetails();
   }, [hostelID, guests]);
 
@@ -92,9 +102,8 @@ export const BookStay = ({ isLoggedIn, hostelID }) => {
             <input
               type="date"
               placeholder="Check in"
-              className="h-10 bg-gray-200  px-2 focus:outline-none rounded"
+              className="h-10 bg-gray-200 px-2 focus:outline-none rounded"
               value={checkIn}
-              min={new Date().toISOString().split("T")[0]}
               onChange={(e) => setCheckIn(e.target.value)}
             />
             <input
@@ -102,32 +111,28 @@ export const BookStay = ({ isLoggedIn, hostelID }) => {
               placeholder="Check out"
               className="h-10 bg-gray-200 px-2 focus:outline-none rounded"
               value={checkOut}
-              min={
-                checkIn
-                  ? new Date(new Date(checkIn).getTime() + 86400000)
-                      .toISOString()
-                      .split("T")[0]
-                  : new Date().toISOString().split("T")[0]
-              }
               onChange={(e) => setCheckOut(e.target.value)}
             />
           </div>
           <input
             type="number"
-            className="h-10 bg-gray-200   px-2 focus:outline-none rounded"
+            className="h-10 bg-gray-200 px-2 focus:outline-none rounded"
             placeholder="Guests"
             value={guests}
             onChange={handleGuestsChange}
           />
         </div>
-        {error && <p className="text-red-500 mb-4">{error}</p>}{" "}
+        {error && <p className="text-red-500 mb-4">{error}</p>}
         <h3 className="font-bold text-lg text-black mb-1 text-left">
           Total Price
         </h3>
         <h4 className="text-black mb-4 text-left">{roomsRequired}</h4>
         <div className="flex flex-row justify-between">
           <h3 className="font-bold text-black text-left text-4xl">
-            NPR {calculateTotalPrice(totalPrice, guests, checkIn, checkOut)}
+            NPR{" "}
+            {totalPrice === "NAN"
+              ? "NAN"
+              : calculateTotalPrice(totalPrice, guests, checkIn, checkOut)}
           </h3>
           <button
             onClick={handleConfirmBooking}

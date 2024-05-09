@@ -9,6 +9,20 @@ export const AdminSideBar = ({ handleAdminLogout, bookingsCount }) => {
     setShowNotification(false);
   };
 
+  const handleAdminDetailsClick = () => {
+    setShowNotification(false);
+  };
+
+  const handleLogout = () => {
+    setShowNotification(true); // Reset notification status before logging out
+    handleAdminLogout();
+    console.log("Logged out");
+  };
+
+  const handleLinkClick = () => {
+    setShowNotification(true);
+  };
+
   return (
     <div className="flex h-screen justify-center items-center">
       <div className="bg-neutral-300 text-black w-80 h-full p-4">
@@ -20,6 +34,7 @@ export const AdminSideBar = ({ handleAdminLogout, bookingsCount }) => {
             <Link
               to="/dashboard"
               className="hover:text-blue-600 hover:underline"
+              onClick={handleLinkClick}
             >
               Dashboard
             </Link>
@@ -28,6 +43,7 @@ export const AdminSideBar = ({ handleAdminLogout, bookingsCount }) => {
             <Link
               to="/hostel-list"
               className="hover:text-blue-600 hover:underline"
+              onClick={handleLinkClick}
             >
               Hostel List
             </Link>
@@ -36,10 +52,13 @@ export const AdminSideBar = ({ handleAdminLogout, bookingsCount }) => {
             <Link
               to="/bookings"
               className="hover:text-blue-600 hover:underline"
-              onClick={handleBookingClick}
+              onClick={() => {
+                handleBookingClick();
+                handleLinkClick();
+              }}
             >
               Bookings
-              {showNotification && (
+              {showNotification && location.pathname !== "/cancelled" && (
                 <span className="absolute top-1 right-10 h-6 w-6 bg-blue-500 text-white rounded-full flex items-center justify-center">
                   {bookingsCount > 9 ? "9+" : bookingsCount}
                 </span>
@@ -50,6 +69,7 @@ export const AdminSideBar = ({ handleAdminLogout, bookingsCount }) => {
             <Link
               to="/cancelled"
               className="hover:text-blue-600 hover:underline"
+              onClick={handleLinkClick}
             >
               Cancelled
             </Link>
@@ -58,6 +78,7 @@ export const AdminSideBar = ({ handleAdminLogout, bookingsCount }) => {
             <Link
               to="/user-details"
               className="hover:text-blue-600 hover:underline"
+              onClick={handleLinkClick}
             >
               User Details
             </Link>
@@ -66,6 +87,10 @@ export const AdminSideBar = ({ handleAdminLogout, bookingsCount }) => {
             <Link
               to="/admindetails"
               className="hover:text-blue-600 hover:underline"
+              onClick={() => {
+                handleAdminDetailsClick();
+                handleLinkClick();
+              }}
             >
               Admin Details
             </Link>
@@ -74,10 +99,7 @@ export const AdminSideBar = ({ handleAdminLogout, bookingsCount }) => {
         <div className="mt-auto ">
           <button
             className="text-xl text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md mt-14"
-            onClick={() => {
-              handleAdminLogout();
-              console.log("Logged out");
-            }}
+            onClick={handleLogout}
           >
             Logout
           </button>
