@@ -87,6 +87,14 @@ export const SignUp = ({ email: emailProp }) => {
     }
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault(); // Prevent the default behavior of the Enter key on forms
+      handleSignUp();
+    }
+  };
+
+
   return (
     <div className="flex h-screen">
       <div className="w-1/2">
@@ -100,10 +108,19 @@ export const SignUp = ({ email: emailProp }) => {
       <div className="w-1/2 flex items-center justify-center p-8">
         <div className="text-left w-96">
           <h1 className="text-3xl font-bold mb-4">Create an Account</h1>
-          {errorMessage && <Alert status="error">{errorMessage}</Alert>}
-          {successMessage && <Alert status="success">{successMessage}</Alert>}
+          {errorMessage && (
+            <Alert status="error">
+              <AlertIcon />
+              {errorMessage}
+            </Alert>
+          )}
+          {successMessage && (
+            <Alert status="success">
+              <AlertIcon />
+              {successMessage}
+            </Alert>
+          )}
           <p className="mb-2">Create a new account</p>
-          <p className="font-bold">{emailProp}</p>
           <div className="flex flex-col my-3 mb-4 w-full">
             <input
               type="text"
@@ -111,6 +128,7 @@ export const SignUp = ({ email: emailProp }) => {
               className="border-b border-gray-400 focus:outline-none mb-2 p-2"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
+              onKeyPress={handleKeyPress}
             />
 
             <input
@@ -119,6 +137,7 @@ export const SignUp = ({ email: emailProp }) => {
               className="border-b border-gray-400 focus:outline-none mb-2 p-2"
               defaultValue={emailProp}
               onChange={(e) => setEmail(e.target.value)}
+              onKeyPress={handleKeyPress}
             />
 
             <input
@@ -127,6 +146,7 @@ export const SignUp = ({ email: emailProp }) => {
               className="border-b border-gray-400 focus:outline-none mb-2 p-2"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onKeyPress={handleKeyPress}
             />
             <input
               type="password"
@@ -134,10 +154,13 @@ export const SignUp = ({ email: emailProp }) => {
               className="border-b border-gray-400 focus:outline-none mb-2 p-2"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
+              onKeyDown={handleKeyPress} // Attach key event handler to the confirm password input
             />
             <button
               className="bg-blue-500 text-white px-4 py-2 rounded-md"
-              onClick={handleSignUp}>
+              onClick={handleSignUp}
+              onKeyDown={handleKeyPress} // Move key event handling to the button
+            >
               Sign Up
             </button>
             <p className="text-blue-500 text-left mt-3">

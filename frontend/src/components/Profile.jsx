@@ -17,6 +17,7 @@ export const Profile = () => {
   const [cancelledHostels, setCancelledHostels] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(""); // State for success message
 
   useEffect(() => {
     const storedUserId = localStorage.getItem("userID");
@@ -64,12 +65,18 @@ export const Profile = () => {
       if (!response.ok) {
         throw new Error("Failed to cancel booking");
       }
+      // Show success message for 500ms
+      setSuccessMessage("Booking confirmed successfully.");
+      setTimeout(() => {
+        setSuccessMessage(""); // Clear the success message after 500ms
+      }, 500);
       // Refresh the page
       window.location.reload();
     } catch (error) {
       setError(error.message);
     }
   };
+
 
   if (loading) {
     return <p>Loading...</p>;
@@ -82,6 +89,11 @@ export const Profile = () => {
   return (
     <div>
       <p className="text-left text-2xl font-bold p-8">Hostel Bookings</p>
+      {successMessage && (
+        <Alert status="success" className="mb-4">
+          {successMessage}
+        </Alert>
+      )}
       <TableContainer>
         <Table variant="simple">
           <TableCaption>Bookings</TableCaption>

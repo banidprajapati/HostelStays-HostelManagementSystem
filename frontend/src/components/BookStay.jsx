@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Alert, AlertIcon } from "@chakra-ui/react"; // Import Alert component from Chakra UI
 
 export const BookStay = ({ isLoggedIn, hostelID }) => {
   const [checkIn, setCheckIn] = useState(
@@ -122,7 +123,12 @@ export const BookStay = ({ isLoggedIn, hostelID }) => {
             onChange={handleGuestsChange}
           />
         </div>
-        {error && <p className="text-red-500 mb-4">{error}</p>}
+        {error && (
+          <Alert status="error" className="mb-4">
+            <AlertIcon />
+            {error}
+          </Alert>
+        )}
         <h3 className="font-bold text-lg text-black mb-1 text-left">
           Total Price
         </h3>

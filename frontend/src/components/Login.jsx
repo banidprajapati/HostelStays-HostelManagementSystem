@@ -1,7 +1,16 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Alert, AlertIcon } from "@chakra-ui/react"; // Import Alert component from Chakra UI
+
+const AlertMessage = ({ message, type }) => {
+  return (
+    <Alert status={type} className="mb-4">
+      <AlertIcon />
+      {message}
+    </Alert>
+  );
+};
 
 export const Login = ({ handleLogin }) => {
   const [email, setEmail] = useState("");
@@ -70,12 +79,9 @@ export const Login = ({ handleLogin }) => {
       <div className="w-1/2 flex items-center justify-center p-8 ">
         <div className="text-left w-96">
           <h1 className="text-3xl font-bold mb-4">Log in</h1>
-          {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+          {errorMessage && <AlertMessage message={errorMessage} type="error" />}
           {loginSuccess && ( // Conditionally render the success message
-            <Alert status='success' className="mb-4">
-              <AlertIcon />
-              Login Successful
-            </Alert>
+            <AlertMessage message="Login Successful" type="success" />
           )}
           <p className="">Email Address:</p>
           <div className="mb-4 max-w-85 flex flex-col">
