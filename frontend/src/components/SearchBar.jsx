@@ -22,6 +22,9 @@ export const SearchBar = () => {
       }
     } catch (error) {
       setError("Hostel is not found in the city"); // Set a general error message
+      setTimeout(() => {
+        setError(null); // Clear the error message after 5000ms (5 seconds)
+      }, 5000);
     }
   };
 

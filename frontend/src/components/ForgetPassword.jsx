@@ -6,6 +6,7 @@ export const ForgetPassword = () => {
   const [email, setEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // State for toggling password visibility
   const [errorMessage, setErrorMessage] = useState("");
   const [step, setStep] = useState(1); // Step 1: Ask for email, Step 2: Change password
   const navigate = useNavigate();
@@ -87,7 +88,11 @@ export const ForgetPassword = () => {
       }, 5000);
     }
   };
-
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleVerifyEmail();
+    }
+  };
   return (
     <div className="flex h-screen">
       <div className="w-1/2">
@@ -112,6 +117,7 @@ export const ForgetPassword = () => {
                   className="border-b border-gray-400 focus:outline-none mb-2 p-2"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  onKeyDown={handleKeyDown}
                 />
               </div>
               <div className="mb-4 max-w-85 flex flex-col">
@@ -129,7 +135,7 @@ export const ForgetPassword = () => {
               <p className="">New Password:</p>
               <div className="mb-4 max-w-85 flex flex-col">
                 <input
-                  type="password"
+                   type={showPassword ? "text" : "password"} 
                   placeholder="Enter your new password"
                   className="border-b border-gray-400 focus:outline-none mb-2 p-2"
                   value={newPassword}
@@ -139,13 +145,21 @@ export const ForgetPassword = () => {
               <p className="">Confirm New Password:</p>
               <div className="mb-4 max-w-85 flex flex-col">
                 <input
-                  type="password"
+                   type={showPassword ? "text" : "password"} 
                   placeholder="Confirm your new password"
                   className="border-b border-gray-400 focus:outline-none mb-2 p-2"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
               </div>
+              <div className="mt-2">
+              <input
+                type="checkbox"
+                className="mr-2"
+                onChange={() => setShowPassword(!showPassword)} // Toggle showPassword state
+              />
+              <label className="text-sm">Show Password</label>
+            </div>
               <div className="mb-4 max-w-85 flex flex-col">
                 <button
                   className="bg-blue-500 text-white px-4 py-2 rounded-md"
