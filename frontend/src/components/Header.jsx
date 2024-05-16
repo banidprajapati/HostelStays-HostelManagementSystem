@@ -9,6 +9,11 @@ export const Header = ({ isLoggedIn, userFullName, handleLogout }) => {
     navigate("/profile"); // Change "/profile" to the actual path of your profile page
   };
 
+  const logoutAndRedirect = () => {
+    handleLogout();
+    navigate("/"); // Redirect to ("/") after logging out
+  };
+
   return (
     <div className="bg-gray-200 h-16 flex items-center justify-between px-4">
       <h1 className="text-lg font-bold text-black">
@@ -25,8 +30,9 @@ export const Header = ({ isLoggedIn, userFullName, handleLogout }) => {
               {userFullName}
             </button>
             <button
-              onClick={handleLogout}
-              className="text-black text-l hover:underline border-2 border-blue-500 hover:bg-blue-600 hover:text-white rounded-md p-2">
+              onClick={logoutAndRedirect} // Logout and redirect to ("/")
+              className="text-black text-l hover:underline border-2 border-blue-500 hover:bg-blue-600 hover:text-white rounded-md p-2"
+            >
               Logout
             </button>
           </div>

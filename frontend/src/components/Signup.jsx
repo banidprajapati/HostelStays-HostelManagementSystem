@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { Alert, AlertIcon } from "@chakra-ui/react"; // Import Alert component from Chakra UI
 
 export const SignUp = ({ email: emailProp }) => {
@@ -10,6 +10,7 @@ export const SignUp = ({ email: emailProp }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState(""); // State for success message
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   // Regular expression for email validation
@@ -94,7 +95,6 @@ export const SignUp = ({ email: emailProp }) => {
     }
   };
 
-
   return (
     <div className="flex h-screen">
       <div className="w-1/2">
@@ -121,6 +121,7 @@ export const SignUp = ({ email: emailProp }) => {
             </Alert>
           )}
           <p className="mb-2">Create a new account</p>
+          <p className="font-bold">{emailProp}</p>
           <div className="flex flex-col my-3 mb-4 w-full">
             <input
               type="text"
@@ -141,7 +142,7 @@ export const SignUp = ({ email: emailProp }) => {
             />
 
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Enter password"
               className="border-b border-gray-400 focus:outline-none mb-2 p-2"
               value={password}
@@ -149,13 +150,21 @@ export const SignUp = ({ email: emailProp }) => {
               onKeyPress={handleKeyPress}
             />
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Confirm password"
               className="border-b border-gray-400 focus:outline-none mb-2 p-2"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               onKeyDown={handleKeyPress} // Attach key event handler to the confirm password input
             />
+            <div className="mt-2">
+              <input
+                type="checkbox"
+                className="mr-2"
+                onChange={() => setShowPassword(!showPassword)} // Toggle showPassword state
+              />
+              <label className="text-xs">Show Password</label>
+            </div>
             <button
               className="bg-blue-500 text-white px-4 py-2 rounded-md"
               onClick={handleSignUp}

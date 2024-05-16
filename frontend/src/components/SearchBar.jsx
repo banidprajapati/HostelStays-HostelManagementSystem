@@ -1,53 +1,27 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Assuming you're using React Router
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Alert, AlertIcon } from "@chakra-ui/react"; // Importing Chakra UI components
 
 export const SearchBar = () => {
   const [cityName, setCityName] = useState("");
-  const [hostelDetails, setHostelDetails] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (cityName.trim() !== "") {
-      setIsLoading(true);
-      axios
-        .get(`http://localhost:3000/search/${cityName}`, {
-          params: {
-            cityName: cityName,
-          },
-        })
-        .then((response) => {
-          setHostelDetails(response.data);
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          setError(error.message);
-          setIsLoading(false);
-        });
-    }
-  }, [cityName]);
-
   const handleSearch = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault();
     try {
-      setIsLoading(true);
       const response = await axios.get(
         `http://localhost:3000/search/${cityName}`
       );
-      setHostelDetails(response.data);
-      setIsLoading(false);
-      navigate(`/search/${cityName}`);
+      if (response.data.length === 0) {
+        setError("No hostels found for this city.");
+      } else {
+        setError(null); // Clear any previous error messages
+        navigate(`/search/${cityName}`);
+      }
     } catch (error) {
-      setError(error.message);
-      setIsLoading(false);
-    }
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleSearch(e);
+      setError("Hostel is not found in the city"); // Set a general error message
     }
   };
 
@@ -62,7 +36,6 @@ export const SearchBar = () => {
             className="px-4 py-3 border-r-2 border-gray-400 bg-gray-200 focus:bg-gray-200 focus:outline-none h-12 rounded-l-lg placeholder-gray-700 w-3/5"
             value={cityName}
             onChange={(e) => setCityName(e.target.value)}
-            onKeyDown={handleKeyPress} 
           />
           <button
             type="submit"
@@ -71,6 +44,12 @@ export const SearchBar = () => {
             Search
           </button>
         </div>
+        {error && (
+          <Alert status="error" className="mt-4">
+            <AlertIcon />
+            {error}
+          </Alert>
+        )}
       </form>
     </div>
   );

@@ -55,7 +55,7 @@ export const ProductPage = ({ isLoggedIn }) => {
           />
         </div>
       )}
-      <Footer />
+      <Footer/>
     </div>
   );
 };

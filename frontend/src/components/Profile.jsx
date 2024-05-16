@@ -66,7 +66,7 @@ export const Profile = () => {
         throw new Error("Failed to cancel booking");
       }
       // Show success message for 500ms
-      setSuccessMessage("Booking confirmed successfully.");
+      setSuccessMessage("Booking cancelled successfully.");
       setTimeout(() => {
         setSuccessMessage(""); // Clear the success message after 500ms
       }, 500);

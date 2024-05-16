@@ -2,10 +2,19 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 
-export const Billing = () => {
+export const Billing = ({ isLoggedIn }) => {
   const location = useLocation();
-  const { checkIn, checkOut, guests, totalPrice, roomsRequired, hostel_ID } =
-    location.state;
+
+  // Destructure properties from location.state with default values to prevent errors
+  const {
+    checkIn = "",
+    checkOut = "",
+    guests = 0,
+    totalPrice = 0,
+    roomsRequired = 0,
+    hostel_ID = "",
+  } = location.state || {};
+
   const hostelId = hostel_ID;
   const [userData, setUserData] = useState({});
   const [hostelData, setHostelData] = useState({});
@@ -13,6 +22,8 @@ export const Billing = () => {
 
   useEffect(() => {
     // Get userId from localStorage
+    if (!isLoggedIn) {
+    }
     const userId = localStorage.getItem("userID");
 
     const fetchData = async () => {

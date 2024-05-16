@@ -19,6 +19,10 @@ import { Header } from "./components/Header";
 import { Profile } from "./components/Profile";
 import { Privacy } from "./components/Privacy";
 import { RoomDetails } from "./components/RoomDetails";
+import { AboutUs } from "./components/AboutUs";
+import { Faq } from "./components/Faq";
+import { HelpCenter } from "./components/HelpCenter";
+import { Footer } from "./components/Footer";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -66,9 +70,11 @@ function App() {
     setIsAdminLoggedIn(false);
     localStorage.setItem("isAdminLoggedIn", "false");
   };
+  document.title = "Hostel Stays";
   return (
     <>
       <Header
+      className="w-screen"
         isLoggedIn={isLoggedIn}
         userFullName={userFullName}
         handleLogout={handleLogout}
@@ -84,6 +90,9 @@ function App() {
         <Route path="/billing" element={<Billing />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/privacy" element={<Privacy />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/faq" element={<Faq />} />
+        <Route path="/helpcenter" element={<HelpCenter />} />
         <Route
           path="/product/:id"
           element={<ProductPage isLoggedIn={isLoggedIn} />}

@@ -19,8 +19,11 @@ export const BookStay = ({ isLoggedIn, hostelID }) => {
   const navigate = useNavigate();
 
   const handleGuestsChange = (event) => {
-    const { value } = event.target;
-    setGuests(parseInt(value));
+    let value = parseInt(event.target.value);
+    if (isNaN(value) || value < 0) {
+      value = 0;
+    }
+    setGuests(value);
   };
 
   const handleConfirmBooking = () => {
@@ -86,8 +89,20 @@ export const BookStay = ({ isLoggedIn, hostelID }) => {
   ) => {
     const checkIn = new Date(checkInDate);
     const checkOut = new Date(checkOutDate);
+
+    // Check if check-in and check-out dates are valid
+    if (isNaN(checkIn.getTime()) || isNaN(checkOut.getTime())) {
+      return "NAN"; // Invalid date format, return "NAN"
+    }
+
     const durationMs = checkOut - checkIn;
     const durationDays = durationMs / (1000 * 60 * 60 * 24);
+
+    // Check if duration is valid (positive number)
+    if (durationDays <= 0) {
+      return "NAN"; // Invalid duration, return "NAN"
+    }
+
     const totalPrice = hostelPrice * guests * durationDays;
     return totalPrice;
   };
@@ -105,6 +120,7 @@ export const BookStay = ({ isLoggedIn, hostelID }) => {
               placeholder="Check in"
               className="h-10 bg-gray-200 px-2 focus:outline-none rounded"
               value={checkIn}
+              min={new Date().toISOString().split("T")[0]} // Sets min date to current date
               onChange={(e) => setCheckIn(e.target.value)}
             />
             <input
@@ -112,6 +128,7 @@ export const BookStay = ({ isLoggedIn, hostelID }) => {
               placeholder="Check out"
               className="h-10 bg-gray-200 px-2 focus:outline-none rounded"
               value={checkOut}
+              min={new Date().toISOString().split("T")[0]} // Sets min date to current date
               onChange={(e) => setCheckOut(e.target.value)}
             />
           </div>

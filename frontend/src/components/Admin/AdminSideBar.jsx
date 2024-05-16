@@ -1,26 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 export const AdminSideBar = ({ handleAdminLogout, bookingsCount }) => {
   const location = useLocation();
-  const [showNotification, setShowNotification] = useState(true);
+  const [hasNewNotifications, setHasNewNotifications] = useState(false);
 
-  const handleBookingClick = () => {
-    setShowNotification(false);
-  };
-
-  const handleAdminDetailsClick = () => {
-    setShowNotification(false);
-  };
+  useEffect(() => {
+    // Check if there are any notifications (bookingsCount > 0)
+    setHasNewNotifications(bookingsCount > 0);
+  }, [bookingsCount]);
 
   const handleLogout = () => {
-    setShowNotification(true); // Reset notification status before logging out
-    handleAdminLogout();
-    console.log("Logged out");
-  };
-
-  const handleLinkClick = () => {
-    setShowNotification(true);
+    if (typeof handleAdminLogout === "function") {
+      handleAdminLogout();
+      console.log("Logged out");
+    } else {
+      console.error("handleAdminLogout is not a function");
+    }
   };
 
   return (
@@ -34,7 +30,6 @@ export const AdminSideBar = ({ handleAdminLogout, bookingsCount }) => {
             <Link
               to="/dashboard"
               className="hover:text-blue-600 hover:underline"
-              onClick={handleLinkClick}
             >
               Dashboard
             </Link>
@@ -43,33 +38,23 @@ export const AdminSideBar = ({ handleAdminLogout, bookingsCount }) => {
             <Link
               to="/hostel-list"
               className="hover:text-blue-600 hover:underline"
-              onClick={handleLinkClick}
             >
               Hostel List
             </Link>
           </li>
-          <li className="mb-4 relative">
+          <li className="mb-4">
             <Link
               to="/bookings"
               className="hover:text-blue-600 hover:underline"
-              onClick={() => {
-                handleBookingClick();
-                handleLinkClick();
-              }}
             >
               Bookings
-              {showNotification && location.pathname !== "/cancelled" && (
-                <span className="absolute top-1 right-10 h-6 w-6 bg-blue-500 text-white rounded-full flex items-center justify-center">
-                  {bookingsCount > 9 ? "9+" : bookingsCount}
-                </span>
-              )}
+              {hasNewNotifications && <span>({bookingsCount})</span>}
             </Link>
           </li>
           <li className="mb-4">
             <Link
               to="/cancelled"
               className="hover:text-blue-600 hover:underline"
-              onClick={handleLinkClick}
             >
               Cancelled
             </Link>
@@ -78,7 +63,6 @@ export const AdminSideBar = ({ handleAdminLogout, bookingsCount }) => {
             <Link
               to="/user-details"
               className="hover:text-blue-600 hover:underline"
-              onClick={handleLinkClick}
             >
               User Details
             </Link>
@@ -87,10 +71,6 @@ export const AdminSideBar = ({ handleAdminLogout, bookingsCount }) => {
             <Link
               to="/admindetails"
               className="hover:text-blue-600 hover:underline"
-              onClick={() => {
-                handleAdminDetailsClick();
-                handleLinkClick();
-              }}
             >
               Admin Details
             </Link>
@@ -108,3 +88,4 @@ export const AdminSideBar = ({ handleAdminLogout, bookingsCount }) => {
     </div>
   );
 };
+

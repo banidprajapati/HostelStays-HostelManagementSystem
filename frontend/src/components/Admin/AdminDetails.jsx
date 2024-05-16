@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AdminSideBar } from "./AdminSideBar";
 import { Table, Thead, Tbody, Tr, Th, Td, Button } from "@chakra-ui/react";
 
-export const AdminDetails = ({ isAdminLoggedIn }) => {
+export const AdminDetails = ({ isAdminLoggedIn, handleAdminLogout }) => {
   const navigate = useNavigate(); // Initialize useNavigate hook
 
   useEffect(() => {
@@ -12,6 +12,13 @@ export const AdminDetails = ({ isAdminLoggedIn }) => {
       navigate("/admin");
     }
   }, [isAdminLoggedIn, navigate]);
+
+  const logoutAdmin = () => {
+    if (typeof handleAdminLogout === "function") {
+      handleAdminLogout();
+    }
+  };
+
   const [admins, setAdmins] = useState([]); // State to store fetched admins
   const [showAddAdminForm, setShowAddAdminForm] = useState(false);
   const [editAdmin, setEditAdmin] = useState(null); // State to store currently edited admin
@@ -164,7 +171,7 @@ export const AdminDetails = ({ isAdminLoggedIn }) => {
 
   return (
     <div className="flex h-screen">
-      <AdminSideBar />
+      <AdminSideBar handleAdminLogout={logoutAdmin} />
       <div className="flex-1 p-8 bg-gray-100 relative">
         <h1 className="text-3xl font-bold mb-4 text-left">Admin Details</h1>
 
@@ -179,11 +186,13 @@ export const AdminDetails = ({ isAdminLoggedIn }) => {
               } else {
                 handleAddAdmin(); // Call handleAddAdmin if adding a new admin
               }
-            }}>
+            }}
+          >
             <div className="mb-4">
               <label
                 htmlFor="fullName"
-                className="block text-sm font-semibold text-gray-700 mb-1">
+                className="block text-sm font-semibold text-gray-700 mb-1"
+              >
                 FullName
               </label>
               <input
@@ -199,7 +208,8 @@ export const AdminDetails = ({ isAdminLoggedIn }) => {
             <div className="mb-4">
               <label
                 htmlFor="email"
-                className="block text-sm font-semibold text-gray-700 mb-1">
+                className="block text-sm font-semibold text-gray-700 mb-1"
+              >
                 Email
               </label>
               <input
@@ -215,7 +225,8 @@ export const AdminDetails = ({ isAdminLoggedIn }) => {
             <div className="mb-4">
               <label
                 htmlFor="password"
-                className="block text-sm font-semibold text-gray-700 mb-1">
+                className="block text-sm font-semibold text-gray-700 mb-1"
+              >
                 Password
               </label>
               <input
@@ -230,7 +241,8 @@ export const AdminDetails = ({ isAdminLoggedIn }) => {
             </div>
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md mt-4 block mx-auto">
+              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md mt-4 block mx-auto"
+            >
               {editAdmin ? "Update" : "Submit"}
             </button>
           </form>
@@ -261,14 +273,16 @@ export const AdminDetails = ({ isAdminLoggedIn }) => {
                       variant="solid"
                       size="sm"
                       onClick={() => handleEdit(admin)}
-                      mr={2}>
+                      mr={2}
+                    >
                       Edit
                     </Button>
                     <Button
                       colorScheme="red"
                       variant="solid"
                       size="sm"
-                      onClick={() => handleDelete(admin.admin_ID)}>
+                      onClick={() => handleDelete(admin.admin_ID)}
+                    >
                       Delete
                     </Button>
                   </Td>
@@ -279,10 +293,12 @@ export const AdminDetails = ({ isAdminLoggedIn }) => {
         </div>
         <button
           className="text-xl bg-blue-500 hover:bg-blue-600 text-white px-4 p-2 rounded-md"
-          onClick={() => setShowAddAdminForm(true)}>
+          onClick={() => setShowAddAdminForm(true)}
+        >
           Add Admin
         </button>
       </div>
     </div>
   );
 };
+

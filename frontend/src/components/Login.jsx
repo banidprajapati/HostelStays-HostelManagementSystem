@@ -16,7 +16,8 @@ export const Login = ({ handleLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [loginSuccess, setLoginSuccess] = useState(false); // State for login success
+  const [loginSuccess, setLoginSuccess] = useState(false); 
+  const [showPassword, setShowPassword] = useState(false); // State for toggling password visibility
   const navigate = useNavigate();
 
   const loginUser = async () => {
@@ -96,13 +97,21 @@ export const Login = ({ handleLogin }) => {
           <p className="">Password:</p>
           <div className="mb-4 max-w-85 flex flex-col">
             <input
-              type="password"
+              type={showPassword ? "text" : "password"} // Toggle between text and password type
               placeholder="Enter your password"
               className="border-b border-gray-400 focus:outline-none mb-2 p-2"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               onKeyDown={handleKeyPress} // Listen for Enter key press
             />
+            <div className="mt-2">
+              <input
+                type="checkbox"
+                className="mr-2"
+                onChange={() => setShowPassword(!showPassword)} // Toggle showPassword state
+              />
+              <label className="text-xs">Show Password</label>
+            </div>
             <button
               className="bg-blue-500 text-white px-4 py-2 rounded-md"
               onClick={loginUser}

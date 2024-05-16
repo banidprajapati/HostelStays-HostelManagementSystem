@@ -1,6 +1,10 @@
 import React from "react";
 
 export const Footer = () => {
+  const handleCopyNumber = (phoneNumber) => {
+    navigator.clipboard.writeText(phoneNumber);
+  };
+
   return (
     <footer className="bg-gray-300 py-8">
       <div className="container mx-auto flex flex-wrap justify-center">
@@ -8,13 +12,11 @@ export const Footer = () => {
           <h3 className="text-2xl font-semibold mb-4">Support</h3>
           <ul className="space-y-2">
             <li>
-              <a href="#">Help Center</a>
+              <a href="/helpcenter" className="hover:text-blue-600 hover:underline">Help Center</a>
             </li>
+            
             <li>
-              <a href="#">Cancellation</a>
-            </li>
-            <li>
-              <a href="#">Report Problems</a>
+              <a href="/helpcenter" className="hover:text-blue-600 hover:underline">Report Problems</a>
             </li>
           </ul>
         </div>
@@ -22,13 +24,13 @@ export const Footer = () => {
           <h3 className="text-2xl font-semibold mb-4 ">Other Pages</h3>
           <ul className="space-y-2">
             <li>
-              <a href="#">About Us</a>
+              <a href="/about" className="hover:text-blue-600 hover:underline">About Us</a>
             </li>
             <li>
-              <a href="/privacy">Privacy Policy</a>
+              <a href="/privacy" className="hover:text-blue-600 hover:underline">Privacy Policy</a>
             </li>
             <li>
-              <a href="#">FAQ</a>
+              <a href="/faq" className="hover:text-blue-600 hover:underline">FAQ</a>
             </li>
           </ul>
         </div>
@@ -36,13 +38,13 @@ export const Footer = () => {
           <h3 className="text-2xl font-semibold mb-4 ">Contact Us</h3>
           <ul className="space-y-2">
             <li>
-              <a href="tel:+9779800000000">+977-9800000000</a>
+              <a href="tel:+9779800000000" className="hover:text-blue-600 hover:underline" onClick={() => handleCopyNumber("+977-9800000000")}>+977-9800000000</a>
             </li>
             <li>
-              <a href="mailto:info@example.com">info@example.com</a>
+              <a href="https://mail.google.com/" className="hover:text-blue-600 hover:underline "target="_blank">Gmail</a>
             </li>
             <li>
-              <a href="#">Follow us on social media</a>
+              <a href="https://www.facebook.com/" className="hover:text-blue-600 hover:underline"target="_blank">Facebook</a>
             </li>
           </ul>
         </div>
