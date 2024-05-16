@@ -32,7 +32,9 @@ export const AdminBookings = ({ isAdminLoggedIn, handleAdminLogout }) => {
           (booking) => !booking.cancelled
         );
         setBookings(activeBookings);
-        setBookingsCount(activeBookings.length); // Set initial count
+        setBookingsCount(
+          activeBookings.filter((booking) => !booking.completed).length
+        ); // Set initial count of incomplete bookings
       })
       .catch((error) => {
         console.error("Error fetching bookings:", error.message);
@@ -98,6 +100,7 @@ export const AdminBookings = ({ isAdminLoggedIn, handleAdminLogout }) => {
       <AdminSideBar
         handleAdminLogout={handleAdminLogout}
         bookingsCount={bookingsCount}
+        allBookings={bookings}
       />
       <div className="flex-1 p-8 bg-gray-100">
         <h1 className="text-3xl font-bold mb-4 text-left">Bookings</h1>

@@ -20,8 +20,8 @@ export const BookStay = ({ isLoggedIn, hostelID }) => {
 
   const handleGuestsChange = (event) => {
     let value = parseInt(event.target.value);
-    if (isNaN(value) || value < 0) {
-      value = 0;
+    if (isNaN(value) || value <= 0) {
+      value = ""; // Set value to empty string for invalid input
     }
     setGuests(value);
   };
@@ -35,8 +35,13 @@ export const BookStay = ({ isLoggedIn, hostelID }) => {
         "Provide the correct date. Check-in date should be before check-out date."
       );
       setTotalPrice("NAN");
+      // Clear the error message and reset total price after 2000ms (2 seconds)
+      setTimeout(() => {
+        setError("");
+        setTotalPrice(""); // Reset to default value or handle as needed
+      }, 5000);
     } else {
-      setError("");
+      setError(""); // Clear error message on correct input
       if (isLoggedIn) {
         navigate("/billing", {
           state: {
@@ -78,8 +83,9 @@ export const BookStay = ({ isLoggedIn, hostelID }) => {
         setTotalPrice("NAN");
       }
     };
+
     fetchHostelDetails();
-  }, [hostelID, guests]);
+  }, [hostelID, guests, checkIn, checkOut]);
 
   const calculateTotalPrice = (
     hostelPrice,
@@ -136,7 +142,7 @@ export const BookStay = ({ isLoggedIn, hostelID }) => {
             type="number"
             className="h-10 bg-gray-200 px-2 focus:outline-none rounded"
             placeholder="Guests"
-            value={guests}
+            value={guests !== "" ? guests : ""}
             onChange={handleGuestsChange}
           />
         </div>

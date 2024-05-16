@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-export const AdminSideBar = ({ handleAdminLogout, bookingsCount }) => {
+export const AdminSideBar = ({
+  handleAdminLogout,
+  bookingsCount,
+  allBookings,
+}) => {
   const location = useLocation();
   const [hasNewNotifications, setHasNewNotifications] = useState(false);
 
@@ -9,6 +13,10 @@ export const AdminSideBar = ({ handleAdminLogout, bookingsCount }) => {
     // Check if there are any notifications (bookingsCount > 0)
     setHasNewNotifications(bookingsCount > 0);
   }, [bookingsCount]);
+
+  const countCompletedBookings = () => {
+    return allBookings.filter((booking) => booking.completed).length;
+  };
 
   const handleLogout = () => {
     if (typeof handleAdminLogout === "function") {
@@ -88,4 +96,3 @@ export const AdminSideBar = ({ handleAdminLogout, bookingsCount }) => {
     </div>
   );
 };
-
