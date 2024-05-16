@@ -460,7 +460,33 @@ app.get("/combined_data_booking", (req, res) => {
         .json({ success: false, message: "Internal server error" });
     });
 });
+//Notification, Completed
+app.put("/update_booking_status/:bookingId", (req, res) => {
+  const bookingId = req.params.bookingId;
+  const { completed } = req.body;
 
+  // Update the completion status in the database
+  const updateQuery =
+    "UPDATE booking_details SET completed = ? WHERE booking_id = ?";
+  db.query(updateQuery, [completed, bookingId], (err, result) => {
+    if (err) {
+      console.error("Error updating completion status:", err);
+      res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
+    } else if (result.affectedRows === 0) {
+      // No booking found with the given ID
+      res.status(404).json({ success: false, message: "Booking not found" });
+    } else {
+      // Completion status updated successfully
+      res.status(200).json({
+        success: true,
+        message: "Completion status updated successfully",
+      });
+    }
+  });
+});
+//End of Notification, Completed
 app.post("/booking/add", (req, res) => {
   // Extract data from request body
   const {
@@ -521,10 +547,34 @@ app.post("/booking/add", (req, res) => {
         .json({ success: false, message: "Internal server error" });
     } else {
       console.log("Booking details inserted successfully");
+
+      // Check if notification needs to be updated
+      if (status === "booked") {
+        // If booking is marked as booked, increase notification count
+        increaseNotificationCount();
+      }
+
       res.status(200).json({ success: true, message: "Booking successful" });
     }
   });
 });
+
+
+function increaseNotificationCount() {
+  const updateNotificationQuery = `
+    UPDATE booking_details 
+    SET notification = notification - 1
+    WHERE status = 'booked'
+  `;
+  db.query(updateNotificationQuery, (err, result) => {
+    if (err) {
+      console.error("Error updating notification count:", err);
+    } else {
+      console.log("Notification count updated successfully");
+    }
+  });
+}
+
 
 app.get("/booked_details", (req, res) => {
   const { email, password } = req.body;
