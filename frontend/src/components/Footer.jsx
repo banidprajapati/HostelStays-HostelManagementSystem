@@ -24,7 +24,7 @@ export const Footer = () => {
           <h3 className="text-2xl font-semibold mb-4 ">Other Pages</h3>
           <ul className="space-y-2">
             <li>
-              <a href="/about" className="hover:text-blue-600 hover:underline">About Us</a>
+              <a href="/aboutUs" className="hover:text-blue-600 hover:underline">About Us</a>
             </li>
             <li>
               <a href="/privacy" className="hover:text-blue-600 hover:underline">Privacy Policy</a>

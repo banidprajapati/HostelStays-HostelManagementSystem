@@ -23,6 +23,7 @@ import { AboutUs } from "./components/AboutUs";
 import { Faq } from "./components/Faq";
 import { HelpCenter } from "./components/HelpCenter";
 import { Footer } from "./components/Footer";
+import { FooterAbout } from "./components/FooterAbout";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -93,6 +94,7 @@ function App() {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/faq" element={<Faq />} />
         <Route path="/helpcenter" element={<HelpCenter />} />
+        <Route path="/aboutUs" element={<FooterAbout/>}/>
         <Route
           path="/product/:id"
           element={<ProductPage isLoggedIn={isLoggedIn} />}

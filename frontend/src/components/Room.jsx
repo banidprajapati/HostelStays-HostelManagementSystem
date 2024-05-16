@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-export const Room = ({ id, name, image, location, price }) => {
+export const Room = ({ id, name, image, location, cityName, price }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -19,7 +19,7 @@ export const Room = ({ id, name, image, location, price }) => {
       />
       <div className="px-4 py-2 flex flex-col gap-1">
         <h2 className="text-2xl font-semibold">{name}</h2>
-        <p>{location}</p>
+        <p>{`${location}, ${cityName}`}</p>
         <h1 className="text-2xl font-semibold">NRs. {price}</h1>
       </div>
     </div>

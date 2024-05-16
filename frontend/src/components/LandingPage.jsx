@@ -17,7 +17,9 @@ export const LandingPage = () => {
         );
         // Reverse the order of hostel details array
         const reversedHostelDetails = response.data.reverse();
-        setHostelDetails(reversedHostelDetails);
+        // Slice the array to get only the first six items
+        const limitedHostelDetails = reversedHostelDetails.slice(0, 6);
+        setHostelDetails(limitedHostelDetails);
       } catch (error) {
         console.error("Error fetching hostel details:", error);
       }
@@ -46,6 +48,7 @@ export const LandingPage = () => {
             name={hostel.hostel_name}
             image={hostel.photos}
             location={hostel.hostel_location}
+            cityName={hostel.hostel_city}
             price={hostel.price}
           />
         ))}
