@@ -182,9 +182,6 @@ fetchHostels(); // Fetch hostels on component mount
 
       <div className="flex-1 p-8 bg-gray-100 relative">
         <h1 className="text-3xl font-bold mb-4 text-left">Hostel Details</h1>
-
-        {/* Form for adding/editing hostels */}
-        {/* Form for adding/editing hostels */}
         {showAddHostelForm && (
           <form
             ref={formRef}
@@ -323,7 +320,7 @@ fetchHostels(); // Fetch hostels on component mount
         )}
 
         {/* Table displaying hostel information */}
-        <div className="flex justify-center w-full flex-col items-center">
+        <div className="flex justify-center w-full flex-col items-center table-container max-h-[750px] overflow-y-auto">
           <Table variant="striped" colorScheme="gray">
             <Thead>
               <Tr>
@@ -331,7 +328,7 @@ fetchHostels(); // Fetch hostels on component mount
                 <Th>Location</Th>
                 <Th>City</Th>
                 <Th>Facilities</Th>
-                <Th>Description</Th>
+                {/* <Th>Description</Th> */}
                 <Th>Price</Th>
                 <Th>Actions</Th>
               </Tr>
@@ -343,7 +340,7 @@ fetchHostels(); // Fetch hostels on component mount
                   <Td>{hostel.hostel_location}</Td>
                   <Td>{hostel.hostel_city}</Td>
                   <Td>{hostel.facilities}</Td>
-                  <Td>{hostel.hostel_description}</Td>
+                  {/* <Td>{hostel.hostel_description}</Td> */}
                   <Td>{hostel.price}</Td>
                   <Td>
                     <Button

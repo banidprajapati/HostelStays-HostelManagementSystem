@@ -30,14 +30,13 @@ export const HelpCenter = () => {
                 className="text-blue-500 mr-2 mt-4"
                 size="2xl"
               />
-              <h3 className="text-xl font-bold mb-2 mt-4">Cancellation</h3>
+              <h3 className="text-xl font-bold mb-2 mt-4">About Us</h3>
               <p className="text-gray-700">
-                For details on cancellation, check our policy or contact <br></br>
-                support.
+              For more information about us, explore our story or get in touch with our team at support.
               </p>
             </div>
-            <a href="#" className="  text-blue-500 hover:underline mt-5">
-              Cancel Now
+            <a href="/aboutUs" className="  text-blue-500 hover:underline mt-5">
+              About Us
             </a>
           </div>
           <div className="bg-gray-100 rounded-lg shadow-md p-4 flex flex-col justify-between hover:bg-gray-200 h-64 md:w-72">
