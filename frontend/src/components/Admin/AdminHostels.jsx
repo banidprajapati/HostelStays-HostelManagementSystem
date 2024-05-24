@@ -333,7 +333,11 @@ export const AdminHostels = ({ isAdminLoggedIn, handleAdminLogout }) => {
 
         {/* Table displaying hostel information */}
         <div className="flex justify-center w-full flex-col items-center table-container max-h-[750px] overflow-y-auto">
-          <TableContainer maxW="800px">
+          <TableContainer
+            maxW="800px"
+            maxHeight="700px"
+            overflowY="auto"
+            overflowX="auto">
             <Table variant="striped" colorScheme="gray">
               <TableCaption>Hostel Listings</TableCaption>
               <Thead>

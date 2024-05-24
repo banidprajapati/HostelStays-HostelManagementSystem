@@ -1,7 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { AdminSideBar } from "./AdminSideBar";
-import { Table, Thead, Tbody, Tr, Th, Td, Button } from "@chakra-ui/react";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TableContainer,
+  Button,
+} from "@chakra-ui/react";
 
 export const AdminDetails = ({ isAdminLoggedIn, handleAdminLogout }) => {
   const navigate = useNavigate(); // Initialize useNavigate hook
@@ -186,13 +195,11 @@ export const AdminDetails = ({ isAdminLoggedIn, handleAdminLogout }) => {
               } else {
                 handleAddAdmin(); // Call handleAddAdmin if adding a new admin
               }
-            }}
-          >
+            }}>
             <div className="mb-4">
               <label
                 htmlFor="fullName"
-                className="block text-sm font-semibold text-gray-700 mb-1"
-              >
+                className="block text-sm font-semibold text-gray-700 mb-1">
                 FullName
               </label>
               <input
@@ -208,8 +215,7 @@ export const AdminDetails = ({ isAdminLoggedIn, handleAdminLogout }) => {
             <div className="mb-4">
               <label
                 htmlFor="email"
-                className="block text-sm font-semibold text-gray-700 mb-1"
-              >
+                className="block text-sm font-semibold text-gray-700 mb-1">
                 Email
               </label>
               <input
@@ -225,8 +231,7 @@ export const AdminDetails = ({ isAdminLoggedIn, handleAdminLogout }) => {
             <div className="mb-4">
               <label
                 htmlFor="password"
-                className="block text-sm font-semibold text-gray-700 mb-1"
-              >
+                className="block text-sm font-semibold text-gray-700 mb-1">
                 Password
               </label>
               <input
@@ -241,64 +246,65 @@ export const AdminDetails = ({ isAdminLoggedIn, handleAdminLogout }) => {
             </div>
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md mt-4 block mx-auto"
-            >
+              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md mt-4 block mx-auto">
               {editAdmin ? "Update" : "Submit"}
             </button>
           </form>
         )}
         {/* Table =================================================================================================================================== */}
         <div className="flex justify-center w-full  flex-col items-center">
-          {/* Table displaying admin information */}
-          <Table variant="striped" colorScheme="gray">
-            <Thead>
-              <Tr>
-                <Th>Admin ID</Th>
-                <Th>Admin FullName</Th>
-                <Th>Admin Email</Th>
-                <Th>Admin Password</Th>
-                <Th>Actions</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {admins.map((admin) => (
-                <Tr key={admin.admin_ID}>
-                  <Td>{admin.admin_ID}</Td>
-                  <Td>{admin.fullName}</Td>
-                  <Td>{admin.email}</Td>
-                  <Td>{admin.password}</Td>
-                  <Td>
-                    <Button
-                      colorScheme="blue"
-                      variant="solid"
-                      size="sm"
-                      onClick={() => handleEdit(admin)}
-                      mr={2}
-                    >
-                      Edit
-                    </Button>
-                    <Button
-                      colorScheme="red"
-                      variant="solid"
-                      size="sm"
-                      onClick={() => handleDelete(admin.admin_ID)}
-                    >
-                      Delete
-                    </Button>
-                  </Td>
+          <TableContainer
+            maxW="800px"
+            maxHeight="700px"
+            overflowY="auto"
+            overflowX="auto">
+            {/* Table displaying admin information */}
+            <Table variant="striped" colorScheme="gray">
+              <Thead>
+                <Tr>
+                  <Th>Admin ID</Th>
+                  <Th>Admin FullName</Th>
+                  <Th>Admin Email</Th>
+                  <Th>Admin Password</Th>
+                  <Th>Actions</Th>
                 </Tr>
-              ))}
-            </Tbody>
-          </Table>
+              </Thead>
+              <Tbody>
+                {admins.map((admin) => (
+                  <Tr key={admin.admin_ID}>
+                    <Td>{admin.admin_ID}</Td>
+                    <Td>{admin.fullName}</Td>
+                    <Td>{admin.email}</Td>
+                    <Td>{admin.password}</Td>
+                    <Td>
+                      <Button
+                        colorScheme="blue"
+                        variant="solid"
+                        size="sm"
+                        onClick={() => handleEdit(admin)}
+                        mr={2}>
+                        Edit
+                      </Button>
+                      <Button
+                        colorScheme="red"
+                        variant="solid"
+                        size="sm"
+                        onClick={() => handleDelete(admin.admin_ID)}>
+                        Delete
+                      </Button>
+                    </Td>
+                  </Tr>
+                ))}
+              </Tbody>
+            </Table>
+          </TableContainer>
         </div>
         <button
           className="text-xl bg-blue-500 hover:bg-blue-600 text-white px-4 p-2 rounded-md"
-          onClick={() => setShowAddAdminForm(true)}
-        >
+          onClick={() => setShowAddAdminForm(true)}>
           Add Admin
         </button>
       </div>
     </div>
   );
 };
-

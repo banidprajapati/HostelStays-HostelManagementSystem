@@ -63,7 +63,11 @@ export const AdminCancelled = ({ isAdminLoggedIn, handleAdminLogout }) => {
         <h1 className="text-3xl font-bold mb-4 text-left">
           Cancelled Bookings
         </h1>
-        <TableContainer maxW="800px">
+        <TableContainer
+          maxW="800px"
+          maxHeight="700px"
+          overflowY="auto"
+          overflowX="auto">
           <Table variant="simple">
             <TableCaption>Bookings</TableCaption>
             <Thead>

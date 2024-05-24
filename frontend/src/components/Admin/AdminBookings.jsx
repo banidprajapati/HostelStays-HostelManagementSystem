@@ -105,7 +105,11 @@ export const AdminBookings = ({ isAdminLoggedIn, handleAdminLogout }) => {
       />
       <div className="flex-1 p-8 bg-gray-100">
         <h1 className="text-3xl font-bold mb-4 text-left">Bookings</h1>
-        <TableContainer maxW="800px">
+        <TableContainer
+          maxW="800px"
+          maxHeight="700px"
+          overflowY="auto"
+          overflowX="auto">
           <Table variant="simple">
             <TableCaption>Bookings</TableCaption>
             <Thead>

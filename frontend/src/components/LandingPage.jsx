@@ -56,7 +56,7 @@ export const LandingPage = () => {
       <div className="border-t-2 border-gray-400 my-4"></div>
 
       <AboutUs />
-      <Footer/>
+      <Footer />
     </div>
   );
 };
