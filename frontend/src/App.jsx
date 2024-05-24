@@ -75,7 +75,7 @@ function App() {
   return (
     <>
       <Header
-      className="w-screen"
+        className="w-screen"
         isLoggedIn={isLoggedIn}
         userFullName={userFullName}
         handleLogout={handleLogout}
@@ -94,7 +94,7 @@ function App() {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/faq" element={<Faq />} />
         <Route path="/helpcenter" element={<HelpCenter />} />
-        <Route path="/aboutUs" element={<FooterAbout/>}/>
+        <Route path="/aboutUs" element={<FooterAbout />} />
         <Route
           path="/product/:id"
           element={<ProductPage isLoggedIn={isLoggedIn} />}

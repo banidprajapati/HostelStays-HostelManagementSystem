@@ -1,6 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import { AdminSideBar } from "./AdminSideBar";
-import { Table, Thead, Tbody, Tr, Th, Td, Button } from "@chakra-ui/react";
+import {
+  TableContainer,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  Box,
+  Button,
+  Tfoot,
+  TableCaption,
+} from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 export const AdminHostels = ({ isAdminLoggedIn, handleAdminLogout }) => {
@@ -55,7 +67,7 @@ export const AdminHostels = ({ isAdminLoggedIn, handleAdminLogout }) => {
       console.error("Error fetching hostels:", error);
     }
   };
-fetchHostels(); // Fetch hostels on component mount
+  fetchHostels(); // Fetch hostels on component mount
   const handleAddHostel = () => {
     // Make POST request to add hostel
     fetch("http://localhost:3000/hostel_details/add", {
@@ -321,52 +333,68 @@ fetchHostels(); // Fetch hostels on component mount
 
         {/* Table displaying hostel information */}
         <div className="flex justify-center w-full flex-col items-center table-container max-h-[750px] overflow-y-auto">
-          <Table variant="striped" colorScheme="gray">
-            <Thead>
-              <Tr>
-                <Th>Hostel Name</Th>
-                <Th>Location</Th>
-                <Th>City</Th>
-                <Th>Facilities</Th>
-                {/* <Th>Description</Th> */}
-                <Th>Price</Th>
-                <Th>Actions</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {hostels.map((hostel) => (
-                <Tr key={hostel.hostel_ID}>
-                  <Td>{hostel.hostel_name}</Td>
-                  <Td>{hostel.hostel_location}</Td>
-                  <Td>{hostel.hostel_city}</Td>
-                  <Td>{hostel.facilities}</Td>
-                  {/* <Td>{hostel.hostel_description}</Td> */}
-                  <Td>{hostel.price}</Td>
-                  <Td>
-                    <Button
-                      colorScheme="blue"
-                      variant="solid"
-                      size="sm"
-                      onClick={() => handleEditHostel(hostel)}>
-                      Edit
-                    </Button>
-                    <Button
-                      colorScheme="red"
-                      variant="solid"
-                      size="sm"
-                      onClick={() => handleDeleteHostel(hostel.hostel_ID)}>
-                      Delete
-                    </Button>
-                  </Td>
+          <TableContainer maxW="800px">
+            <Table variant="striped" colorScheme="gray">
+              <TableCaption>Hostel Listings</TableCaption>
+              <Thead>
+                <Tr>
+                  <Th>Hostel Name</Th>
+                  <Th>Location</Th>
+                  <Th>City</Th>
+                  <Th>Facilities</Th>
+                  <Th>Price</Th>
+                  <Th>Actions</Th>
                 </Tr>
-              ))}
-            </Tbody>
-          </Table>
+              </Thead>
+              <Tbody>
+                {hostels.map((hostel) => (
+                  <Tr key={hostel.hostel_ID}>
+                    <Td>{hostel.hostel_name}</Td>
+                    <Td>{hostel.hostel_location}</Td>
+                    <Td>{hostel.hostel_city}</Td>
+                    <Td>
+                      <Box maxW="150px" isTruncated>
+                        {hostel.facilities}
+                      </Box>
+                    </Td>
+                    {/* <Td>{hostel.hostel_description}</Td> */}
+                    <Td>{hostel.price}</Td>
+                    <Td>
+                      <Button
+                        colorScheme="blue"
+                        variant="solid"
+                        size="sm"
+                        onClick={() => handleEditHostel(hostel)}>
+                        Edit
+                      </Button>
+                      <Button
+                        colorScheme="red"
+                        variant="solid"
+                        size="sm"
+                        onClick={() => handleDeleteHostel(hostel.hostel_ID)}>
+                        Delete
+                      </Button>
+                    </Td>
+                  </Tr>
+                ))}
+              </Tbody>
+              <Tfoot>
+                <Tr>
+                  <Th>Hostel Name</Th>
+                  <Th>Location</Th>
+                  <Th>City</Th>
+                  <Th>Facilities</Th>
+                  <Th>Price</Th>
+                  <Th>Actions</Th>
+                </Tr>
+              </Tfoot>
+            </Table>
+          </TableContainer>
         </div>
 
         {/* Button to toggle add hostel form */}
         <button
-          className="text-xl bg-blue-500 hover:bg-blue-600 text-white px-4 p-2 rounded-md"
+          className="text-xl bg-blue-500 hover:bg-blue-600 text-white px-4 p-2 rounded-md mt-4"
           onClick={() => setShowAddHostelForm(true)}>
           Add Hostel
         </button>

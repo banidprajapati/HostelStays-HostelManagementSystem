@@ -11,6 +11,7 @@ import {
   TableCaption,
   TableContainer,
   Button,
+  Tfoot,
 } from "@chakra-ui/react";
 
 export const AdminBookings = ({ isAdminLoggedIn, handleAdminLogout }) => {
@@ -141,14 +142,27 @@ export const AdminBookings = ({ isAdminLoggedIn, handleAdminLogout }) => {
                           booking.booking_id,
                           booking.completed
                         )
-                      }
-                    >
+                      }>
                       {booking.completed ? "Completed" : "Complete"}
                     </Button>
                   </Td>
                 </Tr>
               ))}
             </Tbody>
+            <Tfoot>
+              <Tr>
+                <Th>Booking ID</Th>
+                <Th>User Name</Th>
+                <Th>User Email</Th>
+                <Th>No of Guests</Th>
+                <Th>Check-in</Th>
+                <Th>Check-out</Th>
+                <Th>No of Rooms</Th>
+                <Th>Hostel Name</Th>
+                <Th>Total Cost</Th>
+                <Th>Notification</Th>
+              </Tr>
+            </Tfoot>
           </Table>
         </TableContainer>
       </div>

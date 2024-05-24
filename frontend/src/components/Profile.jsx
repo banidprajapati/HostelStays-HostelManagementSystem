@@ -77,7 +77,6 @@ export const Profile = () => {
     }
   };
 
-
   if (loading) {
     return <p>Loading...</p>;
   }
