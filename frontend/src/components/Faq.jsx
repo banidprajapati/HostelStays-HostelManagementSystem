@@ -5,7 +5,6 @@ export const Faq = () => {
   return (
     <div>
       <div className="flex">
-        {/* Left Column */}
         <div className="w-1/2 p-4">
           <h1 className="text-3xl font-semibold mb-4 text-left mt-7">Frequently Asked Questions<span className="text-red-500 font-bold"> (FAQs)</span></h1>
          
@@ -34,10 +33,8 @@ export const Faq = () => {
               contact information listed under "Contact Us" for assistance with
               your booking or any inquiries.
             </p>
-          {/* Add more questions and answers here */}
         </div>
 
-        {/* Right Column */}
         <div className="w-1/2 p-4 mb-14">
           <div className="mb-4 mt-24">
             <h2 className="font-bold text-xl text-left">

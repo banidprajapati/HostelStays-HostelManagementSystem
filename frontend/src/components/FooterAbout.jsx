@@ -5,7 +5,7 @@ export const FooterAbout = () => {
   return (
     <div>
       <h1 className="text-3xl font-bold mt-10 mb-7 text-left">Our Story.</h1>
-      <div className="flex items-left justify-center font-poppins">
+      <div className="flex items-left justify-center font-poppins mb-10">
         <div className="w-full">
           <div className="mb-4 flex text-left gap-9">
             <div className="flex-1">

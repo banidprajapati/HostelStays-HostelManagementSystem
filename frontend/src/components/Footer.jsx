@@ -38,7 +38,7 @@ export const Footer = () => {
           <h3 className="text-2xl font-semibold mb-4 ">Contact Us</h3>
           <ul className="space-y-2">
             <li>
-              <a href="tel:+9779800000000" className="hover:text-blue-600 hover:underline" onClick={() => handleCopyNumber("+977-9800000000")}>+977-9800000000</a>
+              <a href="tel:+9779800000000" className="hover:text-blue-600 hover:underline" onClick={() => handleCopyNumber("+977-9864231151")}>+977-9864231151</a>
             </li>
             <li>
               <a href="https://mail.google.com/" className="hover:text-blue-600 hover:underline "target="_blank">Gmail</a>

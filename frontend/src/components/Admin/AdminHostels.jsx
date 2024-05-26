@@ -206,7 +206,7 @@ export const AdminHostels = ({ isAdminLoggedIn, handleAdminLogout }) => {
                 handleAddHostel(); // Call function for adding hostel
               }
             }}>
-            {/* Input fields for hostel information */}
+            
             <div className="mb-4">
               <label
                 htmlFor="hostel_name"
